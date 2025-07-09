@@ -40,7 +40,7 @@ const Contact = () => {
     {
       name: "LinkedIn",
       icon: <Linkedin className="w-5 h-5" />,
-      href: "https://linkedin.com/in/rahil-memdani",
+      href: "https://linkedin.com/in/rahil-memdani-8968681ab",
       color: "hover:text-blue-500"
     },
     {
@@ -62,15 +62,28 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Create mailto link with form data
+      const subject = encodeURIComponent(formData.subject);
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      );
+      const mailtoLink = `mailto:rmemdanib@gmail.com?subject=${subject}&body=${body}`;
+      
+      // Open mail client
+      window.location.href = mailtoLink;
+      
       setIsSubmitting(false);
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       
       // Reset status after 3 seconds
       setTimeout(() => setSubmitStatus('idle'), 3000);
-    }, 1000);
+    } catch (error) {
+      setIsSubmitting(false);
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 3000);
+    }
   };
 
   return (
@@ -237,7 +250,7 @@ const Contact = () => {
                 {isSubmitting ? (
                   <div className="flex items-center justify-center">
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                    Sending...
+                    Opening Mail Client...
                   </div>
                 ) : (
                   <div className="flex items-center justify-center">
@@ -250,13 +263,13 @@ const Contact = () => {
               {/* Status Messages */}
               {submitStatus === 'success' && (
                 <div className="p-4 bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 text-center">
-                  Message sent successfully! I'll get back to you soon.
+                  Mail client opened! Complete sending the message in your email app.
                 </div>
               )}
               
               {submitStatus === 'error' && (
                 <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-lg text-red-400 text-center">
-                  Failed to send message. Please try again or contact me directly.
+                  Unable to open mail client. Please contact me directly at rmemdanib@gmail.com
                 </div>
               )}
             </form>

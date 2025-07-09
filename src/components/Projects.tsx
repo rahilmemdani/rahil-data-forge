@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ExternalLink, Github, Database, Brain, BarChart3, Zap } from 'lucide-react';
+import { ExternalLink, Database, Brain, BarChart3 } from 'lucide-react';
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
@@ -8,91 +8,72 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "Predictive Sales Forecasting Engine",
-      description: "Built an end-to-end predictive analytics solution using advanced machine learning to forecast sales trends with 92% accuracy for enterprise agritech platform.",
-      longDescription: "Developed a comprehensive forecasting system that processes 5,000+ monthly transactions and serves 2M+ users across 15+ states. The system combines time series analysis, statistical modeling, and machine learning algorithms to predict sales patterns and inventory requirements.",
-      technologies: ["Python", "Scikit-learn", "PostgreSQL", "React", "Node.js", "Machine Learning"],
+      title: "Grow Indigo - Agritech Platform",
+      description: "Led full-stack development for enterprise agritech platform serving 2M+ users across 15+ states with predictive analytics and commission management systems.",
+      longDescription: "Built comprehensive agritech solution with commission analytics processing 5,000+ monthly transactions, seller onboarding dashboard serving 600+ monthly registrations, and predictive forecasting models improving inventory accuracy by 25%.",
+      technologies: ["React", "Node.js", ".NET Core", "PostgreSQL", "MongoDB", "Snowflake", "Python", "Machine Learning"],
       features: [
-        "Real-time data processing and model training",
-        "Interactive dashboard with prediction visualization",
-        "Automated anomaly detection and alerting",
-        "95% improvement in inventory accuracy",
-        "35% reduction in stock-out scenarios"
+        "Commission analytics system with 10% revenue accuracy improvement",
+        "React-based seller onboarding dashboard reducing onboarding time by 30%",
+        "Predictive forecasting models with 25% inventory accuracy improvement",
+        "Snowflake anomaly detection for bi-weekly sales insights",
+        "Multi-tenant SaaS platform architecture"
       ],
       metrics: {
-        accuracy: "92%",
         users: "2M+",
-        improvement: "50%"
+        accuracy: "25%",
+        transactions: "5K+/month"
       },
       icon: <Brain className="w-6 h-6" />,
       color: "from-blue-500 to-cyan-500",
-      status: "Production"
+      status: "Production",
+      url: "https://www.growindigo.co.in/"
     },
     {
       id: 2,
-      title: "Enterprise Commission Analytics System",
-      description: "Designed and implemented a comprehensive analytics platform for commission tracking and revenue optimization, processing 5,000+ monthly transactions with improved accuracy.",
-      longDescription: "Built using .NET Core and PostgreSQL, this system revolutionized commission management by providing real-time analytics, automated reconciliation, and predictive insights for revenue optimization across multiple business units.",
-      technologies: [".NET Core", "PostgreSQL", "React", "C#", "SQL", "Analytics"],
+      title: "Timeless Tales Decor",
+      description: "Full-stack e-commerce platform for home decor with modern design, responsive interface, and seamless user experience.",
+      longDescription: "Developed complete e-commerce solution with product catalog, shopping cart, user authentication, and payment integration. Features modern UI/UX design with mobile-first approach.",
+      technologies: ["React", "Node.js", "MongoDB", "Express", "Tailwind CSS", "Stripe API"],
       features: [
-        "Automated commission calculation and reporting",
-        "Real-time transaction processing",
-        "Advanced analytics and business intelligence",
-        "10% improvement in revenue accuracy",
-        "15% faster reporting cycles"
+        "Responsive product catalog with search and filtering",
+        "Shopping cart and checkout process",
+        "User authentication and profile management",
+        "Payment integration with Stripe",
+        "Admin dashboard for inventory management"
       ],
       metrics: {
-        transactions: "5K+/month",
-        accuracy: "98%",
-        speed: "15x faster"
+        performance: "Fast",
+        responsive: "100%",
+        uptime: "99.9%"
       },
       icon: <BarChart3 className="w-6 h-6" />,
       color: "from-green-500 to-emerald-500",
-      status: "Production"
+      status: "Live",
+      url: "https://timelesstalesdecor.vercel.app/"
     },
     {
       id: 3,
-      title: "Multi-Tenant SaaS Platform Architecture",
-      description: "Led the transformation of monolithic application to scalable multi-tenant SaaS platform, enabling global market expansion and improved performance.",
-      longDescription: "Architected and implemented a complete platform transformation supporting multiple tenants with isolated data, customizable features, and enterprise-grade security. The new architecture supports 600+ monthly registrations and serves users across 15+ states.",
-      technologies: ["Node.js", "MongoDB", "React", "Docker", "Microservices", "AWS"],
+      title: "Corra Culinary",
+      description: "Modern restaurant web application featuring menu showcase, online ordering system, and customer management.",
+      longDescription: "Built comprehensive restaurant management system with menu display, online ordering capabilities, customer reviews, and reservation system. Implemented modern design principles with smooth animations.",
+      technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS", "API Integration"],
       features: [
-        "Multi-tenant architecture with data isolation",
-        "Scalable microservices infrastructure",
-        "Global deployment capabilities",
-        "30% reduction in onboarding time",
-        "Enterprise-grade security and compliance"
+        "Interactive menu with category filtering",
+        "Online ordering and cart management",
+        "Customer review and rating system",
+        "Reservation booking system",
+        "Mobile-responsive design"
       ],
       metrics: {
-        tenants: "100+",
-        uptime: "99.9%",
-        scalability: "10x"
+        orders: "Seamless",
+        design: "Modern",
+        mobile: "Optimized"
       },
       icon: <Database className="w-6 h-6" />,
       color: "from-purple-500 to-pink-500",
-      status: "Production"
-    },
-    {
-      id: 4,
-      title: "Automated ETL Pipeline & Analytics",
-      description: "Developed scalable data pipeline architecture processing millions of records daily with automated workflows, reducing manual errors by 40%.",
-      longDescription: "Created comprehensive ETL pipelines using Node.js and PostgreSQL for processing agricultural data at scale. The system includes automated data validation, transformation, and real-time analytics capabilities.",
-      technologies: ["Node.js", "PostgreSQL", "Python", "Apache Airflow", "Docker", "AWS"],
-      features: [
-        "Automated data ingestion and processing",
-        "Real-time data validation and quality checks",
-        "Scalable pipeline architecture",
-        "40% reduction in manual errors",
-        "200+ automated monthly reports"
-      ],
-      metrics: {
-        records: "10M+/day",
-        automation: "95%",
-        errors: "-40%"
-      },
-      icon: <Zap className="w-6 h-6" />,
-      color: "from-orange-500 to-red-500",
-      status: "Production"
+      status: "Live",
+      url: "https://corra-culinary.vercel.app/"
     }
   ];
 
@@ -101,14 +82,14 @@ const Projects = () => {
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Featured <span className="gradient-text">Projects</span>
+            Professional <span className="gradient-text">Projects</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Enterprise-scale solutions that transform data into competitive advantages
+            Real-world applications built with modern technologies and best practices
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <div
               key={project.id}
@@ -125,6 +106,15 @@ const Projects = () => {
                   <span className="px-3 py-1 bg-primary/20 text-primary text-xs rounded-full font-medium">
                     {project.status}
                   </span>
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 text-muted-foreground hover:text-primary transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <ExternalLink size={16} />
+                  </a>
                 </div>
               </div>
 
@@ -174,7 +164,7 @@ const Projects = () => {
                         {project.longDescription}
                       </p>
                       
-                      <h4 className="font-semibold mb-2 text-primary">Key Features & Impact</h4>
+                      <h4 className="font-semibold mb-2 text-primary">Key Features</h4>
                       <ul className="space-y-1 text-sm text-muted-foreground">
                         {project.features.map((feature, idx) => (
                           <li key={idx} className="flex items-center">
@@ -183,17 +173,6 @@ const Projects = () => {
                           </li>
                         ))}
                       </ul>
-
-                      <div className="flex space-x-4 mt-6">
-                        <button className="flex items-center px-4 py-2 bg-primary/20 text-primary rounded-lg text-sm font-medium hover:bg-primary/30 transition-colors">
-                          <Github size={16} className="mr-2" />
-                          View Code
-                        </button>
-                        <button className="flex items-center px-4 py-2 bg-secondary/20 text-secondary rounded-lg text-sm font-medium hover:bg-secondary/30 transition-colors">
-                          <ExternalLink size={16} className="mr-2" />
-                          Live Demo
-                        </button>
-                      </div>
                     </div>
                   </div>
                 )}
@@ -205,13 +184,13 @@ const Projects = () => {
         {/* Call to Action */}
         <div className="text-center mt-16">
           <p className="text-lg text-muted-foreground mb-6">
-            Interested in building something similar for your business?
+            Interested in collaborating on innovative projects?
           </p>
           <button 
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             className="btn-primary"
           >
-            Let's Collaborate
+            Let's Connect
           </button>
         </div>
       </div>

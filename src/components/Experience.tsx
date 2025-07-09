@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { MapPin, Calendar, TrendingUp, Users, Database, Code } from 'lucide-react';
+import { MapPin, Calendar, TrendingUp, Users, Database, Code, ExternalLink } from 'lucide-react';
 
 const Experience = () => {
   const experiences = [
@@ -38,7 +38,9 @@ const Experience = () => {
       ],
       technologies: ["Node.js", "MySQL", "React", "JavaScript", "HTML5", "CSS3"],
       icon: <Code className="w-6 h-6" />,
-      color: "from-secondary to-green-500"
+      color: "from-secondary to-green-500",
+      link: "https://akeb.iiindia.org/?a=51c802d3&l=en",
+      linkText: "AKEB School Info Microsite"
     }
   ];
 
@@ -47,7 +49,8 @@ const Experience = () => {
       name: "HackerRank Certified: Core Java",
       issuer: "HackerRank",
       id: "0aae57b1fde8",
-      icon: <Code className="w-5 h-5" />
+      icon: <Code className="w-5 h-5" />,
+      link: "https://www.hackerrank.com/certificates/0aae57b1fde8"
     },
     {
       name: "Docker for Developers",
@@ -105,6 +108,17 @@ const Experience = () => {
                       <div className="text-lg font-semibold text-primary mb-2">
                         {exp.company}
                       </div>
+                      {exp.link && (
+                        <a 
+                          href={exp.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-sm text-secondary hover:text-primary transition-colors mb-2"
+                        >
+                          {exp.linkText}
+                          <ExternalLink size={14} className="ml-1" />
+                        </a>
+                      )}
                     </div>
                     <div className="flex flex-col md:items-end space-y-1">
                       <div className="flex items-center text-sm text-muted-foreground">
@@ -187,7 +201,7 @@ const Experience = () => {
                 <p className="font-semibold">B.E. Electronics and Telecommunication</p>
                 <p className="text-sm text-muted-foreground">Aug 2017 - June 2021</p>
                 <p className="text-sm">
-                  <span className="text-primary font-medium">Grade: 75.2%</span>
+                  <span className="text-primary font-medium">CGPA: 7.52/10</span>
                 </p>
               </div>
             </div>
@@ -206,8 +220,20 @@ const Experience = () => {
                     <div className="text-primary mt-0.5">
                       {cert.icon}
                     </div>
-                    <div>
-                      <p className="font-medium text-sm">{cert.name}</p>
+                    <div className="flex-1">
+                      {cert.link ? (
+                        <a 
+                          href={cert.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="font-medium text-sm hover:text-primary transition-colors flex items-center"
+                        >
+                          {cert.name}
+                          <ExternalLink size={12} className="ml-1" />
+                        </a>
+                      ) : (
+                        <p className="font-medium text-sm">{cert.name}</p>
+                      )}
                       <p className="text-xs text-muted-foreground">{cert.issuer}</p>
                       {cert.id && (
                         <p className="text-xs text-primary font-mono">{cert.id}</p>
