@@ -20,13 +20,13 @@ const Contact = () => {
       href: "mailto:rmemdanib@gmail.com",
       color: "from-primary to-blue-500"
     },
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: "Phone",
-      value: "+91-9167156829",
-      href: "tel:+919167156829",
-      color: "from-secondary to-green-500"
-    },
+    // {
+    //   icon: <Phone className="w-6 h-6" />,
+    //   title: "Phone",
+    //   value: "+91-9167156829",
+    //   href: "tel:+919167156829",
+    //   color: "from-secondary to-green-500"
+    // },
     {
       icon: <MapPin className="w-6 h-6" />,
       title: "Location",
