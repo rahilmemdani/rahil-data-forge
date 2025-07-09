@@ -7,10 +7,10 @@ const Hero = () => {
   const skills = [
     'Full-Stack Development',
     'Predictive Analytics',
+    '.NET Core Development',
+    'React & Node.js',
     'Machine Learning',
     'Snowflake Data Solutions',
-    'React & Node.js',
-    '.NET Core Development',
     'Data Engineering'
   ];
   
@@ -79,7 +79,7 @@ const Hero = () => {
               <div className="text-xl md:text-2xl text-muted-foreground">
                 Full-Stack Software Engineer
                 <br />
-                <span className="gradient-text font-semibold">Predictive Analytics Specialist</span>
+                <span className="gradient-text font-semibold">Data Analytics & Machine Learning</span>
               </div>
 
               <div className="text-lg text-muted-foreground max-w-2xl">
