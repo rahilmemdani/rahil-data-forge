@@ -31,7 +31,7 @@ const Contact = () => {
       icon: <MapPin className="w-6 h-6" />,
       title: "Location",
       value: "Mumbai, Maharashtra, IN",
-      href: "https://maps.google.com/?q=Mumbai,Maharashtra,India",
+      href: "https://maps.app.goo.gl/FsgoLuXWCT2Yzswj8",
       color: "from-purple-500 to-pink-500"
     }
   ];
