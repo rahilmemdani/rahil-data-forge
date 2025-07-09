@@ -1,78 +1,43 @@
 
-import React, { useState } from 'react';
-import { ExternalLink, Database, Brain, BarChart3 } from 'lucide-react';
+import React from 'react';
+import { Building2, Palette, ChefHat } from 'lucide-react';
 
 const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
-
   const projects = [
     {
       id: 1,
-      title: "Grow Indigo - Agritech Platform",
-      description: "Led full-stack development for enterprise agritech platform serving 2M+ users across 15+ states with predictive analytics and commission management systems.",
-      longDescription: "Built comprehensive agritech solution with commission analytics processing 5,000+ monthly transactions, seller onboarding dashboard serving 600+ monthly registrations, and predictive forecasting models improving inventory accuracy by 25%.",
-      technologies: ["React", "Node.js", ".NET Core", "PostgreSQL", "MongoDB", "Snowflake", "Python", "Machine Learning"],
-      features: [
-        "Commission analytics system with 10% revenue accuracy improvement",
-        "React-based seller onboarding dashboard reducing onboarding time by 30%",
-        "Predictive forecasting models with 25% inventory accuracy improvement",
-        "Snowflake anomaly detection for bi-weekly sales insights",
-        "Multi-tenant SaaS platform architecture"
-      ],
-      metrics: {
-        users: "2M+",
-        accuracy: "25%",
-        transactions: "5K+/month"
-      },
-      icon: <Brain className="w-6 h-6" />,
+      category: "Enterprise",
+      title: "Grow Indigo - AgriTech Platform",
+      description: "Enterprise-scale agricultural technology platform serving 2M+ farmers across 15+ states with 7M+ acres coverage. Built scalable systems for sustainable agriculture, biological products, and carbon solutions.",
+      technologies: ["React", "Node.js", ".NET Core", "PostgreSQL", "AWS"],
+      tagline: "Accelerated ag transformation for healthy planet",
+      metrics: "2M+ farmers, 15+ states, 7M+ acres",
+      icon: <Building2 className="w-6 h-6" />,
       color: "from-blue-500 to-cyan-500",
-      status: "Production",
       url: "https://www.growindigo.co.in/"
     },
     {
       id: 2,
+      category: "Design & Events",
       title: "Timeless Tales Decor",
-      description: "Full-stack e-commerce platform for home decor with modern design, responsive interface, and seamless user experience.",
-      longDescription: "Developed complete e-commerce solution with product catalog, shopping cart, user authentication, and payment integration. Features modern UI/UX design with mobile-first approach.",
-      technologies: ["React", "Node.js", "MongoDB", "Express", "Tailwind CSS", "Stripe API"],
-      features: [
-        "Responsive product catalog with search and filtering",
-        "Shopping cart and checkout process",
-        "User authentication and profile management",
-        "Payment integration with Stripe",
-        "Admin dashboard for inventory management"
-      ],
-      metrics: {
-        performance: "Fast",
-        responsive: "100%",
-        uptime: "99.9%"
-      },
-      icon: <BarChart3 className="w-6 h-6" />,
-      color: "from-green-500 to-emerald-500",
-      status: "Live",
+      description: "Elegant event design and styling platform for intimate celebrations including gender reveals, baby & bridal showers, proposals, and weddings. Features custom backdrop designs and full event styling services.",
+      technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+      tagline: "Transforming ordinary moments into timeless memories",
+      metrics: "Custom event designs & styling services",
+      icon: <Palette className="w-6 h-6" />,
+      color: "from-pink-500 to-purple-500",
       url: "https://timelesstalesdecor.vercel.app/"
     },
     {
       id: 3,
+      category: "Hospitality",
       title: "Corra Culinary",
-      description: "Modern restaurant web application featuring menu showcase, online ordering system, and customer management.",
-      longDescription: "Built comprehensive restaurant management system with menu display, online ordering capabilities, customer reviews, and reservation system. Implemented modern design principles with smooth animations.",
-      technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS", "API Integration"],
-      features: [
-        "Interactive menu with category filtering",
-        "Online ordering and cart management",
-        "Customer review and rating system",
-        "Reservation booking system",
-        "Mobile-responsive design"
-      ],
-      metrics: {
-        orders: "Seamless",
-        design: "Modern",
-        mobile: "Optimized"
-      },
-      icon: <Database className="w-6 h-6" />,
-      color: "from-purple-500 to-pink-500",
-      status: "Live",
+      description: "Premium restaurant experience platform featuring culinary artistry where tradition meets innovation. Includes daily specials, menu management, location services, and reservation systems across Mumbai.",
+      technologies: ["React", "Next.js", "JavaScript", "CSS3"],
+      tagline: "Celebrating flavor and craft through digital experience",
+      metrics: "Multiple locations, premium dining experience",
+      icon: <ChefHat className="w-6 h-6" />,
+      color: "from-orange-500 to-red-500",
       url: "https://corra-culinary.vercel.app/"
     }
   ];
@@ -89,93 +54,59 @@ const Projects = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="space-y-12">
           {projects.map((project, index) => (
             <div
               key={project.id}
-              className="card-glass group cursor-pointer"
-              onClick={() => setSelectedProject(selectedProject === project.id ? null : project.id)}
+              className="card-glass group"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {/* Project Header */}
-              <div className="flex items-start justify-between mb-4">
-                <div className={`p-3 rounded-lg bg-gradient-to-r ${project.color} text-white group-hover:scale-110 transition-transform duration-300`}>
+              {/* Category Header */}
+              <div className="flex items-center mb-4">
+                <div className={`p-3 rounded-lg bg-gradient-to-r ${project.color} text-white mr-4 group-hover:scale-110 transition-transform duration-300`}>
                   {project.icon}
                 </div>
-                <div className="flex items-center space-x-2">
-                  <span className="px-3 py-1 bg-primary/20 text-primary text-xs rounded-full font-medium">
-                    {project.status}
-                  </span>
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 text-muted-foreground hover:text-primary transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <ExternalLink size={16} />
-                  </a>
+                <div>
+                  <div className="text-sm font-medium text-primary mb-1">{project.category}</div>
+                  <h3 className="text-2xl font-bold group-hover:text-primary transition-colors duration-300">
+                    {project.title}
+                  </h3>
                 </div>
               </div>
 
-              {/* Project Info */}
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
-                  {project.title}
-                </h3>
-                
-                <p className="text-muted-foreground">
-                  {project.description}
-                </p>
+              {/* Description */}
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                {project.description}
+              </p>
 
-                {/* Key Metrics */}
-                <div className="grid grid-cols-3 gap-4 py-4 border-t border-b border-border/50">
-                  {Object.entries(project.metrics).map(([key, value]) => (
-                    <div key={key} className="text-center">
-                      <div className="font-bold text-primary">{value}</div>
-                      <div className="text-xs text-muted-foreground capitalize">{key}</div>
-                    </div>
-                  ))}
-                </div>
+              {/* Technologies */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {project.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 bg-primary/20 text-primary text-sm rounded-full font-medium"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
 
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.slice(0, 4).map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-muted/50 text-foreground text-xs rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.technologies.length > 4 && (
-                    <span className="px-3 py-1 bg-muted/50 text-muted-foreground text-xs rounded-full">
-                      +{project.technologies.length - 4} more
-                    </span>
-                  )}
-                </div>
+              {/* Tagline and Metrics */}
+              <div className="border-t border-border/50 pt-4 space-y-2">
+                <div className="font-medium text-foreground">{project.tagline}</div>
+                <div className="text-sm text-muted-foreground">{project.metrics}</div>
+              </div>
 
-                {/* Expanded Content */}
-                {selectedProject === project.id && (
-                  <div className="mt-6 space-y-4 animate-fade-in-up">
-                    <div className="border-t border-border/50 pt-4">
-                      <h4 className="font-semibold mb-2 text-primary">Project Details</h4>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        {project.longDescription}
-                      </p>
-                      
-                      <h4 className="font-semibold mb-2 text-primary">Key Features</h4>
-                      <ul className="space-y-1 text-sm text-muted-foreground">
-                        {project.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-center">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mr-2 flex-shrink-0" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
+              {/* Visit Link */}
+              <div className="mt-4">
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-sm font-medium"
+                >
+                  Visit Project →
+                </a>
               </div>
             </div>
           ))}

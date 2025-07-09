@@ -75,7 +75,7 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors z-50 relative"
+            className="md:hidden p-2 text-foreground hover:text-primary transition-colors z-[60] relative"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -83,14 +83,14 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden fixed inset-0 top-16 glassmorphism">
-            <div className="px-4 pt-4 pb-3 space-y-2">
+          <div className="md:hidden fixed inset-0 top-0 z-[55] bg-background/95 backdrop-blur-lg border-t border-border">
+            <div className="px-4 pt-20 pb-3 space-y-2">
               {navItems.map((item) => (
                 <button
                   key={item.href}
                   onClick={() => handleNavClick(item.href)}
-                  className={`block w-full text-left px-3 py-3 text-base font-medium transition-colors duration-300 hover:text-primary rounded-lg hover:bg-primary/10 ${
-                    activeSection === item.href.slice(1) ? 'text-primary bg-primary/10' : 'text-muted-foreground'
+                  className={`block w-full text-left px-3 py-4 text-lg font-medium transition-colors duration-300 hover:text-primary rounded-lg hover:bg-primary/10 ${
+                    activeSection === item.href.slice(1) ? 'text-primary bg-primary/10' : 'text-foreground'
                   }`}
                 >
                   {item.label}
