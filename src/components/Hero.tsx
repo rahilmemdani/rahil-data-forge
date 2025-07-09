@@ -48,7 +48,7 @@ const Hero = () => {
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/resume.pdf';
+    link.href = '/Rahil Memdani Resume.pdf';
     link.download = 'Rahil_Memdani_Resume.pdf';
     document.body.appendChild(link);
     link.click();
