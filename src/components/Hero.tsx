@@ -13,7 +13,7 @@ const Hero = () => {
     'Snowflake Data Solutions',
     'Data Engineering'
   ];
-  
+
   const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
 
@@ -75,7 +75,7 @@ const Hero = () => {
                 <br />
                 <span className="text-foreground">Memdani</span>
               </h1>
-              
+
               <div className="text-xl md:text-2xl text-muted-foreground">
                 Full-Stack Software Engineer
                 <br />
@@ -113,41 +113,41 @@ const Hero = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <button 
-              onClick={scrollToProjects}
-              className="btn-primary"
-            >
-              View Projects
-              <ExternalLink size={20} />
-            </button>
-            <button 
-              onClick={handleDownloadResume}
-              className="btn-secondary"
-            >
-              <Download size={20} />
-              Download Resume
-            </button>
-          </div>
+              <button
+                onClick={scrollToProjects}
+                className="btn-primary"
+              >
+                View Projects
+                <ExternalLink size={20} />
+              </button>
+              <button
+                onClick={handleDownloadResume}
+                className="btn-secondary"
+              >
+                <Download size={20} />
+                Download Resume
+              </button>
+            </div>
 
             {/* Social Links */}
             <div className="flex space-x-6 pt-4">
-              <a 
-                href="https://www.linkedin.com/in/rahil-memdani-8968681ab/" 
-                target="_blank" 
+              <a
+                href="https://www.linkedin.com/in/rahil-memdani-8968681ab/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300"
               >
                 <Linkedin size={24} />
               </a>
-              <a 
-                href="https://github.com/rahilmemdani" 
-                target="_blank" 
+              <a
+                href="https://github.com/rahilmemdani"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300"
               >
                 <Github size={24} />
               </a>
-              <a 
+              <a
                 href="mailto:rmemdanib@gmail.com"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300"
               >
@@ -163,7 +163,12 @@ const Hero = () => {
                 <div className="w-full h-full rounded-full bg-gradient-to-br from-primary to-secondary p-1">
                   <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
                     <div className="w-full h-full rounded-full bg-gradient-to-br from-muted to-card flex items-center justify-center text-6xl font-bold gradient-text">
-                      RM
+                      {/* RM */}
+                      <img
+                        src="/rahil.jpeg"
+                        alt="Rahil Memdani"
+                        className="w-full h-full object-cover rounded-full"
+                      />
                     </div>
                   </div>
                 </div>
