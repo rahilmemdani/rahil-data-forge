@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Building2, Palette, ChefHat } from 'lucide-react';
+import { Building2, Palette, ChefHat, BarChart3, Play } from 'lucide-react';
 
 const Projects = () => {
   const projects = [
@@ -18,6 +18,19 @@ const Projects = () => {
     },
     {
       id: 2,
+      category: "Enterprise Dashboard",
+      title: "Seller Analytics Dashboard",
+      description: "Built an internal seller onboarding and commission tracking dashboard using React, .NET Core, and PostgreSQL. This system handles 600+ monthly registrations and 5,000+ transactions, reducing onboarding time by 30% and improving revenue accuracy by 10%.",
+      technologies: ["React", ".NET Core", "PostgreSQL", "Analytics", "Dashboard"],
+      tagline: "Streamlined seller operations with data-driven insights",
+      metrics: "600+ monthly registrations, 5,000+ transactions, 30% faster onboarding",
+      icon: <BarChart3 className="w-6 h-6" />,
+      color: "from-purple-500 to-indigo-500",
+      isDemo: true,
+      demoVideoUrl: "https://www.loom.com/share/your-demo-link-here"
+    },
+    {
+      id: 3,
       category: "Design & Events",
       title: "Timeless Tales Decor",
       description: "Elegant event design and styling platform for intimate celebrations including gender reveals, baby & bridal showers, proposals, and weddings. Features custom backdrop designs and full event styling services.",
@@ -29,7 +42,7 @@ const Projects = () => {
       url: "https://timelesstalesdecor.vercel.app/"
     },
     {
-      id: 3,
+      id: 4,
       category: "Hospitality",
       title: "Corra Culinary",
       description: "Premium restaurant experience platform featuring culinary artistry where tradition meets innovation. Includes daily specials, menu management, location services, and reservation systems across Mumbai.",
@@ -79,6 +92,30 @@ const Projects = () => {
                 {project.description}
               </p>
 
+              {/* Demo Video Section for Dashboard */}
+              {project.isDemo && (
+                <div className="mb-6">
+                  <div className="bg-muted/20 rounded-lg p-4 border border-border/50">
+                    <div className="flex items-center mb-3">
+                      <Play className="w-5 h-5 text-primary mr-2" />
+                      <span className="text-sm font-medium text-foreground">Demo Video Available</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Since this is an internal dashboard requiring authentication, view the demo video to see the full functionality.
+                    </p>
+                    <a
+                      href={project.demoVideoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium"
+                    >
+                      <Play className="w-4 h-4 mr-2" />
+                      Watch Demo Video
+                    </a>
+                  </div>
+                </div>
+              )}
+
               {/* Technologies */}
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.technologies.map((tech) => (
@@ -97,17 +134,19 @@ const Projects = () => {
                 <div className="text-sm text-muted-foreground">{project.metrics}</div>
               </div>
 
-              {/* Visit Link */}
-              <div className="mt-4">
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-sm font-medium"
-                >
-                  Visit Project →
-                </a>
-              </div>
+              {/* Visit Link - Only for non-demo projects */}
+              {!project.isDemo && (
+                <div className="mt-4">
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-sm font-medium"
+                  >
+                    Visit Project →
+                  </a>
+                </div>
+              )}
             </div>
           ))}
         </div>
