@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Code, Database, Brain, Cloud, Wrench, Users } from 'lucide-react';
 
@@ -8,37 +7,70 @@ const Skills = () => {
       icon: <Brain className="w-8 h-8" />,
       title: "Predictive Analytics",
       color: "from-primary to-blue-500",
-      skills: ["Machine Learning", "Statistical Modeling", "Time Series Forecasting", "A/B Testing"]
+      skills: [
+        "Machine Learning",
+        "Statistical Modeling",
+        "Forecasting Models",
+        "Anomaly Detection"
+      ]
     },
     {
       icon: <Database className="w-8 h-8" />,
       title: "Data Engineering",
       color: "from-secondary to-green-500",
-      skills: ["Snowflake", "ETL/ELT Pipelines", "PostgreSQL", "MongoDB"]
+      skills: [
+        "Snowflake",
+        "ETL Pipelines",
+        "PostgreSQL",
+        "MongoDB",
+        "MySQL"
+      ]
     },
     {
       icon: <Code className="w-8 h-8" />,
       title: "Full-Stack Development",
       color: "from-purple-500 to-pink-500",
-      skills: ["React & Node.js", ".NET Core", "JavaScript/TypeScript", "Python"]
+      skills: [
+        "React & Node.js",
+        ".NET Core",
+        "JavaScript/TypeScript",
+        "React Native",
+        "HTML5 & CSS3"
+      ]
     },
     {
       icon: <Cloud className="w-8 h-8" />,
       title: "Cloud & DevOps",
       color: "from-orange-500 to-red-500",
-      skills: ["AWS (EC2, S3, RDS)", "Docker", "Jenkins CI/CD", "Microservices"]
+      skills: [
+        "AWS (EC2, S3, RDS)",
+        "Docker",
+        "Jenkins",
+        "Microservices"
+      ]
     },
     {
       icon: <Wrench className="w-8 h-8" />,
       title: "Tools & Frameworks",
       color: "from-yellow-500 to-orange-500",
-      skills: ["Git & Version Control", "RESTful APIs", "Unit Testing", "Agile/Scrum"]
+      skills: [
+        "Git & Jira",
+        "RESTful APIs",
+        "Unit Testing",
+        "Debugging",
+        "Agile/Scrum"
+      ]
     },
     {
       icon: <Users className="w-8 h-8" />,
       title: "Leadership & Soft Skills",
       color: "from-teal-500 to-cyan-500",
-      skills: ["Technical Mentoring", "Cross-functional Collaboration", "Problem Solving", "Project Management"]
+      skills: [
+        "Technical Mentoring",
+        "Cross-functional Collaboration",
+        "Problem Solving",
+        "Project Ownership"
+      ]
     }
   ];
 

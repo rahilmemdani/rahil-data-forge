@@ -110,7 +110,7 @@ const Projects = () => {
 
                     {/* Description */}
                     <p className="text-sm text-muted-foreground mb-4">
-                      This internal dashboard requires authentication. View the public product page for a high-level overview to explore capabilities.
+                      The internal dashboard requires authentication. View the public product page for a high-level overview to explore capabilities.
                     </p>
 
                     {/* Product Link */}
