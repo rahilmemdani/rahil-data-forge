@@ -279,7 +279,7 @@ const Contact = () => {
         {/* Footer */}
         <div className="text-center mt-16 pt-8 border-t border-border">
           <p className="text-muted-foreground">
-            © 2024 Rahil Memdani. Built with React, TypeScript, and Tailwind CSS.
+            © 2025 Rahil Memdani. Built with React, TypeScript, and Tailwind CSS.
           </p>
           <p className="text-sm text-muted-foreground mt-2">
             Transforming data into intelligent solutions, one project at a time.
