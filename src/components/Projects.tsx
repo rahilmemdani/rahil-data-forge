@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Building2, Palette, ChefHat, BarChart3, Play } from 'lucide-react';
+import { Building2, Palette, ChefHat, BarChart3, Play, Globe, ExternalLink } from 'lucide-react';
 
 const Projects = () => {
   const projects = [
@@ -19,11 +18,12 @@ const Projects = () => {
     {
       id: 2,
       category: "Enterprise Dashboard",
-      title: "Seller Analytics Dashboard",
-      description: "Built an internal seller onboarding and commission tracking dashboard using React, .NET Core, and PostgreSQL. This system handles 600+ monthly registrations and 5,000+ transactions, reducing onboarding time by 30% and improving revenue accuracy by 10%.",
-      technologies: ["React", ".NET Core", "PostgreSQL", "Analytics", "Dashboard"],
+      title: "SaaS Platform",
+      description:
+        "SaaS platform streamlining onboarding, commission, and payments. Achieved 20% time savings, 20% better recovery, 10% cost savings, and enabled 5+ schemes with expert-built architecture.",
+      technologies: ["React", "Typescript", "NodeJS", ".NET Core", "PostgreSQL", "MongoDB"],
       tagline: "Streamlined seller operations with data-driven insights",
-      metrics: "600+ monthly registrations, 5,000+ transactions, 30% faster onboarding",
+      metrics: "Part of Grow Indigo’s AgriCloud Platform — automation, insights, scale",
       icon: <BarChart3 className="w-6 h-6" />,
       color: "from-purple-500 to-indigo-500",
       isDemo: true,
@@ -63,7 +63,7 @@ const Projects = () => {
             Professional <span className="gradient-text">Projects</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Real-world applications built with modern technologies and best practices
+            Explore real-world applications built with modern technologies, optimized UX, and scalable architectures.
           </p>
         </div>
 
@@ -97,21 +97,23 @@ const Projects = () => {
                 <div className="mb-6">
                   <div className="bg-muted/20 rounded-lg p-4 border border-border/50">
                     <div className="flex items-center mb-3">
-                      <Play className="w-5 h-5 text-primary mr-2" />
-                      <span className="text-sm font-medium text-foreground">Demo Video Available</span>
+                      <Globe className="w-5 h-5 text-primary mr-2" />
+                      <span className="text-sm font-medium text-foreground">Powered by Grow Indigo’s AgriCloud Platform</span>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Since this is an internal dashboard requiring authentication, view the demo video to see the full functionality.
+                    <p className="text-sm text-muted-foreground mb-4">
+                      This internal dashboard requires authentication. View the public product page for a high-level overview to explore capabilities.
                     </p>
-                    <a
-                      href={project.demoVideoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium"
-                    >
-                      <Play className="w-4 h-4 mr-2" />
-                      Watch Demo Video
-                    </a>
+                    <div className="flex flex-wrap gap-4">
+                      <a
+                        href="https://www.growindigo.co.in/agri-cloud/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-background border border-border/50 rounded-lg hover:shadow-md transition text-sm font-medium"
+                      >
+                        <Globe className="w-4 h-4 text-primary" />
+                        <span className="text-foreground">Product Website</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               )}
@@ -134,16 +136,17 @@ const Projects = () => {
                 <div className="text-sm text-muted-foreground">{project.metrics}</div>
               </div>
 
-              {/* Visit Link - Only for non-demo projects */}
-              {!project.isDemo && (
+              {/* Elegant Visit Link for public projects */}
+              {!project.isDemo && project.url && (
                 <div className="mt-4">
                   <a
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-sm font-medium"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-background border border-border/50 rounded-lg hover:shadow-md transition text-sm font-medium"
                   >
-                    Visit Project →
+                    <ExternalLink className="w-4 h-4 text-primary" />
+                    <span className="text-foreground">Visit Project</span>
                   </a>
                 </div>
               )}
@@ -156,7 +159,7 @@ const Projects = () => {
           <p className="text-lg text-muted-foreground mb-6">
             Interested in collaborating on innovative projects?
           </p>
-          <button 
+          <button
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             className="btn-primary"
           >
