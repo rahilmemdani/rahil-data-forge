@@ -1,5 +1,6 @@
 import React from 'react';
 import { Building2, Palette, ChefHat, BarChart3, Play, Globe, ExternalLink } from 'lucide-react';
+import agriCloudThumb from "/public/agricloud-thumbnail.svg"
 
 const Projects = () => {
   const projects = [
@@ -96,13 +97,23 @@ const Projects = () => {
               {project.isDemo && (
                 <div className="mb-6">
                   <div className="bg-muted/20 rounded-lg p-4 border border-border/50">
-                    <div className="flex items-center mb-3">
-                      <Globe className="w-5 h-5 text-primary mr-2" />
-                      <span className="text-sm font-medium text-foreground">Powered by Grow Indigo’s AgriCloud Platform</span>
+
+                    {/* Powered by AgriCloud */}
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-sm font-medium text-foreground">Powered by</span>
+                      <img
+                        src={agriCloudThumb}
+                        alt="AgriCloud Logo"
+                        className="h-7 w-auto rounded-sm object-contain"
+                      />
                     </div>
+
+                    {/* Description */}
                     <p className="text-sm text-muted-foreground mb-4">
                       This internal dashboard requires authentication. View the public product page for a high-level overview to explore capabilities.
                     </p>
+
+                    {/* Product Link */}
                     <div className="flex flex-wrap gap-4">
                       <a
                         href="https://www.growindigo.co.in/agri-cloud/"
@@ -110,13 +121,18 @@ const Projects = () => {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-4 py-2 bg-background border border-border/50 rounded-lg hover:shadow-md transition text-sm font-medium"
                       >
-                        <Globe className="w-4 h-4 text-primary" />
+                        <img
+                          src={agriCloudThumb}
+                          alt="AgriCloud Logo"
+                          className="w-5 h-5 rounded-sm object-cover"
+                        />
                         <span className="text-foreground">Product Website</span>
                       </a>
                     </div>
                   </div>
                 </div>
               )}
+
 
               {/* Technologies */}
               <div className="flex flex-wrap gap-2 mb-6">
