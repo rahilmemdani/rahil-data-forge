@@ -8,6 +8,7 @@ import Projects from '../components/Projects';
 import Experience from '../components/Experience';
 import Contact from '../components/Contact';
 import ParticleBackground from '../components/ParticleBackground';
+import Chatbot from '@/components/Chatbot';
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -27,6 +28,7 @@ const Index = () => {
         <Projects />
         <Experience />
         <Contact />
+        <Chatbot />
       </main>
     </div>
   );
