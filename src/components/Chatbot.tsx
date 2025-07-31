@@ -28,6 +28,12 @@ WEB DEVELOPMENT INTERN | AGA KHAN EDUCATION BOARD (Feb '21 - Mar '21)
 - Delivered a responsive, end-to-end solution with integrated curriculum data.
 - Handled full-stack development independently.
 
+PROJECTS:
+- Agri-Cloud Forecasting Suite: A predictive analytics tool used by supply teams to anticipate crop demand, reducing excess stock holding by 25%.
+- Farmer Ledger Automation: A full-stack reporting system that automated ledger creation and reconciliations, minimizing manual input errors by 40%.
+- SaaS HR Payroll Tool: Built a custom HR solution to process salaries, attendance, and employee records across departments — went from 30-day manual cycles to <10-day automated runs.
+
+
 SKILLS:
 - Programming Languages: JavaScript, Node.js, React, React Native, C#.NET Core, Python, HTML5, CSS3.
 - Databases and Cloud: MongoDB, PostgreSQL, MySQL, AWS EC2, AWS S3, AWS RDS, Snowflake, Docker, Jenkins.
