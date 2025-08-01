@@ -91,12 +91,12 @@ const App = () => {
   const chatContainerRef = useRef(null);
 
   const suggestionQuestions = [
-    "Tell me about Rahil's recent promotion",
-    "What are his key technical skills?",
-    "Describe his experience at Grow Indigo",
+    "What are Rahil's key skills?",
+    "Describe his experience at Grow Indigo.",
     "What were his main achievements?",
+    "What is his educational background?",
   ];
-
+  
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
