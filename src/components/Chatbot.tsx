@@ -8,20 +8,24 @@ Name: Rahil Memdani
 Contact: +91-9167156829 | rmemdanib@gmail.com | LinkedIn: linkedin.com/in/rahil-memdani | Portfolio: rahilmemdani-portfolio.vercel.app
 
 PROFESSIONAL SUMMARY:
-Full-Stack Software Engineer with 3+ years of experience in React, Node.js, .NET Core, and databases, delivering 50% operational gains through machine learning and predictive analytics in agritech. Built forecasting platforms serving 2M+ users; now pursuing advanced Data Science to drive innovation through data-driven solutions.
+Full-Stack Software Engineer with 3+ years of experience in React, Node.js, .NET Core, and databases, delivering 50% operational gains through machine learning and predictive analytics in agritech. Recently promoted to SDE-II for leading large-scale projects and mentoring team members. Built forecasting platforms serving 2M+ users; now pursuing advanced Data Science to drive innovation through data-driven solutions.
 
 EXPERIENCE (3+ YEARS):
-SOFTWARE DEVELOPMENT ENGINEER I | GROW INDIGO (Aug '21 - Present)
+SOFTWARE DEVELOPMENT ENGINEER I → II | GROW INDIGO (Aug '21 - Present)
+Promoted from SDE-I to SDE-II (July 2025) for leading large-scale full-stack projects, driving platform-wide innovation, and mentoring team members in a fast-paced agritech environment serving 2M+ users.
+
+Key Achievements:
 - Built commission analytics system using .NET Core and PostgreSQL, processing 5,000+ monthly transactions with 10% revenue accuracy improvement and 15% faster reporting.
 - Created React-based seller onboarding dashboard serving 600+ monthly registrations, reducing onboarding time by 30% for 2M+ user platform across 15+ states.
+- Developed predictive forecasting models improving inventory accuracy by 25% and refund processing by 20% through machine learning algorithms.
+- Implemented Snowflake anomaly detection system providing bi-weekly sales insights for data-driven strategic decisions.
+- Led SaaS platform transformation to multi-tenant architecture enabling global scalability and improved performance.
+- Mentored team through 8 technical interviews and successfully onboarded 3 engineers, demonstrating leadership capabilities.
 - Integrated Rupifi Buy Now Pay Later and HDFC payment APIs, managing 250+ weekly verifications and accelerating reconciliation by 35%.
 - Automated ledger workflows using Node.js and PostgreSQL, generating 200+ monthly reports while cutting manual errors by 40%.
-- Developed predictive forecasting models improving inventory accuracy by 25% and refund processing by 20% through machine learning.
-- Implemented Snowflake anomaly detection providing bi-weekly sales insights.
 - Deployed barcode inventory system enhancing stock accuracy by 30%.
 - Built Electron Human Resources payroll system with MongoDB, reducing processing time from 30 days to 5-10 days.
-- Led SaaS platform transformation to multi-tenant architecture. (Product link: growindigo.co.in/agri-cloud)
-- Mentored team through 8 technical interviews and onboarded 3 engineers.
+- Product link: growindigo.co.in/agri-cloud
 
 WEB DEVELOPMENT INTERN | AGA KHAN EDUCATION BOARD (Feb '21 - Mar '21)
 - Developed full-stack school portal using Node.js, MySQL, and React.
@@ -33,14 +37,14 @@ PROJECTS:
 - Farmer Ledger Automation: A full-stack reporting system that automated ledger creation and reconciliations, minimizing manual input errors by 40%.
 - SaaS HR Payroll Tool: Built a custom HR solution to process salaries, attendance, and employee records across departments — went from 30-day manual cycles to <10-day automated runs.
 
-
 SKILLS:
 - Programming Languages: JavaScript, Node.js, React, React Native, C#.NET Core, Python, HTML5, CSS3.
 - Databases and Cloud: MongoDB, PostgreSQL, MySQL, AWS EC2, AWS S3, AWS RDS, Snowflake, Docker, Jenkins.
 - Development Tools: Git, Jira, Visual Studio, RESTful APIs, Microservices, ETL Pipelines, Unit Testing, Debugging.
-- Analytics and Leadership: Predictive Analytics, Machine Learning, Agile Methodologies, Cross-functional Collaboration, Technical Mentoring.
+- Analytics and Leadership: Predictive Analytics, Machine Learning, System Design, Multi-tenant Architecture, Agile Methodologies, Cross-functional Collaboration, Technical Mentoring.
 
 ACHIEVEMENTS:
+- Promoted to SDE-II in July 2025 for exceptional performance and leadership.
 - Engineered systems for 2M+ farmers across 15+ states.
 - Optimized operational efficiency by 30-50%.
 - Reduced manual processing errors by 40%.
@@ -56,7 +60,6 @@ CERTIFICATIONS:
 `;
 
 // --- Helper Components ---
-
 const SendIcon = () => (
   <svg viewBox="0 0 24 24" className="w-6 h-6 text-white" fill="currentColor">
     <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
@@ -70,8 +73,8 @@ const BotIcon = () => (
 );
 
 const UserIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-slate-500">
-    <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clipRule="evenodd" />
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-primary">
+    <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clipRule="evenodd" />
   </svg>
 );
 
@@ -80,16 +83,18 @@ const UserIcon = () => (
 const App = () => {
   const [userInput, setUserInput] = useState('');
   const [chatHistory, setChatHistory] = useState([
-    { role: "model", parts: [{ text: "Hello! I am Rahil's AI assistant. You can ask me any questions about his skills, experience, and projects based on his resume." }] }
+    { role: "model", parts: [{ text: "Hello! I am Rahil's AI assistant. You can ask me any questions about his skills, experience, and projects based on his resume. He was recently promoted to SDE-II!" }] }
   ]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasSentFirstMessage, setHasSentFirstMessage] = useState(false);
   const chatContainerRef = useRef(null);
 
   const suggestionQuestions = [
-    "What are Rahil's key skills?",
-    "Describe his experience at Grow Indigo.",
+    "Tell me about Rahil's recent promotion",
+    "What are his key technical skills?",
+    "Describe his experience at Grow Indigo",
     "What were his main achievements?",
-    "What is his educational background?",
   ];
 
   useEffect(() => {
@@ -183,10 +188,6 @@ const App = () => {
     }
   };
 
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasSentFirstMessage, setHasSentFirstMessage] = useState(false);
-
-
   return (
     <>
       {isVisible && (
@@ -216,11 +217,19 @@ const App = () => {
                 {message.role === 'model' && <BotIcon />}
                 <div
                   className={`max-w-[80%] p-3 rounded-2xl shadow ${message.role === 'user'
-                      ? 'bg-primary-500 text-black rounded-br-none'
+                      ? 'bg-primary text-white rounded-br-none'
                       : 'bg-white text-gray-800 rounded-bl-none'
                     }`}
                 >
-                  <p className="whitespace-pre-wrap">{message.parts[0].text}</p>
+                  <div 
+                    className="whitespace-pre-wrap"
+                    dangerouslySetInnerHTML={{
+                      __html: message.parts[0].text
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                        .replace(/\n/g, '<br>')
+                    }}
+                  />
                 </div>
                 {message.role === 'user' && <UserIcon />}
               </div>
@@ -231,9 +240,9 @@ const App = () => {
                 <BotIcon />
                 <div className="p-3 bg-white rounded-2xl shadow text-gray-800">
                   <div className="flex gap-1">
-                    <span className="w-2 h-2 bg-primary-500 rounded-full animate-pulse delay-75"></span>
-                    <span className="w-2 h-2 bg-primary-500 rounded-full animate-pulse delay-150"></span>
-                    <span className="w-2 h-2 bg-primary-500 rounded-full animate-pulse delay-300"></span>
+                    <span className="w-2 h-2 bg-primary rounded-full animate-pulse delay-75"></span>
+                    <span className="w-2 h-2 bg-primary rounded-full animate-pulse delay-150"></span>
+                    <span className="w-2 h-2 bg-primary rounded-full animate-pulse delay-300"></span>
                   </div>
                 </div>
               </div>

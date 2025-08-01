@@ -43,7 +43,7 @@ const About = () => {
           <div className="space-y-6 animate-slide-in-left">
             <div className="space-y-4">
               <p className="text-lg leading-relaxed">
-                As a Full-Stack Software Engineer with over 3 years of experience, I specialize in building 
+                As a Full-Stack Software Engineer with over 4 years of experience, I specialize in building 
                 end-to-end predictive analytics solutions that drive business intelligence and operational efficiency.
               </p>
               

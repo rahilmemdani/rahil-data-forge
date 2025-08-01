@@ -3,23 +3,88 @@ import React from 'react';
 import { MapPin, Calendar, TrendingUp, Users, Database, Code, ExternalLink } from 'lucide-react';
 
 const Experience = () => {
+  // const experiences = [
+  //   {
+  //     company: "Grow Indigo",
+  //     position: "Software Development Engineer II",
+  //     duration: "Aug 2021 - Present",
+  //     location: "Mumbai, India",
+  //     type: "Full-time",
+  //     description:
+  //       "Promoted from SDE-I to SDE-II for leading large-scale full-stack projects, driving platform-wide innovation, and mentoring team members in a fast-paced agritech environment serving 2M+ users.",
+  //     achievements: [
+  //       "Built commission analytics system processing 5,000+ monthly transactions with 10% revenue accuracy improvement",
+  //       "Created React-based seller onboarding dashboard reducing onboarding time by 30% for 600+ monthly registrations",
+  //       "Developed predictive forecasting models improving inventory accuracy by 25% through machine learning",
+  //       "Implemented Snowflake anomaly detection providing bi-weekly sales insights for data-driven decisions",
+  //       "Led SaaS platform transformation to multi-tenant architecture enabling global scalability",
+  //       "Mentored team through technical interviews and onboarded 3 engineers",
+  //       "Recognized for ownership and cross-functional collaboration, leading to promotion to SDE-II in July 2025"
+  //     ],
+  //     technologies: [
+  //       "React",
+  //       "Node.js",
+  //       ".NET Core",
+  //       "PostgreSQL",
+  //       "MongoDB",
+  //       "Snowflake",
+  //       "Python",
+  //       "Machine Learning"
+  //     ],
+  //     icon: <TrendingUp className="w-6 h-6" />,
+  //     color: "from-primary to-blue-500"
+  //   },
+  //   {
+  //     company: "Aga Khan Education Board",
+  //     position: "Web Development Intern",
+  //     duration: "Feb 2021 - Mar 2021",
+  //     location: "Mumbai, India",
+  //     type: "Internship",
+  //     description:
+  //       "Developed full-stack school information portal with comprehensive database integration and responsive design.",
+  //     achievements: [
+  //       "Built complete school information portal using Node.js, MySQL, and React",
+  //       "Implemented location-based filtering and encrypted URL systems for security",
+  //       "Delivered responsive interface with comprehensive curriculum database integration",
+  //       "Demonstrated adaptability for global user bases across multiple education boards"
+  //     ],
+  //     technologies: ["Node.js", "MySQL", "React", "JavaScript", "HTML5", "CSS3"],
+  //     icon: <Code className="w-6 h-6" />,
+  //     color: "from-secondary to-green-500",
+  //     link: "https://akeb.iiindia.org/?a=51c802d3&l=en",
+  //     linkText: "AKEB School Info Microsite"
+  //   }
+  // ];
+  
   const experiences = [
     {
       company: "Grow Indigo",
-      position: "Software Development Engineer I",
+      position: "Software Development Engineer I → II",
       duration: "Aug 2021 - Present",
       location: "Mumbai, India",
       type: "Full-time",
-      description: "Leading full-stack development and predictive analytics initiatives for agritech platform serving 2M+ users across 15+ states.",
+      description:
+        "Promoted from SDE-I to SDE-II (July 2025) for leading large-scale full-stack projects, driving platform-wide innovation, and mentoring team members in a fast-paced agritech environment serving 2M+ users.",
       achievements: [
         "Built commission analytics system processing 5,000+ monthly transactions with 10% revenue accuracy improvement",
         "Created React-based seller onboarding dashboard reducing onboarding time by 30% for 600+ monthly registrations",
-        "Developed predictive forecasting models improving inventory accuracy by 25% through machine learning",
-        "Implemented Snowflake anomaly detection providing bi-weekly sales insights for data-driven decisions",
-        "Led SaaS platform transformation to multi-tenant architecture enabling global scalability",
-        "Mentored team through technical interviews and onboarded 3 engineers"
+        "Developed predictive forecasting models improving inventory accuracy by 25% through machine learning algorithms",
+        "Implemented Snowflake anomaly detection system providing bi-weekly sales insights for data-driven strategic decisions",
+        "Led SaaS platform transformation to multi-tenant architecture enabling global scalability and improved performance",
+        "Mentored team through technical interviews and successfully onboarded 3 engineers, demonstrating leadership capabilities"
       ],
-      technologies: ["React", "Node.js", ".NET Core", "PostgreSQL", "MongoDB", "Snowflake", "Python", "Machine Learning"],
+      technologies: [
+        "React",
+        "Node.js",
+        ".NET Core",
+        "PostgreSQL",
+        "MongoDB",
+        "Snowflake",
+        "Python",
+        "Machine Learning",
+        "System Design",
+        "Multi-tenant Architecture"
+      ],
       icon: <TrendingUp className="w-6 h-6" />,
       color: "from-primary to-blue-500"
     },
@@ -29,10 +94,11 @@ const Experience = () => {
       duration: "Feb 2021 - Mar 2021",
       location: "Mumbai, India",
       type: "Internship",
-      description: "Developed full-stack school information portal with comprehensive database integration and responsive design.",
+      description:
+        "Developed full-stack school information portal with comprehensive database integration and responsive design.",
       achievements: [
         "Built complete school information portal using Node.js, MySQL, and React",
-        "Implemented location-based filtering and encrypted URL systems for security",
+        "Implemented location-based filtering and encrypted URL systems for enhanced security",
         "Delivered responsive interface with comprehensive curriculum database integration",
         "Demonstrated adaptability for global user bases across multiple education boards"
       ],
@@ -43,6 +109,7 @@ const Experience = () => {
       linkText: "AKEB School Info Microsite"
     }
   ];
+  
 
   const certifications = [
     {
