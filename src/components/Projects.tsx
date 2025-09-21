@@ -1,5 +1,5 @@
 import React from 'react';
-import { Building2, Palette, ChefHat, BarChart3, Play, Globe, ExternalLink } from 'lucide-react';
+import { Building2, Palette, ChefHat, BarChart3, Play, Globe, ExternalLink, Sparkles } from 'lucide-react';
 import agriCloudThumb from "/public/agricloud-thumbnail.svg"
 
 const Projects = () => {
@@ -14,17 +14,17 @@ const Projects = () => {
       metrics: "2M+ farmers, 15+ states, 7M+ acres",
       icon: <Building2 className="w-6 h-6" />,
       color: "from-blue-500 to-cyan-500",
-      url: "https://www.growindigo.co.in/"
+      url: "https://www.growindigo.co.in/",
+      // isFeatured: true
     },
     {
       id: 2,
       category: "Enterprise Dashboard",
       title: "SaaS Platform",
-      description:
-        "SaaS platform streamlining onboarding, commission, and payments. Achieved 20% time savings, 20% better recovery, 10% cost savings, and enabled 5+ schemes with expert-built architecture.",
+      description: "SaaS platform streamlining onboarding, commission, and payments. Achieved 20% time savings, 20% better recovery, 10% cost savings, and enabled 5+ schemes with expert-built architecture.",
       technologies: ["React", "Typescript", "NodeJS", ".NET Core", "PostgreSQL", "MongoDB"],
       tagline: "Streamlined seller operations with data-driven insights",
-      metrics: "Part of Grow Indigo’s AgriCloud Platform — automation, insights, scale",
+      metrics: "Part of Grow Indigo's AgriCloud Platform — automation, insights, scale",
       icon: <BarChart3 className="w-6 h-6" />,
       color: "from-purple-500 to-indigo-500",
       isDemo: true,
@@ -32,6 +32,19 @@ const Projects = () => {
     },
     {
       id: 3,
+      category: "E-Commerce",
+      title: "Zoshe - Luxury Perfume Platform",
+      description: "Modern e-commerce platform specializing in premium fragrances with advanced SEO optimization, intelligent product search, and seamless mobile experience. Features comprehensive analytics tracking, optimized product pages, and conversion-focused UX design.",
+      technologies: ["React", "JavaScript", "CSS3", "Google Analytics", "SEO Optimization", "Responsive Design"],
+      tagline: "Where luxury meets technology in fragrance commerce",
+      metrics: "Active e-commerce platform · SEO optimized · Mobile-first design",
+      icon: <Sparkles className="w-6 h-6" />,
+      color: "from-purple-500 to-pink-500",
+      url: "https://www.zoshe.in/",
+      isFeatured: true
+    },
+    {
+      id: 4,
       category: "Design & Events",
       title: "Timeless Tales Decor",
       description: "Elegant event design and styling platform for intimate celebrations including gender reveals, baby & bridal showers, proposals, and weddings. Features custom backdrop designs and full event styling services.",
@@ -43,7 +56,7 @@ const Projects = () => {
       url: "https://timelesstalesdecor.vercel.app/"
     },
     {
-      id: 4,
+      id: 5,
       category: "Hospitality",
       title: "Corra Culinary",
       description: "Premium restaurant experience platform featuring culinary artistry where tradition meets innovation. Includes daily specials, menu management, location services, and reservation systems across Mumbai.",
@@ -72,17 +85,19 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={project.id}
-              className="card-glass group"
+              className={`card-glass group ${project.isFeatured ? 'ring-2 ring-primary/20 bg-gradient-to-br from-card to-muted/20' : ''}`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Category Header */}
               <div className="flex items-center mb-4">
-                <div className={`p-3 rounded-lg bg-gradient-to-r ${project.color} text-white mr-4 group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`p-3 rounded-lg bg-gradient-to-r ${project.color} text-white mr-4 group-hover:scale-110 transition-transform duration-300 ${project.isFeatured ? 'shadow-lg' : ''}`}>
                   {project.icon}
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-primary mb-1">{project.category}</div>
-                  <h3 className="text-2xl font-bold group-hover:text-primary transition-colors duration-300">
+                  <div className={`text-sm font-medium mb-1 ${project.isFeatured ? 'text-primary font-bold' : 'text-primary'}`}>
+                    {project.category}
+                  </div>
+                  <h3 className={`text-2xl font-bold group-hover:text-primary transition-colors duration-300 ${project.isFeatured ? 'text-3xl' : ''}`}>
                     {project.title}
                   </h3>
                 </div>
@@ -93,11 +108,38 @@ const Projects = () => {
                 {project.description}
               </p>
 
+              {/* Featured Project Highlights */}
+              {project.isFeatured && (
+                <div className="mb-6 p-4 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 rounded-lg border border-primary/20">
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-primary" />
+                    Key Features & Achievements
+                  </h4>
+                  <div className="grid md:grid-cols-2 gap-2 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                      SEO-optimized product pages
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                      Google Analytics integration
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                      Intelligent product search
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                      Mobile-first responsive design
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Demo Video Section for Dashboard */}
               {project.isDemo && (
                 <div className="mb-6">
                   <div className="bg-muted/20 rounded-lg p-4 border border-border/50">
-
                     {/* Powered by AgriCloud */}
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-sm font-medium text-foreground">Powered by</span>
@@ -121,7 +163,7 @@ const Projects = () => {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-4 py-2 bg-background border border-border/50 rounded-lg hover:shadow-md transition text-sm font-medium"
                       >
-                      <Globe className="w-5 h-5 text-primary mr-2" />
+                        <Globe className="w-5 h-5 text-primary mr-2" />
                         <span className="text-foreground">Product Website</span>
                       </a>
                     </div>
@@ -129,13 +171,16 @@ const Projects = () => {
                 </div>
               )}
 
-
               {/* Technologies */}
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 bg-primary/20 text-primary text-sm rounded-full font-medium"
+                    className={`px-3 py-1 text-sm rounded-full font-medium ${
+                      project.isFeatured 
+                        ? 'bg-primary/30 text-primary border border-primary/20' 
+                        : 'bg-primary/20 text-primary'
+                    }`}
                   >
                     {tech}
                   </span>
@@ -144,7 +189,9 @@ const Projects = () => {
 
               {/* Tagline and Metrics */}
               <div className="border-t border-border/50 pt-4 space-y-2">
-                <div className="font-medium text-foreground">{project.tagline}</div>
+                <div className={`font-medium ${project.isFeatured ? 'text-primary font-semibold' : 'text-foreground'}`}>
+                  {project.tagline}
+                </div>
                 <div className="text-sm text-muted-foreground">{project.metrics}</div>
               </div>
 
@@ -155,10 +202,14 @@ const Projects = () => {
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-background border border-border/50 rounded-lg hover:shadow-md transition text-sm font-medium"
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg hover:shadow-md transition text-sm font-medium ${
+                      project.isFeatured
+                        ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg'
+                        : 'bg-background border border-border/50 text-foreground'
+                    }`}
                   >
-                    <ExternalLink className="w-4 h-4 text-primary" />
-                    <span className="text-foreground">Visit Project</span>
+                    <ExternalLink className="w-4 h-4" />
+                    <span>{project.isFeatured ? 'Explore Live Platform' : 'Visit Project'}</span>
                   </a>
                 </div>
               )}
