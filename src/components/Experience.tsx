@@ -245,87 +245,191 @@ const Experience = () => {
               </div>
 
               {/* Certifications with Modal */}
-              <div className="card-glass p-6 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg">
-                <h4 className="font-bold text-2xl mb-8 flex items-center text-white dark:text-white">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-secondary to-primary flex items-center justify-center text-white mr-4">
-                    <Database size={24} />
+{/* Certifications with Modal - Improved UI */}
+<div className="card-glass">
+  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-12">
+    <div className="flex items-center mb-4 sm:mb-0">
+      <div className="w-12 h-12 rounded-full bg-gradient-to-r from-secondary to-primary flex items-center justify-center text-white mr-4">
+        <Database size={24} />
+      </div>
+      <div>
+        <h4 className="font-bold text-2xl text-foreground">Certifications & Awards</h4>
+        <p className="text-muted-foreground text-sm">Professional credentials and achievements</p>
+      </div>
+    </div>
+    <div className="text-right">
+      <span className="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium">
+        {certifications.length} Credentials
+      </span>
+    </div>
+  </div>
+
+  <div className="grid gap-6">
+    {certifications.map((cert, idx) => (
+      <div
+        key={idx}
+        className={`group relative overflow-hidden rounded-2xl transition-all duration-300 cursor-pointer ${
+          cert.type === "award"
+            ? "bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-600 hover:from-blue-600 hover:via-cyan-600 hover:to-blue-700 shadow-lg hover:shadow-xl"
+            : "bg-card hover:bg-card/80 border border-border hover:border-primary/30 shadow-sm hover:shadow-lg"
+        } hover:scale-[1.02] hover:-translate-y-1`}
+        onClick={() => openModal(cert)}
+      >
+        {/* Background Pattern for Awards */}
+        {cert.type === "award" && (
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-4 right-4 w-16 h-16 border-2 border-white/30 rounded-full"></div>
+            <div className="absolute bottom-4 left-4 w-8 h-8 border border-white/20 rounded-full"></div>
+            <div className="absolute top-1/2 right-8 w-4 h-4 bg-white/20 rounded-full"></div>
+          </div>
+        )}
+
+        <div className="relative p-6">
+          <div className="flex items-start space-x-4">
+            {/* Icon or Image */}
+            <div className="flex-shrink-0">
+              {cert.type === "award" && cert.image ? (
+                <div className="relative">
+                  <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-white/30 shadow-lg">
+                    <img
+                      src={cert.image}
+                      alt={cert.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
                   </div>
-                  Certifications & Awards
-                </h4>
+                  {/* Glow effect for awards */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-transparent rounded-2xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              ) : (
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors duration-300 ${
+                  cert.type === "award" 
+                    ? "bg-white/20 text-white group-hover:bg-white/30" 
+                    : "bg-primary/10 text-primary group-hover:bg-primary/20"
+                }`}>
+                  {cert.icon}
+                </div>
+              )}
+            </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  {certifications.map((cert, idx) => (
-                    <div
-                      key={idx}
-                      className={`flex flex-col md:flex-row items-center md:items-start p-5 rounded-xl transition-transform cursor-pointer ${
-                        cert.type === "award"
-                          ? "bg-gradient-to-r from-blue-400 to-cyan-500 text-white shadow-lg hover:scale-105"
-                          : "bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-md hover:shadow-lg"
+            {/* Content */}
+            <div className="flex-1 min-w-0">
+              {/* Header */}
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex-1">
+                  {cert.link ? (
+                    <a
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`font-bold text-lg line-clamp-2 hover:underline flex items-start gap-2 transition-colors duration-200 ${
+                        cert.type === "award" ? "text-white" : "text-foreground group-hover:text-primary"
                       }`}
-                      onClick={() => openModal(cert)}
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      {/* Image/Icon */}
-                      {cert.type === "award" && cert.image ? (
-                        <div className="relative group">
-                          <img
-                            src={cert.image}
-                            alt={cert.name}
-                            className="w-32 h-32 md:w-28 md:h-28 rounded-full border-4 border-white object-cover mb-4 md:mb-0 md:mr-6 flex-shrink-0 group-hover:scale-105 transition-transform duration-300"
-                          />
-                          <div className="absolute inset-0 bg-black/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span className="text-white text-sm font-medium">Click to view</span>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="text-primary mt-0.5 flex-shrink-0 mb-4 md:mb-0 md:mr-6">
-                          {cert.icon}
-                        </div>
-                      )}
+                      <span>{cert.name}</span>
+                      <ExternalLink size={16} className="flex-shrink-0 mt-0.5 opacity-70" />
+                    </a>
+                  ) : (
+                    <h5 className={`font-bold text-lg line-clamp-2 transition-colors duration-200 ${
+                      cert.type === "award" ? "text-white" : "text-foreground group-hover:text-primary"
+                    }`}>
+                      {cert.name}
+                    </h5>
+                  )}
+                  
+                  <p className={`text-sm font-medium mt-1 ${
+                    cert.type === "award" ? "text-white/90" : "text-muted-foreground"
+                  }`}>
+                    {cert.issuer}
+                  </p>
+                </div>
 
-                      {/* Details */}
-                      <div className="flex-1 text-center md:text-left">
-                        {cert.link ? (
-                          <a
-                            href={cert.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`font-semibold text-lg flex items-center justify-center md:justify-start mb-1 ${
-                              cert.type === "award" ? "text-white" : "text-gray-900 dark:text-white"
-                            }`}
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            {cert.name}
-                            <ExternalLink size={16} className="ml-2" />
-                          </a>
-                        ) : (
-                          <p className={`font-semibold text-lg mb-1 ${cert.type === "award" ? "text-white" : "text-gray-900 dark:text-white"}`}>
-                            {cert.name}
-                          </p>
-                        )}
+                {/* Award Badge */}
+                {cert.type === "award" && (
+                  <div className="flex-shrink-0 ml-4">
+                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-white/20 text-white border border-white/30">
+                      🏆 Award
+                    </span>
+                  </div>
+                )}
+              </div>
 
-                        <p className={`text-sm mb-1 ${cert.type === "award" ? "text-white/80" : "text-gray-600 dark:text-gray-300"}`}>
-                          {cert.issuer}
-                        </p>
-                        {cert.id && (
-                          <p className={`text-xs font-mono mb-1 ${cert.type === "award" ? "text-white/80" : "text-gray-500 dark:text-gray-400"}`}>
-                            {cert.id}
-                          </p>
-                        )}
-                        {cert.year && (
-                          <p className={`text-xs mb-1 ${cert.type === "award" ? "text-white/80" : "text-gray-500 dark:text-gray-400"}`}>
-                            Year: {cert.year}
-                          </p>
-                        )}
-                        {cert.contribution && (
-                          <p className={`text-xs ${cert.type === "award" ? "text-white/80" : "text-gray-500 dark:text-gray-400"}`}>
-                            {cert.contribution}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
+              {/* Details Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                {cert.id && (
+                  <div className="flex items-center">
+                    <span className={`font-medium mr-2 ${cert.type === "award" ? "text-white/80" : "text-muted-foreground"}`}>
+                      ID:
+                    </span>
+                    <code className={`px-2 py-0.5 rounded text-xs font-mono ${
+                      cert.type === "award" 
+                        ? "bg-white/20 text-white" 
+                        : "bg-muted text-muted-foreground"
+                    }`}>
+                      {cert.id}
+                    </code>
+                  </div>
+                )}
+                
+                {cert.year && (
+                  <div className="flex items-center">
+                    <Calendar size={14} className={`mr-2 ${cert.type === "award" ? "text-white/80" : "text-muted-foreground"}`} />
+                    <span className={cert.type === "award" ? "text-white/90" : "text-muted-foreground"}>
+                      {cert.year}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Contribution (for awards) */}
+              {cert.contribution && (
+                <div className="mt-4 pt-4 border-t border-white/20">
+                  <p className="text-sm text-white/90 line-clamp-2 leading-relaxed">
+                    {cert.contribution}
+                  </p>
+                </div>
+              )}
+
+              {/* Hover indicator */}
+              <div className={`mt-4 flex items-center justify-between ${
+                cert.image ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+              } transition-opacity duration-200`}>
+                <span className={`text-xs ${
+                  cert.type === "award" ? "text-white/70" : "text-muted-foreground"
+                }`}>
+                  {cert.image ? "Click to view full details" : "Click for more info"}
+                </span>
+                <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-transform group-hover:translate-x-1 ${
+                  cert.type === "award" ? "bg-white/20" : "bg-primary/10"
+                }`}>
+                  <ExternalLink size={12} className={cert.type === "award" ? "text-white" : "text-primary"} />
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Shine effect on hover */}
+        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"></div>
+      </div>
+    ))}
+  </div>
+
+  {/* Additional certifications note */}
+  <div className="mt-8 p-4 bg-muted/30 rounded-lg border-l-4 border-primary">
+    <div className="flex items-start">
+      <TrendingUp size={18} className="text-primary mt-0.5 mr-3 flex-shrink-0" />
+      <div>
+        <h5 className="font-semibold text-foreground mb-1">Continuous Learning</h5>
+        <p className="text-sm text-muted-foreground">
+          Actively pursuing additional certifications in cloud technologies and modern development practices. 
+          <span className="text-primary font-medium ml-1">Stay tuned for updates!</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
             </div>
           </div>
         </div>
