@@ -6,6 +6,20 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
+      category: "Business Intelligence",
+      title: "Agricultural Data Analytics Dashboard",
+      description: "Comprehensive Power BI dashboard analyzing agricultural performance metrics, farmer engagement, and regional trends. Features interactive visualizations for commission tracking, sales forecasting, and operational efficiency across 15+ states with real-time data integration.",
+      technologies: ["Power BI", "DAX", "Power Query", "SQL", "Data Modeling", "Excel Integration"],
+      tagline: "Transforming agricultural data into actionable business insights",
+      metrics: "15+ states coverage · Real-time analytics · Interactive visualizations",
+      icon: <BarChart3 className="w-6 h-6" />,
+      color: "from-yellow-500 to-orange-500",
+      url: "https://app.powerbi.com/view?r=eyJrIjoiOTM3MTJkY2YtMDdhYy00YjBlLWFiNTQtNGYxMDAzMmRjZTM0IiwidCI6IjhmYzRlMWZhLTc3NjItNGU0OS1iYzJlLTY0MWQ4YTZkNzUzMCJ9",
+      isPowerBI: true
+      // isFeatured: true
+    },
+    {
+      id: 2,
       category: "Data & Analytics",
       title: "Snowflake Macros for Grow Indigo",
       description: "Developed reusable Snowflake SQL macros to streamline complex query patterns across agricultural datasets. Enabled modular, efficient, and scalable query logic for enterprise reporting and analytics workloads at Grow Indigo.",
@@ -17,7 +31,7 @@ const Projects = () => {
       // url: "https://www.growindigo.co.in/"
     },
     {
-      id: 2,
+      id: 3,
       category: "Data Reporting",
       title: "Excel Reporting with Snowflake for Mahyco",
       description: "Implemented seamless integration of Snowflake with Excel for Mahyco’s business teams. Delivered automated reporting dashboards enabling real-time access to sales, supply chain, and R&D data directly in Excel, improving decision-making and adoption.",
@@ -28,7 +42,7 @@ const Projects = () => {
       color: "from-green-500 to-emerald-600"
     },
     {
-      id: 3,
+      id: 4,
       category: "Enterprise",
       title: "Grow Indigo - AgriTech Platform",
       description: "Enterprise-scale agricultural technology platform serving 2M+ farmers across 15+ states with 7M+ acres coverage. Built scalable systems for sustainable agriculture, biological products, and carbon solutions.",
@@ -40,7 +54,7 @@ const Projects = () => {
       url: "https://www.growindigo.co.in/"
     },
     {
-      id: 4,
+      id: 5,
       category: "Enterprise Dashboard",
       title: "SaaS Platform",
       description: "SaaS platform streamlining onboarding, commission, and payments. Achieved 20% time savings, 20% better recovery, 10% cost savings, and enabled 5+ schemes with expert-built architecture.",
@@ -53,7 +67,7 @@ const Projects = () => {
       demoVideoUrl: "https://www.loom.com/share/your-demo-link-here"
     },
     {
-      id: 5,
+      id: 6,
       category: "E-Commerce",
       title: "Zoshe - Luxury Perfume Platform",
       description: "Modern e-commerce platform specializing in premium fragrances with advanced SEO optimization, intelligent product search, and seamless mobile experience. Features comprehensive analytics tracking, optimized product pages, and conversion-focused UX design.",
@@ -66,7 +80,7 @@ const Projects = () => {
       isFeatured: true
     },
     {
-      id: 6,
+      id: 7,
       category: "Design & Events",
       title: "Timeless Tales Decor",
       description: "Elegant event design and styling platform for intimate celebrations including gender reveals, baby & bridal showers, proposals, and weddings. Features custom backdrop designs and full event styling services.",
@@ -78,7 +92,7 @@ const Projects = () => {
       url: "https://timelesstalesdecor.vercel.app/"
     },
     {
-      id: 7,
+      id: 8,
       category: "Hospitality",
       title: "Corra Culinary",
       description: "Premium restaurant experience platform featuring culinary artistry where tradition meets innovation. Includes daily specials, menu management, location services, and reservation systems across Mumbai.",
