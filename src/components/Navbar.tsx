@@ -10,10 +10,10 @@ const Navbar = () => {
   const navItems = [
     { name: "Home", path: "/" },
     // { name: "About", path: "/about" },
-    { name: "Skills", path: "/skills" },
-    { name: "Projects", path: "/projects" },
-    { name: "Experience", path: "/experience" },
-    { name: "Contact", path: "/contact" },
+    { name: "Skills & Technologies", path: "/skills" },
+    { name: "Featured Projects", path: "/projects" },
+    { name: "Professional Experience", path: "/experience" },
+    { name: "Get In Touch", path: "/contact" },
   ];
 
   // Detect scroll for glassmorphism effect

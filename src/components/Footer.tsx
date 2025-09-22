@@ -1,87 +1,162 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Twitter, Mail, Phone, MapPin } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, Phone, MapPin, ExternalLink, Code2, Heart, Download } from 'lucide-react';
 
 const Footer = () => {
+
+  const handleDownloadResume = () => {
+    const link = document.createElement('a');
+    link.href = '/Rahil_Memdani_Resume.pdf';
+    link.download = 'Rahil_Memdani_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold font-serif">Zoshe</h3>
-            <p className="text-sm opacity-90">
-              Luxury fragrances crafted with the finest ingredients for the most discerning connoisseurs.
-            </p>
-            <div className="flex space-x-4">
-              <a
-                href="https://www.instagram.com/zoshe.perfume?igsh=MWdwd3ozdmFraG82bw%3D%3D&utm_source=qr"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram className="w-5 h-5 hover:text-accent cursor-pointer transition-colors" />
-              </a>
-              <a
-                href="https://www.facebook.com/share/1FCQw1q7s8/?mibextid=wwXIfr"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Facebook className="w-5 h-5 hover:text-accent cursor-pointer transition-colors" />
-              </a>
+    <footer className="relative bg-background border-t border-border">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-8 left-1/4 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-8 right-1/4 w-40 h-40 bg-secondary/5 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="relative container-custom py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+
+          {/* Brand & Intro */}
+          <div className="lg:col-span-2 space-y-6">
+            <div>
+              <h3 className="text-2xl font-bold font-serif gradient-text mb-3">
+                Full-Stack Developer
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed max-w-md">
+                Passionate about building scalable web applications and driving innovation in agritech.
+                Currently leading impactful projects at Grow Indigo, serving 2M+ users globally.
+              </p>
             </div>
-            
+
+            {/* CTA */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                to="/contact"
+                className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors duration-200 group"
+              >
+                <Mail className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
+                Let's Work Together
+              </Link>
+              {/* <a
+                href="mailto:rmemdanib@gmail.com"
+                className="inline-flex items-center px-6 py-3 border border-border rounded-lg font-medium hover:bg-muted/50 transition-colors duration-200 group"
+              >
+                <ExternalLink className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
+                Download Resume
+              </a> */}
+              <button
+                onClick={handleDownloadResume}
+                className="btn-secondary"
+              >
+                <Download size={20} />
+                Download Resume
+              </button>
+            </div>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Quick Links</h4>
-            <div className="space-y-2">
-              <Link to="/about" className="block text-sm opacity-90 hover:opacity-100 transition-opacity">About Us</Link>
-              <Link to="/catalog" className="block text-sm opacity-90 hover:opacity-100 transition-opacity">Our Perfumes</Link>
-              <Link to="/customization" className="block text-sm opacity-90 hover:opacity-100 transition-opacity">Custom Services</Link>
-              <Link to="/contact" className="block text-sm opacity-90 hover:opacity-100 transition-opacity">Contact Us</Link>
+            <h4 className="text-lg font-semibold text-foreground">Navigation</h4>
+            <div className="space-y-3">
+              <Link to="/" className="block text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+                Home
+              </Link>
+              <Link to="/skills" className="block text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+                Skills & Technologies
+              </Link>
+              <Link to="/projects" className="block text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+                Featured Projects
+              </Link>
+              <Link to="/experience" className="block text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+                Professional Experience
+              </Link>
+              <Link to="/contact" className="block text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+                Get In Touch
+              </Link>
             </div>
           </div>
 
-          {/* Services */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Services</h4>
-            <div className="space-y-2">
-              <p className="text-sm opacity-90">Custom Hampers</p>
-              <p className="text-sm opacity-90">Festive Collections</p>
-              <p className="text-sm opacity-90">Corporate Solutions</p>
-              <p className="text-sm opacity-90">Scent Laboratory</p>
-            </div>
-          </div>
-
-          {/* Contact */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Contact</h4>
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2">
-                <a href="mailto:zosheperfume@gmail.com" className="flex items-center gap-2 hover:text-accent transition-colors">
-                  <Mail className="w-4 h-4" />
-                  <span className="text-sm opacity-90">zosheperfume@gmail.com</span>
+          {/* Tech Stack & Contact */}
+          <div className="space-y-6">
+            {/* Contact Info */}
+            <div className="space-y-3">
+              <h4 className="text-lg font-semibold text-foreground">Contact</h4>
+              <div className="space-y-2">
+                <a
+                  href="mailto:your-email@example.com"
+                  className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors duration-200 group"
+                >
+                  <Mail className="w-4 h-4 mr-3 group-hover:translate-x-0.5 transition-transform" />
+                  rmemdanib@gmail.com
                 </a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <a href="tel:+917977233704" className="flex items-center gap-2 hover:text-accent transition-colors">
-                  <Phone className="w-4 h-4" />
-                  <span className="text-sm opacity-90">+91 79772 33704</span>
+                <a
+                  href="tel:9167156829"
+                  className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors duration-200 group"
+                >
+                  <Phone className="w-4 h-4 mr-3 group-hover:translate-x-0.5 transition-transform" />
+                  +91 9167156829
                 </a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <MapPin className="w-4 h-4" />
-                <span className="text-sm opacity-90">Mumbai, India</span>
+                <div className="flex items-center text-sm text-muted-foreground">
+                  <MapPin className="w-4 h-4 mr-3" />
+                  Mumbai, India
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
-          <p className="text-sm opacity-75">
-            © 2024 Zoshe Perfumes. All rights reserved. |
-            <Link to="/policies" className="ml-1 hover:opacity-100 transition-opacity">Privacy Policy</Link>
-          </p>
+        {/* Social Media */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pt-8 border-t border-border">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6 sm:mb-0">
+            <span className="text-sm text-muted-foreground font-medium">Connect with me:</span>
+            <div className="flex items-center space-x-4">
+              <a
+                href="https://github.com/rahilmemdani"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-muted/50 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-200 hover:scale-110"
+              >
+                <Github className="w-4 h-4" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/rahil-memdani-8968681ab/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-muted/50 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-200 hover:scale-110"
+              >
+                <Linkedin className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="text-center sm:text-right">
+            <p className="text-sm text-muted-foreground flex items-center justify-center sm:justify-end gap-1">
+              © 2025 Built with <Heart className="w-3 h-3 text-red-500 fill-current" /> using React & Tailwind CSS
+            </p>
+            <p className="text-xs text-muted-foreground/70 mt-1">
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+
+        {/* Status Indicator */}
+        <div className="mt-8 pt-6 border-t border-border/50">
+          <div className="flex items-center justify-center">
+            <div className="flex items-center space-x-3 px-4 py-2 bg-green-50 dark:bg-green-950/20 rounded-full border border-green-200 dark:border-green-800/30">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium text-green-700 dark:text-green-300">
+                Currently available for new opportunities
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

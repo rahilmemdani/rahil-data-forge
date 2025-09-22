@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound";
 import ParticleBackground from './components/ParticleBackground';
 import Chatbot from "@/components/Chatbot";
 import Navbar from "./components/Navbar";
+import Layout from "./components/Layout";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
         <Navbar />
+        <Layout>
           {/* Scroll to top on route change */}
           <ScrollToTop />
           <ParticleBackground />
@@ -40,6 +42,7 @@ const App = () => {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </Layout>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
