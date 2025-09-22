@@ -189,9 +189,9 @@ const UserIcon = () => (
 const App = () => {
   const [userInput, setUserInput] = useState('');
   const [chatHistory, setChatHistory] = useState([
-    { 
-      role: "model", 
-      parts: [{ text: "👋 Hello! I'm Rahil's AI assistant and I know everything about his impressive journey from Electronics Engineering to becoming an SDE-II! I can tell you about his Snowflake Data for Good APJ Award, his work with 2M+ farmers, his transition into AI/ML, and so much more. What would you like to discover about Rahil?" }] 
+    {
+      role: "model",
+      parts: [{ text: "👋 Hello! I'm Rahil's AI assistant and I know everything about his impressive journey from Electronics Engineering to becoming an SDE-II! I can tell you about his Snowflake Data for Good APJ Award, his work with 2M+ farmers, his transition into AI/ML, and so much more. What would you like to discover about Rahil?" }]
     }
   ]);
   const [isLoading, setIsLoading] = useState(false);
@@ -207,7 +207,7 @@ const App = () => {
     "🎯 What are his career goals and availability?",
     "💡 What's his working style and leadership approach?",
   ];
-  
+
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
@@ -315,7 +315,7 @@ Here is the comprehensive resume information:\n\n${resumeData}`
     <>
       {isVisible && (
         <div className="fixed bottom-4 right-4 z-50 w-[90vw] max-w-md h-[85vh] max-h-[90vh] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 sm:w-[400px] sm:h-[600px] animate-slide-up">
-          
+
           {/* Enhanced Header */}
           <header className="bg-primary text-white p-4 rounded-t-2xl relative overflow-hidden">
             {/* Subtle animated background */}
@@ -333,7 +333,7 @@ Here is the comprehensive resume information:\n\n${resumeData}`
                 />
               ))}
             </div>
-            
+
             <div className="relative z-10 flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
@@ -364,20 +364,18 @@ Here is the comprehensive resume information:\n\n${resumeData}`
             {chatHistory.map((message, index) => (
               <div
                 key={index}
-                className={`flex items-start gap-3 animate-fade-in ${
-                  message.role === 'user' ? 'justify-end' : ''
-                }`}
+                className={`flex items-start gap-3 animate-fade-in ${message.role === 'user' ? 'justify-end' : ''
+                  }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {message.role === 'model' && <BotIcon />}
                 <div
-                  className={`max-w-[80%] p-4 rounded-2xl shadow-md transition-all duration-200 hover:shadow-lg ${
-                    message.role === 'user'
+                  className={`max-w-[80%] p-4 rounded-2xl shadow-md transition-all duration-200 hover:shadow-lg ${message.role === 'user'
                       ? 'bg-primary text-white rounded-br-md'
                       : 'bg-white text-gray-800 rounded-bl-md border border-gray-100'
-                  }`}
+                    }`}
                 >
-                  <div 
+                  <div
                     className="whitespace-pre-wrap leading-relaxed text-[15px]"
                     dangerouslySetInnerHTML={{
                       __html: message.parts[0].text
@@ -464,12 +462,18 @@ Here is the comprehensive resume information:\n\n${resumeData}`
           onClick={() => setIsVisible(true)}
         >
           <MessageCircle size={24} className="group-hover:animate-pulse" />
-          
+
           {/* Notification badge */}
-          <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center shadow-md animate-bounce">
-            <Sparkles size={12} className="text-white" />
-          </div>
-          
+
+          {/* <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center shadow-md animate-bounce">
+            1
+          </div> */}
+          {!hasSentFirstMessage && (
+            <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center shadow-md animate-bounce text-white text-xs font-bold">
+              1
+            </div>
+          )}
+
           {/* Pulse effect */}
           <div className="absolute inset-0 bg-primary rounded-full animate-ping opacity-20"></div>
         </button>
