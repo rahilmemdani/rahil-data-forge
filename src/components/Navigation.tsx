@@ -7,7 +7,7 @@ const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const navItems = [
-    { href: '#hero', label: 'Home' },
+    { href: '#about', label: 'Home' },
     { href: '#about', label: 'About' },
     { href: '#skills', label: 'Skills' },
     { href: '#projects', label: 'Projects' },
@@ -53,10 +53,6 @@ const Navigation = () => {
       }`}>
         <div className="container-custom">
           <div className="flex items-center justify-between h-16 md:h-20">
-            {/* <div className="text-2xl font-bold gradient-text">
-              Rahil Memdani
-            </div> */}
-
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (

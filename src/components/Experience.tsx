@@ -72,11 +72,11 @@ const Experience = () => {
       issuer: "LinkedIn Learning",
       icon: <Database className="w-5 h-5" />
     },
-    {
-      name: "Introduction to SQL",
-      issuer: "DataCamp",
-      icon: <Database className="w-5 h-5" />
-    },
+    // {
+    //   name: "Introduction to SQL",
+    //   issuer: "DataCamp",
+    //   icon: <Database className="w-5 h-5" />
+    // },
     {
       name: "Data for Good – APJ Award",
       issuer: "Snowflake",
@@ -246,7 +246,7 @@ const Experience = () => {
 
               {/* Certifications with Modal */}
               <div className="card-glass p-6 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg">
-                <h4 className="font-bold text-2xl mb-8 flex items-center text-gray-900 dark:text-white">
+                <h4 className="font-bold text-2xl mb-8 flex items-center text-white dark:text-white">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-secondary to-primary flex items-center justify-center text-white mr-4">
                     <Database size={24} />
                   </div>

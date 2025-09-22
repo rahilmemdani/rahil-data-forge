@@ -1,6 +1,7 @@
 import React from 'react';
 import { Building2, Palette, ChefHat, BarChart3, Play, Globe, ExternalLink, Sparkles, FileSpreadsheet, Database } from 'lucide-react';
 import agriCloudThumb from "/public/agricloud-thumbnail.svg"
+import { Link } from 'react-router-dom';
 
 const Projects = () => {
   const projects = [
@@ -259,12 +260,14 @@ const Projects = () => {
           <p className="text-lg text-muted-foreground mb-6">
             Interested in collaborating on innovative projects?
           </p>
+          <Link to="/Contact">
           <button
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             className="btn-primary"
           >
             Let's Connect
           </button>
+          </Link>
         </div>
       </div>
     </section>
