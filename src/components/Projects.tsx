@@ -1,11 +1,34 @@
 import React from 'react';
-import { Building2, Palette, ChefHat, BarChart3, Play, Globe, ExternalLink, Sparkles } from 'lucide-react';
+import { Building2, Palette, ChefHat, BarChart3, Play, Globe, ExternalLink, Sparkles, FileSpreadsheet, Database } from 'lucide-react';
 import agriCloudThumb from "/public/agricloud-thumbnail.svg"
 
 const Projects = () => {
   const projects = [
     {
       id: 1,
+      category: "Data & Analytics",
+      title: "Snowflake Macros for Grow Indigo",
+      description: "Developed reusable Snowflake SQL macros to streamline complex query patterns across agricultural datasets. Enabled modular, efficient, and scalable query logic for enterprise reporting and analytics workloads at Grow Indigo.",
+      technologies: ["Snowflake", "SQL Macros", "Data Warehousing", "ETL"],
+      tagline: "Reusable data logic for scalable insights",
+      metrics: "Reduced query complexity · Improved performance & maintainability",
+      icon: <Database className="w-6 h-6" />,
+      color: "from-sky-500 to-blue-600"
+      // url: "https://www.growindigo.co.in/"
+    },
+    {
+      id: 2,
+      category: "Data Reporting",
+      title: "Excel Reporting with Snowflake for Mahyco",
+      description: "Implemented seamless integration of Snowflake with Excel for Mahyco’s business teams. Delivered automated reporting dashboards enabling real-time access to sales, supply chain, and R&D data directly in Excel, improving decision-making and adoption.",
+      technologies: ["Snowflake", "Excel", "ODBC/JDBC", "Power Query", "Data Visualization"],
+      tagline: "Excel-native reporting powered by Snowflake",
+      metrics: "Real-time data · Automated refresh · High adoption across business teams",
+      icon: <FileSpreadsheet className="w-6 h-6" />,
+      color: "from-green-500 to-emerald-600"
+    },
+    {
+      id: 3,
       category: "Enterprise",
       title: "Grow Indigo - AgriTech Platform",
       description: "Enterprise-scale agricultural technology platform serving 2M+ farmers across 15+ states with 7M+ acres coverage. Built scalable systems for sustainable agriculture, biological products, and carbon solutions.",
@@ -14,11 +37,10 @@ const Projects = () => {
       metrics: "2M+ farmers, 15+ states, 7M+ acres",
       icon: <Building2 className="w-6 h-6" />,
       color: "from-blue-500 to-cyan-500",
-      url: "https://www.growindigo.co.in/",
-      // isFeatured: true
+      url: "https://www.growindigo.co.in/"
     },
     {
-      id: 2,
+      id: 4,
       category: "Enterprise Dashboard",
       title: "SaaS Platform",
       description: "SaaS platform streamlining onboarding, commission, and payments. Achieved 20% time savings, 20% better recovery, 10% cost savings, and enabled 5+ schemes with expert-built architecture.",
@@ -31,7 +53,7 @@ const Projects = () => {
       demoVideoUrl: "https://www.loom.com/share/your-demo-link-here"
     },
     {
-      id: 3,
+      id: 5,
       category: "E-Commerce",
       title: "Zoshe - Luxury Perfume Platform",
       description: "Modern e-commerce platform specializing in premium fragrances with advanced SEO optimization, intelligent product search, and seamless mobile experience. Features comprehensive analytics tracking, optimized product pages, and conversion-focused UX design.",
@@ -44,7 +66,7 @@ const Projects = () => {
       isFeatured: true
     },
     {
-      id: 4,
+      id: 6,
       category: "Design & Events",
       title: "Timeless Tales Decor",
       description: "Elegant event design and styling platform for intimate celebrations including gender reveals, baby & bridal showers, proposals, and weddings. Features custom backdrop designs and full event styling services.",
@@ -56,7 +78,7 @@ const Projects = () => {
       url: "https://timelesstalesdecor.vercel.app/"
     },
     {
-      id: 5,
+      id: 7,
       category: "Hospitality",
       title: "Corra Culinary",
       description: "Premium restaurant experience platform featuring culinary artistry where tradition meets innovation. Includes daily specials, menu management, location services, and reservation systems across Mumbai.",
@@ -68,6 +90,7 @@ const Projects = () => {
       url: "https://corra-culinary.vercel.app/"
     }
   ];
+  
 
   return (
     <section id="projects" className="section-padding bg-card/20">
