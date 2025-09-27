@@ -11,7 +11,8 @@ const navItems = [
 
 const Footer = () => {
   return (
-    <footer className="bg-[#111827] text-[#f9fafb] border-t border-gray-700">
+    <footer className="bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#111827] text-[#f9fafb] border-t border-gray-700">
+
       <div className="max-w-6xl mx-auto px-6 py-20">
         
         {/* Main Content */}
