@@ -11,7 +11,7 @@ const navItems = [
 
 const Footer = () => {
   return (
-    <footer className="bg-background border-t border-border/60 text-muted-foreground">
+    <footer className="bg-[#111827] text-[#f9fafb] border-t border-gray-700">
       <div className="max-w-6xl mx-auto px-6 py-20">
         
         {/* Main Content */}
@@ -30,9 +30,9 @@ const Footer = () => {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-muted/40 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-200 hover:scale-105"
+                  className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gradient-to-r hover:from-[#00D4FF] hover:to-[#00FFE0] hover:text-black flex items-center justify-center transition-all duration-200 hover:scale-105"
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-4 h-4 text-[#f9fafb]" />
                 </a>
               ))}
             </div>
@@ -40,14 +40,14 @@ const Footer = () => {
           
           {/* Navigation */}
           <div className="text-center md:text-left">
-            <h4 className="text-lg font-semibold text-foreground mb-6">Explore</h4>
+            <h4 className="text-lg font-semibold mb-6">Explore</h4>
             <nav>
               <ul className="space-y-3">
                 {navItems.map((item) => (
                   <li key={item.name}>
                     <Link
                       to={item.path}
-                      className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
+                      className="hover:gradient-text font-medium transition-colors duration-200"
                     >
                       {item.name}
                     </Link>
@@ -59,27 +59,27 @@ const Footer = () => {
           
           {/* Contact */}
           <div className="text-center md:text-left">
-            <h4 className="text-lg font-semibold text-foreground mb-6">Contact</h4>
+            <h4 className="text-lg font-semibold mb-6">Contact</h4>
             <div className="space-y-4">
-              <div className="flex items-center justify-center md:justify-start text-muted-foreground">
+              <div className="flex items-center justify-center md:justify-start">
                 <Mail className="w-4 h-4 mr-3" />
                 <a 
                   href="mailto:rmemdanib@gmail.com" 
-                  className="hover:text-foreground transition-colors duration-200"
+                  className="hover:gradient-text transition-colors duration-200"
                 >
                   rmemdanib@gmail.com
                 </a>
               </div>
-              <div className="flex items-center justify-center md:justify-start text-muted-foreground">
+              <div className="flex items-center justify-center md:justify-start">
                 <Phone className="w-4 h-4 mr-3" />
-              <a 
-                  href="tel: 9167156829" 
-                  className="hover:text-foreground transition-colors duration-200"
+                <a 
+                  href="tel:9167156829" 
+                  className="hover:gradient-text transition-colors duration-200"
                 >
-                <span>+91 9167156829</span>
+                  +91 9167156829
                 </a>
               </div>
-              <div className="flex items-center justify-center md:justify-start text-muted-foreground">
+              <div className="flex items-center justify-center md:justify-start">
                 <MapPin className="w-4 h-4 mr-3" />
                 <span>Mumbai, India</span>
               </div>
@@ -88,8 +88,8 @@ const Footer = () => {
         </div>
         
         {/* Bottom Section */}
-        <div className="border-t border-border/60 pt-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between text-sm text-muted-foreground">
+        <div className="border-t border-gray-700 pt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between text-sm">
             <div className="flex items-center space-x-2 mb-4 sm:mb-0">
               <span>© 2025 Built with</span>
               <Heart className="w-4 h-4 text-red-500 fill-current" />
