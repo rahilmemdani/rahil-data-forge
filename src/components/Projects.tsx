@@ -1,5 +1,5 @@
 import React from 'react';
-import { Building2, Palette, ChefHat, BarChart3, Play, Globe, ExternalLink, Sparkles, FileSpreadsheet, Database } from 'lucide-react';
+import { Building2, Palette, ChefHat, BarChart3, Play, Globe, ExternalLink, Sparkles, FileSpreadsheet, Database, Calculator } from 'lucide-react';
 import agriCloudThumb from "/public/agricloud-thumbnail.svg"
 import { Link } from 'react-router-dom';
 
@@ -72,7 +72,8 @@ const Projects = () => {
       category: "E-Commerce",
       title: "Zoshe - Luxury Perfume Platform",
       description: "Modern e-commerce platform specializing in premium fragrances with advanced SEO optimization, intelligent product search, and seamless mobile experience. Features comprehensive analytics tracking, optimized product pages, and conversion-focused UX design.",
-      technologies: ["React", "JavaScript", "CSS3", "Google Analytics", "SEO Optimization", "Responsive Design"],
+      technologies: [],
+      // ["React", "JavaScript", "CSS3", "Google Analytics", "SEO Optimization", "Responsive Design"],
       tagline: "Where luxury meets technology in fragrance commerce",
       metrics: "Active e-commerce platform · SEO optimized · Mobile-first design",
       icon: <Sparkles className="w-6 h-6" />,
@@ -82,30 +83,19 @@ const Projects = () => {
     },
     {
       id: 7,
-      category: "Design & Events",
-      title: "Timeless Tales Decor",
-      description: "Elegant event design and styling platform for intimate celebrations including gender reveals, baby & bridal showers, proposals, and weddings. Features custom backdrop designs and full event styling services.",
-      technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-      tagline: "Transforming ordinary moments into timeless memories",
-      metrics: "Custom event designs & styling services",
-      icon: <Palette className="w-6 h-6" />,
-      color: "from-pink-500 to-purple-500",
-      url: "https://timelesstalesdecor.vercel.app/"
-    },
-    {
-      id: 8,
-      category: "Hospitality",
-      title: "Corra Culinary",
-      description: "Premium restaurant experience platform featuring culinary artistry where tradition meets innovation. Includes daily specials, menu management, location services, and reservation systems across Mumbai.",
-      technologies: ["React", "Next.js", "JavaScript", "CSS3"],
-      tagline: "Celebrating flavor and craft through digital experience",
-      metrics: "Multiple locations, premium dining experience",
-      icon: <ChefHat className="w-6 h-6" />,
-      color: "from-orange-500 to-red-500",
-      url: "https://corra-culinary.vercel.app/"
+      category: "Business Website",
+      title: "Zavlin Bookkeeping Services",
+      description: "Professional bookkeeping services website showcasing financial expertise, service offerings, and client-focused solutions. Designed with modern UX, responsive layouts, and SEO optimization to ensure visibility and trustworthiness for potential clients.",
+      technologies: [],
+      tagline: "Simplifying bookkeeping with clarity and confidence",
+      metrics: "Modern design · SEO optimized · Client-centric experience",
+      icon: <Calculator className="w-6 h-6" />,
+      color: "from-indigo-500 to-teal-500",
+      url: "https://www.zavlinbookkeeping.com/", 
+      isFeatured: true
     }
   ];
-  
+
 
   return (
     <section id="projects" className="section-padding bg-card/20">
@@ -214,11 +204,10 @@ const Projects = () => {
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className={`px-3 py-1 text-sm rounded-full font-medium ${
-                      project.isFeatured 
-                        ? 'bg-primary/30 text-primary border border-primary/20' 
+                    className={`px-3 py-1 text-sm rounded-full font-medium ${project.isFeatured
+                        ? 'bg-primary/30 text-primary border border-primary/20'
                         : 'bg-primary/20 text-primary'
-                    }`}
+                      }`}
                   >
                     {tech}
                   </span>
@@ -240,11 +229,10 @@ const Projects = () => {
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg hover:shadow-md transition text-sm font-medium ${
-                      project.isFeatured
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg hover:shadow-md transition text-sm font-medium ${project.isFeatured
                         ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg'
                         : 'bg-background border border-border/50 text-foreground'
-                    }`}
+                      }`}
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span>{project.isFeatured ? 'Explore Live Platform' : 'Visit Project'}</span>
@@ -261,12 +249,12 @@ const Projects = () => {
             Interested in collaborating on innovative projects?
           </p>
           <Link to="/Contact">
-          <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="btn-primary"
-          >
-            Let's Connect
-          </button>
+            <button
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="btn-primary"
+            >
+              Let's Connect
+            </button>
           </Link>
         </div>
       </div>
