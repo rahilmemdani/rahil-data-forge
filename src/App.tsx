@@ -32,7 +32,7 @@ const App = () => {
           {/* Scroll to top on route change */}
           <ScrollToTop />
           <ParticleBackground />
-          <Chatbot />
+          {/* <Chatbot /> */}
           <Routes>
             <Route path="/" element={<HeroPage />} />
             <Route path="/about" element={<AboutPage />} />

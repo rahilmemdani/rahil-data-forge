@@ -227,7 +227,7 @@ const App = () => {
     setIsLoading(true);
 
     try {
-      const aiResponse = await callGeminiAPI(newHistory);
+      const aiResponse = await callGeminiAPI(messageText);
       setChatHistory(prevHistory => [...prevHistory, aiResponse]);
     } catch (error) {
       console.error("Error calling Gemini API:", error);
@@ -236,68 +236,108 @@ const App = () => {
         parts: [{ text: "Sorry, I'm having trouble connecting right now. Please try again in a moment! 🔄" }]
       };
       setChatHistory(prevHistory => [...prevHistory, errorMessage]);
-    } finally {
+    }finally {
       setIsLoading(false);
     }
   };
 
   // Enhanced API function with better personality
-  const callGeminiAPI = async (history, retries = 3, delay = 1000) => {
+//   const callGeminiAPI = async (history, retries = 3, delay = 1000) => {
+//     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+//     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+//     const systemInstruction = {
+//       role: "system",
+//       parts: [{
+//         text: `You are Rahil Memdani's enthusiastic and knowledgeable AI assistant. You're genuinely excited about his achievements and career growth! Be conversational, friendly, and use emojis naturally. Highlight his recent promotion to SDE-II, his Snowflake Data for Good APJ Award 2025, and his impressive work with 2M+ farmers. 
+
+// Key things to emphasize:
+// - His career transition from Electronics Engineering to Software Development
+// - Recent promotion to SDE-II in July 2025
+// - Snowflake expertise and data analytics skills
+// - Leadership and mentoring capabilities
+// - Diverse project portfolio across industries
+// - His passion for using technology for positive impact
+
+// Answer questions based ONLY on the provided resume information. If someone asks about information not in the resume, politely suggest they contact Rahil directly using his contact details. Be helpful in providing his contact information when appropriate.
+
+// Here is the comprehensive resume information:\n\n${resumeData}`
+//       }]
+//     };
+
+//     const payload = {
+//       contents: history,
+//       systemInstruction: systemInstruction,
+//       generationConfig: {
+//         temperature: 0.8,
+//         maxOutputTokens: 1000,
+//       }
+//     };
+
+//     for (let i = 0; i < retries; i++) {
+//       try {
+//         const response = await fetch(apiUrl, {
+//           method: 'POST',
+//           headers: { 'Content-Type': 'application/json' },
+//           body: JSON.stringify(payload)
+//         });
+
+//         if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
+//         const result = await response.json();
+
+//         if (result.candidates && result.candidates[0].content) {
+//           return result.candidates[0].content;
+//         } else {
+//           return { role: "model", parts: [{ text: "I received an unusual response. Could you rephrase that? 🤔" }] };
+//         }
+//       } catch (error) {
+//         console.warn(`API call attempt ${i + 1} failed. Retrying in ${delay}ms...`);
+//         if (i === retries - 1) throw error;
+//         await new Promise(resolve => setTimeout(resolve, delay));
+//         delay *= 2;
+//       }
+//     }
+//   };
+
+async function callGeminiAPI(userInput) {
+  try {
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    if (!apiKey) throw new Error("API key not found. Add it to your .env file.");
+
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
-    const systemInstruction = {
-      role: "system",
-      parts: [{
-        text: `You are Rahil Memdani's enthusiastic and knowledgeable AI assistant. You're genuinely excited about his achievements and career growth! Be conversational, friendly, and use emojis naturally. Highlight his recent promotion to SDE-II, his Snowflake Data for Good APJ Award 2025, and his impressive work with 2M+ farmers. 
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [
+          { role: "user", parts: [{ text: userInput }] }
+        ]
+      })
+    });
 
-Key things to emphasize:
-- His career transition from Electronics Engineering to Software Development
-- Recent promotion to SDE-II in July 2025
-- Snowflake expertise and data analytics skills
-- Leadership and mentoring capabilities
-- Diverse project portfolio across industries
-- His passion for using technology for positive impact
+    if (!response.ok) throw new Error(`Request failed: ${response.status}`);
 
-Answer questions based ONLY on the provided resume information. If someone asks about information not in the resume, politely suggest they contact Rahil directly using his contact details. Be helpful in providing his contact information when appropriate.
+    const data = await response.json();
+    console.log("Gemini response:", data);
 
-Here is the comprehensive resume information:\n\n${resumeData}`
-      }]
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response from Gemini";
+
+    // ✅ Always return consistent object
+    return {
+      role: "model",
+      parts: [{ text }]
     };
-
-    const payload = {
-      contents: history,
-      systemInstruction: systemInstruction,
-      generationConfig: {
-        temperature: 0.8,
-        maxOutputTokens: 1000,
-      }
+  } catch (error) {
+    console.error("Gemini API Error:", error);
+    return {
+      role: "model",
+      parts: [{ text: "Sorry, something went wrong. 🔄" }]
     };
+  }
+}
 
-    for (let i = 0; i < retries; i++) {
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
 
-        if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
-        const result = await response.json();
-
-        if (result.candidates && result.candidates[0].content) {
-          return result.candidates[0].content;
-        } else {
-          return { role: "model", parts: [{ text: "I received an unusual response. Could you rephrase that? 🤔" }] };
-        }
-      } catch (error) {
-        console.warn(`API call attempt ${i + 1} failed. Retrying in ${delay}ms...`);
-        if (i === retries - 1) throw error;
-        await new Promise(resolve => setTimeout(resolve, delay));
-        delay *= 2;
-      }
-    }
-  };
 
   const handleSendClick = () => {
     handleSendMessage(userInput);
