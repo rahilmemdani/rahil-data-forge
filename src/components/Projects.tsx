@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Building2, Palette, ChefHat, BarChart3, Play, Globe, ExternalLink, Sparkles, FileSpreadsheet, Database, Calculator } from 'lucide-react';
 import agriCloudThumb from "/public/agricloud-thumbnail.svg";
 import { Link } from 'react-router-dom';
+import { Button } from './ui/button';
+import ScheduleConsultationModal from './ScheduleConsultationModal';
 
 const Projects = () => {
+  const [showBookingOptions, setShowBookingOptions] = useState(false);
   const projects = [
     // Your projects array remains unchanged
     {
@@ -177,11 +180,28 @@ const Projects = () => {
           <p className="text-lg text-muted-foreground mb-4">
             Interested in collaborating on innovative projects?
           </p>
-          <Link to="/Contact">
+          {/* <Link to="/Contact">
             <button className="btn-primary">
               Let's Connect
             </button>
-          </Link>
+          </Link> */}
+
+          {/* Desktop: Schedule Consultation Button */}
+          <div className="">
+            <Button
+              className="bg-gradient-to-r from-gold to-yellow-400 text-navy font-semibold shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-300"
+              onClick={() => setShowBookingOptions(true)}
+            >
+              Schedule Consultation
+            </Button>
+          </div>
+          {/* Booking Modal */}
+          {showBookingOptions && (
+            <ScheduleConsultationModal
+              open={showBookingOptions}
+              onClose={() => setShowBookingOptions(false)}
+            />
+          )}
         </div>
       </div>
     </section>
