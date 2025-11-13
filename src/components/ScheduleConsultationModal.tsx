@@ -84,10 +84,9 @@ const ScheduleConsultationModal = ({
                 {/* WhatsApp button */}
                 <a
                   href={`https://wa.me/+919167156829?text=${encodeURIComponent(
-                    serviceName
-                      ? `Hi, I'm interested in your ${serviceName} service.`
-                      : "Hi, I'm interested in your services."
+                    "Hi, I would like to schedule a consultation."
                   )}`}
+
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-green-600 hover:bg-green-700 text-white font-medium flex items-center justify-center rounded-md p-3"
