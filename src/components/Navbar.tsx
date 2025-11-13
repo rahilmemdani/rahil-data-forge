@@ -36,59 +36,74 @@ const Navbar = () => {
         <div className="container-custom">
           <div className="flex items-center justify-between h-16 md:h-20">
 
-            {/* Desktop Nav Items */}
-            <div className="hidden md:flex items-center space-x-8">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`text-sm font-medium transition-colors duration-300 hover:text-primary ${isActive(item.path)
-                    ? "text-primary border-b-2 border-primary pb-1"
-                    : "text-muted-foreground"
-                    }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
+            {/* LEFT — Hamburger + Desktop Nav */}
+            <div className="flex items-center gap-4">
 
-            {/* Desktop: Schedule Consultation Button */}
-            <div className="hidden md:flex">
-              <Button
-                className="bg-gradient-to-r from-gold to-yellow-400 text-navy font-semibold shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-300"
-                onClick={() => setShowBookingOptions(true)}
+              {/* MOBILE HAMBURGER */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
               >
-                Schedule Consultation
-              </Button>
-            </div>
-            {/* Booking Modal */}
-            {showBookingOptions && (
-              <ScheduleConsultationModal
-                open={showBookingOptions}
-                onClose={() => setShowBookingOptions(false)}
-              />
-            )}
+                {isOpen ? <X size={28} /> : <Menu size={28} />}
+              </button>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 text-foreground hover:text-primary transition-colors relative z-[70]"
-              aria-label={isOpen ? "Close menu" : "Open menu"}
-            >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
+              {/* DESKTOP NAV ITEMS */}
+              <div className="hidden md:flex items-center space-x-8">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`text-sm font-medium transition-colors duration-300 hover:text-primary ${isActive(item.path)
+                      ? "text-primary border-b-2 border-primary pb-1"
+                      : "text-muted-foreground"
+                      }`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT — Schedule Buttons */}
+            <div className="flex items-center">
+
+              {/* DESKTOP SCHEDULE BUTTON */}
+              <div className="hidden md:flex">
+                <Button
+                  className="bg-gradient-to-r from-gold to-yellow-400 text-navy font-semibold shadow-md 
+                             hover:shadow-lg hover:scale-[1.03] transition-all duration-300"
+                  onClick={() => setShowBookingOptions(true)}
+                >
+                  Schedule Consultation
+                </Button>
+              </div>
+
+              {/* MOBILE SCHEDULE BUTTON (TOP RIGHT) WITH MARGIN */}
+              <div className="md:hidden mr-2">
+                <Button
+                  className="bg-gradient-to-r from-gold to-yellow-400 text-navy font-semibold 
+                             px-4 py-2 rounded-lg shadow-md text-xs
+                             hover:scale-[1.05] transition-all duration-200"
+                  onClick={() => setShowBookingOptions(true)}
+                >
+                  Schedule Consultation
+                </Button>
+              </div>
+
+            </div>
+
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* MOBILE MENU OVERLAY */}
       <div
         className={`md:hidden fixed inset-0 z-[60] bg-background/95 backdrop-blur-lg transition-transform duration-300 ${isOpen
           ? "translate-y-0 opacity-100 pointer-events-auto"
           : "-translate-y-full opacity-0 pointer-events-none"
           }`}
       >
-        {/* Close Button */}
+        {/* CLOSE BUTTON */}
         <button
           onClick={() => setIsOpen(false)}
           className="absolute top-6 right-6 text-foreground hover:text-primary transition-colors p-2 rounded-full"
@@ -96,7 +111,7 @@ const Navbar = () => {
           <X size={32} className="shadow-lg rounded-full p-1 bg-muted/70" />
         </button>
 
-        {/* Mobile Menu Items */}
+        {/* MENU ITEMS */}
         <div className="flex flex-col items-center justify-center min-h-screen space-y-4 px-4">
           {navItems.map((item, idx) => (
             <Link
@@ -113,9 +128,10 @@ const Navbar = () => {
             </Link>
           ))}
 
-          {/* Mobile: Schedule Consultation button */}
+          {/* Mobile Full Button */}
           <Button
-            className="w-full mt-6 bg-gradient-to-r from-gold to-yellow-400 text-navy font-semibold rounded-lg shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-300"
+            className="w-full mt-6 bg-gradient-to-r from-gold to-yellow-400 text-navy font-semibold 
+                       rounded-lg shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-300"
             onClick={() => {
               setIsOpen(false);
               setShowBookingOptions(true);
@@ -126,7 +142,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Consultation Modal */}
+      {/* MODAL (Render Once) */}
       {showBookingOptions && (
         <ScheduleConsultationModal
           open={showBookingOptions}
