@@ -1,5 +1,8 @@
 import { Github, Linkedin, Mail, Phone, MapPin, Heart } from "lucide-react";
 import { Link } from "react-router-dom"; // or next/link
+import ScheduleConsultationModal from "./ScheduleConsultationModal";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 const navItems = [
   { name: "Home", path: "/" },
@@ -10,14 +13,15 @@ const navItems = [
 ];
 
 const Footer = () => {
+  const [showBookingOptions, setShowBookingOptions] = useState(false);
   return (
     <footer className="bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#111827] text-[#f9fafb] border-t border-gray-700">
 
       <div className="max-w-6xl mx-auto px-6 py-20">
-        
+
         {/* Main Content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 mb-16">
-          
+
           {/* Brand Section */}
           <div className="text-center md:text-left">
             <div className="flex justify-center md:justify-start space-x-4">
@@ -38,7 +42,7 @@ const Footer = () => {
               ))}
             </div>
           </div>
-          
+
           {/* Navigation */}
           <div className="text-center md:text-left">
             <h4 className="text-lg font-semibold mb-6">Explore</h4>
@@ -57,15 +61,15 @@ const Footer = () => {
               </ul>
             </nav>
           </div>
-          
+
           {/* Contact */}
           <div className="text-center md:text-left">
             <h4 className="text-lg font-semibold mb-6">Contact</h4>
             <div className="space-y-4">
               <div className="flex items-center justify-center md:justify-start">
                 <Mail className="w-4 h-4 mr-3" />
-                <a 
-                  href="mailto:rmemdanib@gmail.com" 
+                <a
+                  href="mailto:rmemdanib@gmail.com"
                   className="hover:gradient-text transition-colors duration-200"
                 >
                   rmemdanib@gmail.com
@@ -73,8 +77,8 @@ const Footer = () => {
               </div>
               <div className="flex items-center justify-center md:justify-start">
                 <Phone className="w-4 h-4 mr-3" />
-                <a 
-                  href="tel:9167156829" 
+                <a
+                  href="tel:9167156829"
                   className="hover:gradient-text transition-colors duration-200"
                 >
                   +91 9167156829
@@ -87,21 +91,20 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
+
+
         {/* Bottom Section */}
         <div className="border-t border-gray-700 pt-8">
           <div className="flex flex-col sm:flex-row items-center justify-between text-sm">
             <div className="flex items-center space-x-2 mb-4 sm:mb-0">
-              <span>© 2025 Built with</span>
-              <Heart className="w-4 h-4 text-red-500 fill-current" />
-              <span>by Rahil Memdani</span>
+              <span>© 2025 Built by Rahil Memdani</span>
             </div>
             <div>
               <span>All rights reserved.</span>
             </div>
           </div>
         </div>
-        
+
       </div>
     </footer>
   );

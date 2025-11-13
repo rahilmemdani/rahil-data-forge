@@ -1,8 +1,21 @@
 import React from 'react';
-import { Code, Database, Brain, Cloud, Wrench, Users } from 'lucide-react';
+import { Code, Database, Brain, Cloud, Wrench, Users, ListTodo } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
+    {
+      icon: <Code className="w-8 h-8" />,
+      title: "Full-Stack Development",
+      color: "from-purple-500 to-pink-500",
+      skills: [
+        "React & Node.js",
+        ".NET Core",
+        "JavaScript/TypeScript",
+        "React Native",
+        "HTML5 & CSS3",
+        "Python"
+      ]
+    },
     {
       icon: <Brain className="w-8 h-8" />,
       title: "Predictive Analytics",
@@ -11,7 +24,10 @@ const Skills = () => {
         "Machine Learning",
         "Statistical Modeling",
         "Forecasting Models",
-        "Anomaly Detection"
+        "Anomaly Detection",
+        // "scikit-learn",
+        // "TensorFlow",
+        // "PyTorch"
       ]
     },
     {
@@ -27,18 +43,6 @@ const Skills = () => {
       ]
     },
     {
-      icon: <Code className="w-8 h-8" />,
-      title: "Full-Stack Development",
-      color: "from-purple-500 to-pink-500",
-      skills: [
-        "React & Node.js",
-        ".NET Core",
-        "JavaScript/TypeScript",
-        "React Native",
-        "HTML5 & CSS3"
-      ]
-    },
-    {
       icon: <Cloud className="w-8 h-8" />,
       title: "Cloud & DevOps",
       color: "from-orange-500 to-red-500",
@@ -47,6 +51,29 @@ const Skills = () => {
         "Docker",
         "Jenkins",
         "Microservices"
+      ]
+    },
+    {
+      icon: <ListTodo className="w-8 h-8" />,
+      title: "Product Planning & Thinking",
+      color: "from-teal-500 to-cyan-500",
+      skills: [
+        "User-Centric Design",
+        "Problem Identification",
+        "Feature Roadmapping",
+        "Business-User Alignment",
+        "Impact-Driven Solutions"
+      ]
+    },
+    {
+      icon: <Users className="w-8 h-8" />,
+      title: "Leadership & Soft Skills",
+      color: "from-teal-500 to-cyan-500",
+      skills: [
+        "Technical Mentoring",
+        "Cross-functional Collaboration",
+        "Problem Solving",
+        "Project Ownership"
       ]
     },
     {
@@ -59,17 +86,6 @@ const Skills = () => {
         "Unit Testing",
         "Debugging",
         "Agile/Scrum"
-      ]
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: "Leadership & Soft Skills",
-      color: "from-teal-500 to-cyan-500",
-      skills: [
-        "Technical Mentoring",
-        "Cross-functional Collaboration",
-        "Problem Solving",
-        "Project Ownership"
       ]
     }
   ];
@@ -105,8 +121,8 @@ const Skills = () => {
               {/* Skills Grid */}
               <div className="grid grid-cols-1 gap-3">
                 {category.skills.map((skill, skillIndex) => (
-                  <div 
-                    key={skillIndex} 
+                  <div
+                    key={skillIndex}
                     className="px-4 py-2 bg-muted/30 rounded-lg text-sm font-medium text-center hover:bg-primary/20 hover:text-primary transition-all duration-300 transform hover:scale-105"
                   >
                     {skill}

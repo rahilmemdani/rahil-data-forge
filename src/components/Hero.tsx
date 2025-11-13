@@ -31,6 +31,7 @@ const Hero = () => {
 
   const [typingText, setTypingText] = useState('');
   const skills = [
+    'Product Planning & Thinking',
     'Full-Stack Development',
     'Predictive Analytics',
     '.NET Core Development',
@@ -134,14 +135,14 @@ const Hero = () => {
                   <div className="text-sm text-muted-foreground">Efficiency Gains</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold gradient-text">3+</div>
+                  <div className="text-3xl font-bold gradient-text">4+</div>
                   <div className="text-sm text-muted-foreground">Years Experience</div>
                 </div>
               </div>
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-                
+
                 <Link to="./Projects">
                   <button
                     // onClick={scrollToProjects}
