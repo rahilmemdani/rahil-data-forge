@@ -76,24 +76,24 @@ const Navbar = () => {
           }`}
       >
         <nav
-          className={`w-full max-w-5xl transition-all duration-300 rounded-full px-3 sm:px-4 pointer-events-auto ${scrolled
+          className={`w-full max-w-5xl transition-all duration-300 rounded-full px-4 sm:px-6 pointer-events-auto ${scrolled
             ? "bg-background/90 backdrop-blur-xl shadow-md border border-border/80 py-2 sm:py-2.5"
-            : "bg-background/50 backdrop-blur-md shadow-sm border border-border/30 py-2.5 sm:py-3"
+            : "bg-background/50 backdrop-blur-md shadow-sm border border-border/30 py-3 sm:py-3.5"
             }`}
         >
-          <div className="flex items-center justify-between h-10 sm:h-12">
+          <div className="flex items-center justify-between h-12 sm:h-14">
 
             {/* ── Logo ── */}
             <button
               onClick={() => scrollTo("#hero")}
-              className="group flex items-center gap-2 pr-2"
+              className="group flex items-center gap-2.5 pr-2"
             >
               {/* Terminal icon - original primary color */}
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-sm group-hover:opacity-90 transition-opacity">
-                <Terminal size={16} />
+              <div className="w-10 h-10 sm:w-10 sm:h-10 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-sm group-hover:opacity-90 transition-opacity">
+                <Terminal size={18} />
               </div>
               <div className="flex flex-col leading-none text-left">
-                <span className="text-sm sm:text-base font-display font-bold tracking-tight text-foreground transition-colors">
+                <span className="text-base sm:text-lg font-display font-bold tracking-tight text-foreground transition-colors">
                   rahil<span className="text-primary">.dev</span>
                 </span>
               </div>
@@ -120,21 +120,21 @@ const Navbar = () => {
             </div>
 
             {/* ── Right Controls ── */}
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-3 sm:gap-4">
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center bg-muted/50 border border-border/40 text-muted-foreground hover:text-foreground transition-all duration-200"
+                className="w-10 h-10 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center bg-muted/50 border border-border/40 text-muted-foreground hover:text-foreground transition-all duration-200"
                 aria-label="Toggle theme"
               >
-                <div className="relative w-4 h-4">
+                <div className="relative w-5 h-5">
                   <Sun
-                    size={16}
+                    size={20}
                     className={`absolute inset-0 transition-transform duration-300 ${theme === "dark" ? "rotate-0 scale-100 opacity-100" : "rotate-90 scale-0 opacity-0"
                       }`}
                   />
                   <Moon
-                    size={16}
+                    size={20}
                     className={`absolute inset-0 transition-transform duration-300 ${theme === "light" ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-0 opacity-0"
                       }`}
                   />
@@ -143,7 +143,7 @@ const Navbar = () => {
 
               {/* Schedule - Desktop */}
               <Button
-                className="hidden md:inline-flex bg-primary text-primary-foreground font-medium text-xs rounded-lg hover:opacity-90 transition-opacity h-8 px-4"
+                className="hidden md:inline-flex bg-primary text-primary-foreground font-medium text-sm rounded-lg hover:opacity-90 transition-opacity h-10 px-5"
                 onClick={() => setShowBookingOptions(true)}
               >
                 Schedule Call
@@ -152,17 +152,17 @@ const Navbar = () => {
               {/* Mobile Hamburger */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center bg-muted/50 border border-border/40 text-foreground transition-colors"
+                className="md:hidden w-10 h-10 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center bg-muted/50 border border-border/40 text-foreground transition-colors"
                 aria-label="Toggle menu"
               >
-                <div className="relative w-4 h-4">
+                <div className="relative w-5 h-5">
                   <X
-                    size={16}
+                    size={20}
                     className={`absolute inset-0 transition-transform duration-300 ${isOpen ? "rotate-0 scale-100 opacity-100" : "rotate-90 scale-0 opacity-0"
                       }`}
                   />
                   <Menu
-                    size={16}
+                    size={20}
                     className={`absolute inset-0 transition-transform duration-300 ${!isOpen ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-0 opacity-0"
                       }`}
                   />

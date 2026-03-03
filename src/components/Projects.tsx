@@ -305,7 +305,7 @@ const Projects = () => {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-12 sm:mt-16 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
+        {/* <div className="text-center mt-12 sm:mt-16 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
           <p className="text-muted-foreground mb-4 text-sm sm:text-base">Interested in collaborating?</p>
           <Button
             className="bg-gradient-to-r from-amber-500 to-yellow-400 text-gray-900 font-semibold shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-300 rounded-xl"
@@ -316,7 +316,7 @@ const Projects = () => {
           {showBookingOptions && (
             <ScheduleConsultationModal open={showBookingOptions} onClose={() => setShowBookingOptions(false)} />
           )}
-        </div>
+        </div> */}
       </div>
 
       {/* ═══ Project Detail Modal ═══ */}
