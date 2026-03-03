@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Linkedin, Github, Copy, Sparkles, CheckCircle, ArrowRight } from 'lucide-react';
+import { Mail, MapPin, Linkedin, Github, Copy, Sparkles, CheckCircle, ArrowRight, Calendar } from 'lucide-react';
+import { Button } from './ui/button';
+import ScheduleConsultationModal from './ScheduleConsultationModal';
 
 const Contact = () => {
   const [emailCopied, setEmailCopied] = useState(false);
+  const [showBookingOptions, setShowBookingOptions] = useState(false);
 
   const handleCopyEmail = async () => {
     try {
@@ -36,17 +39,30 @@ const Contact = () => {
         </div>
 
         {/* Action Center - Simplified View */}
-        <div className="flex justify-center mt-8 sm:mt-12">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-8 sm:mt-12">
           {/* Primary Action Button */}
-          <a href="mailto:rmemdanib@gmail.com" className="relative group/btn overflow-hidden rounded-2xl p-[1px] inline-block cursor-pointer transform hover:-translate-y-1 transition-all duration-300">
+          <a href="mailto:rmemdanib@gmail.com" className="relative group/btn overflow-hidden rounded-2xl p-[1px] inline-block cursor-pointer transform hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto">
             <div className="absolute inset-0 bg-gradient-to-r from-primary via-blue-500 to-primary rounded-2xl" />
-            <div className="relative flex items-center justify-center gap-3 bg-background/90 backdrop-blur-md rounded-[15px] px-8 sm:px-12 py-4 sm:py-5 font-bold text-sm sm:text-base transition-all duration-300 group-hover/btn:bg-background/50 text-black group-hover/btn:text-white">
+            <div className="relative flex items-center justify-center gap-3 bg-background/90 backdrop-blur-md rounded-[15px] px-8 sm:px-12 py-4 sm:py-5 font-bold text-sm sm:text-base transition-all duration-300 group-hover/btn:bg-background/50 text-black dark:text-white group-hover/btn:text-white">
               <Mail className="w-5 h-5 flex-shrink-0" />
               <span>Mail him here</span>
               <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform ml-1 flex-shrink-0" />
             </div>
           </a>
+
+          {/* Schedule a call Button */}
+          <Button
+            className="w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-7 rounded-[16px] text-sm sm:text-base font-bold bg-gradient-to-r from-primary to-blue-500 text-white shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all duration-300 flex items-center justify-center gap-2 border border-primary/50"
+            onClick={() => setShowBookingOptions(true)}
+          >
+            <Calendar className="w-5 h-5" /> Schedule a call
+          </Button>
         </div>
+
+        {/* Schedule Consultation Modal */}
+        {showBookingOptions && (
+          <ScheduleConsultationModal open={showBookingOptions} onClose={() => setShowBookingOptions(false)} />
+        )}
 
       </div>
     </section>
