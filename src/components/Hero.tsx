@@ -230,13 +230,6 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce hidden lg:block">
-          <div className="flex flex-col items-center gap-1">
-            <span className="text-[9px] font-mono text-muted-foreground/60 uppercase tracking-widest">scroll</span>
-            <ChevronDown size={18} className="text-muted-foreground/50" />
-          </div>
-        </div>
       </div>
     </section>
   );

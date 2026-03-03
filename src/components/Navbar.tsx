@@ -16,15 +16,31 @@ const navItems = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [showBookingOptions, setShowBookingOptions] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      setScrolled(currentScrollY > 20);
+
+      // Hide if scrolling down past 100px, show if scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   // Intersection Observer for active section
   useEffect(() => {
@@ -55,7 +71,10 @@ const Navbar = () => {
   return (
     <>
       {/* ═══════ NAVBAR ═══════ */}
-      <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-3 pt-3 sm:px-4 sm:pt-4 pointer-events-none">
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-3 pt-3 sm:px-4 sm:pt-4 pointer-events-none transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"
+          }`}
+      >
         <nav
           className={`w-full max-w-5xl transition-all duration-300 rounded-full px-3 sm:px-4 pointer-events-auto ${scrolled
             ? "bg-background/90 backdrop-blur-xl shadow-md border border-border/80 py-2 sm:py-2.5"
@@ -198,8 +217,8 @@ const Navbar = () => {
                   <button
                     onClick={() => scrollTo(item.href)}
                     className={`relative w-full text-center px-4 py-3 text-lg font-display font-medium transition-all duration-300 hover:text-primary ${activeSection === item.href.slice(1)
-                        ? "text-primary"
-                        : "text-muted-foreground"
+                      ? "text-primary"
+                      : "text-muted-foreground"
                       }`}
                     style={{
                       opacity: isOpen ? 1 : 0,
