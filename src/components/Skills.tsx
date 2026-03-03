@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { Code, Database, Brain, Cloud, Wrench, Users, ListTodo, ChevronLeft, ChevronRight } from 'lucide-react';
 
-const Skills = () => {
+const Skills = React.memo(() => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -185,6 +185,6 @@ const Skills = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Skills;

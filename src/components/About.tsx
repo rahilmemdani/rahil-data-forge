@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Target, TrendingUp, Database, Code, ChevronLeft, ChevronRight } from 'lucide-react';
 
-const About = () => {
+const About = React.memo(() => {
   const highlights = [
     {
       icon: <Target className="w-6 h-6" />,
@@ -189,6 +189,6 @@ const About = () => {
       </div>
     </section>
   );
-};
+});
 
 export default About;

@@ -163,6 +163,7 @@
   background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   color: white;
   box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  will-change: transform, opacity;
 }
 
 .btn-primary:hover {

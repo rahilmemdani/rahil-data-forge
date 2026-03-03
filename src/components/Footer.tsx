@@ -48,7 +48,7 @@ const Footer = () => {
           <div className="w-full md:w-auto flex flex-row justify-between sm:justify-start gap-4 sm:gap-16 text-left mt-4 md:mt-0">
             {/* Navigation */}
             <div>
-              <h4 className="text-[10px] font-mono font-semibold text-muted-foreground uppercase tracking-wider mb-3">// explore</h4>
+              <h4 className="text-[10px] font-mono font-bold uppercase tracking-wider mb-3">// explore</h4>
               <ul className="grid grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-2">
                 {navItems.map((item) => (
                   <li key={item.name}>
@@ -63,7 +63,7 @@ const Footer = () => {
 
             {/* Contact Info */}
             <div>
-              <h4 className="text-[10px] font-mono font-semibold text-muted-foreground uppercase tracking-wider mb-3">// contact</h4>
+              <h4 className="text-[10px] font-mono font-bold uppercase tracking-wider mb-3">// contact</h4>
               <div className="space-y-2">
                 <div className="flex items-center justify-start gap-2">
                   <Mail className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
@@ -86,9 +86,6 @@ const Footer = () => {
         <div className="border-t border-border/50 pt-5 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-[10px] text-muted-foreground">
             © {new Date().getFullYear()} Rahil Memdani. All rights reserved.
-          </p>
-          <p className="text-[10px] text-muted-foreground flex items-center gap-1">
-            Built with <Heart size={10} className="text-red-400" /> using React
           </p>
         </div>
       </div>

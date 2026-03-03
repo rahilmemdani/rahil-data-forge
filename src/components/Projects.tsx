@@ -14,7 +14,7 @@ interface Project {
   url?: string;
 }
 
-const Projects = () => {
+const Projects = React.memo(() => {
   const [showBookingOptions, setShowBookingOptions] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 640 : false);
@@ -387,6 +387,6 @@ const Projects = () => {
       )}
     </section>
   );
-};
+});
 
 export default Projects;

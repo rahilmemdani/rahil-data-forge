@@ -63,6 +63,9 @@ const Navbar = () => {
   const scrollTo = useCallback((href: string) => {
     const element = document.querySelector(href);
     if (element) {
+      // Set active section immediately for instant feedback
+      setActiveSection(href.slice(1));
+
       element.scrollIntoView({ behavior: "smooth" });
       setIsOpen(false);
     }
@@ -227,6 +230,10 @@ const Navbar = () => {
                     }}
                   >
                     {item.name}
+                    <span
+                      className={`absolute bottom-2 left-1/2 -translate-x-1/2 h-[2px] bg-primary transition-all duration-300 ${activeSection === item.href.slice(1) ? "w-12" : "w-0"
+                        }`}
+                    />
                   </button>
                   {idx < navItems.length - 1 && (
                     <div

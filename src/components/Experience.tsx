@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MapPin, Calendar, TrendingUp, Users, Database, Code, ExternalLink, X, Award, Sparkles, Briefcase, GraduationCap } from 'lucide-react';
 
-const Experience = () => {
+const Experience = React.memo(() => {
   const [modalImage, setModalImage] = useState<any>(null);
 
   const experiences = [
@@ -304,7 +304,7 @@ const Experience = () => {
                         <div className="relative z-10 p-4 flex items-center gap-3 sm:gap-4">
                           {cert.type === 'award' && cert.image ? (
                             <div className="shrink-0 w-10 h-10 rounded-xl overflow-hidden border border-white/20 shadow-inner">
-                              <img src={cert.image} alt={cert.name} className="w-full h-full object-cover" />
+                              <img src={cert.image} alt={cert.name} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
                           ) : (
                             <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center shadow-inner ${cert.type === 'award' ? 'bg-white/20 text-white' : 'bg-background border border-border/40 text-primary'
@@ -388,6 +388,8 @@ const Experience = () => {
                     src={modalImage.image}
                     alt={modalImage.name}
                     className="w-full h-auto max-h-[50vh] object-contain hover:scale-[1.02] transition-transform duration-500"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
 
@@ -408,6 +410,6 @@ const Experience = () => {
       )}
     </>
   );
-};
+});
 
 export default Experience;
