@@ -45,11 +45,11 @@ const Footer = () => {
           </div>
 
           {/* Navigation & Contact Row */}
-          <div className="flex flex-col sm:flex-row gap-8 sm:gap-16 text-center sm:text-left">
+          <div className="w-full md:w-auto flex flex-row justify-between sm:justify-start gap-4 sm:gap-16 text-left mt-4 md:mt-0">
             {/* Navigation */}
             <div>
               <h4 className="text-[10px] font-mono font-semibold text-muted-foreground uppercase tracking-wider mb-3">// explore</h4>
-              <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
+              <ul className="grid grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-2">
                 {navItems.map((item) => (
                   <li key={item.name}>
                     <button onClick={() => scrollTo(item.href)}
@@ -65,15 +65,15 @@ const Footer = () => {
             <div>
               <h4 className="text-[10px] font-mono font-semibold text-muted-foreground uppercase tracking-wider mb-3">// contact</h4>
               <div className="space-y-2">
-                <div className="flex items-center justify-center sm:justify-start gap-2">
-                  <Mail className="w-3.5 h-3.5 text-muted-foreground" />
-                  <a href="mailto:rmemdanib@gmail.com" className="text-xs text-muted-foreground hover:text-primary transition-colors">
+                <div className="flex items-center justify-start gap-2">
+                  <Mail className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+                  <a href="mailto:rmemdanib@gmail.com" className="text-xs text-muted-foreground hover:text-primary transition-colors truncate max-w-[120px] sm:max-w-none">
                     rmemdanib@gmail.com
                   </a>
                 </div>
-                <div className="flex items-center justify-center sm:justify-start gap-2">
-                  <Phone className="w-3.5 h-3.5 text-muted-foreground" />
-                  <a href="tel:9167156829" className="text-xs text-muted-foreground hover:text-primary transition-colors">
+                <div className="flex items-center justify-start gap-2">
+                  <Phone className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+                  <a href="tel:9167156829" className="text-xs text-muted-foreground hover:text-primary transition-colors truncate max-w-[120px] sm:max-w-none">
                     +91 9167156829
                   </a>
                 </div>

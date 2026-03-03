@@ -113,94 +113,115 @@ const Experience = () => {
             <div className="absolute left-[39px] top-4 bottom-0 w-0.5 bg-gradient-to-b from-primary/50 via-primary/20 to-transparent hidden md:block" />
 
             <div className="space-y-8 sm:space-y-12">
-              {experiences.map((exp, index) => (
-                <div key={index} className="relative flex flex-col md:flex-row gap-6 md:gap-8 animate-fade-in-up" style={{ animationDelay: `${index * 150}ms` }}>
+              {experiences.map((exp, index) => {
+                const [isExpanded, setIsExpanded] = useState(false);
+                return (
+                  <div key={index} className="relative flex flex-col md:flex-row gap-6 md:gap-8 animate-fade-in-up" style={{ animationDelay: `${index * 150}ms` }}>
 
-                  {/* Timeline Node */}
-                  <div className="hidden md:flex flex-col items-center z-10">
-                    <div className={`w-[80px] h-[80px] rounded-2xl bg-gradient-to-br ${exp.gradient} flex items-center justify-center text-white shadow-xl shadow-primary/20 border-2 border-background ring-4 ring-primary/10 relative group hover:scale-110 transition-transform duration-500`}>
-                      {exp.icon}
-                      {/* Glow behind node */}
-                      <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${exp.gradient} opacity-50 blur-xl -z-10 group-hover:opacity-100 transition-opacity duration-500`} />
+                    {/* Timeline Node */}
+                    <div className="hidden md:flex flex-col items-center z-10">
+                      <div className={`w-[80px] h-[80px] rounded-2xl bg-gradient-to-br ${exp.gradient} flex items-center justify-center text-white shadow-xl shadow-primary/20 border-2 border-background ring-4 ring-primary/10 relative group hover:scale-110 transition-transform duration-500`}>
+                        {exp.icon}
+                        {/* Glow behind node */}
+                        <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${exp.gradient} opacity-50 blur-xl -z-10 group-hover:opacity-100 transition-opacity duration-500`} />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Glass Card */}
-                  <div className="flex-1 group relative">
-                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-xl" />
+                    {/* Glass Card */}
+                    <div className="flex-1 group relative">
+                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-xl" />
 
-                    <div className="relative rounded-3xl border border-border/30 backdrop-blur-xl p-6 sm:p-8 md:p-10 transition-all duration-500 hover:shadow-2xl hover:border-primary/20 hover:-translate-y-1 overflow-hidden"
-                      style={{ background: 'rgba(255,255,255,0.4)', boxShadow: '0 8px 32px rgba(0,0,0,0.06)' }}
-                    >
-                      <div className="absolute inset-0 bg-card/60 dark:bg-card/80 backdrop-blur-xl rounded-3xl" />
+                      <div className="relative rounded-3xl border border-border/30 backdrop-blur-xl p-6 sm:p-8 md:p-10 transition-all duration-500 hover:shadow-2xl hover:border-primary/20 hover:-translate-y-1 overflow-hidden"
+                        style={{ background: 'rgba(255,255,255,0.4)', boxShadow: '0 8px 32px rgba(0,0,0,0.06)' }}
+                      >
+                        <div className="absolute inset-0 bg-card/60 dark:bg-card/80 backdrop-blur-xl rounded-3xl" />
 
-                      <div className="relative z-10">
-                        {/* Mobile Node + Header Row */}
-                        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
-                          <div className="flex items-center gap-4 md:block md:gap-0">
-                            {/* Mobile Icon */}
-                            <div className={`md:hidden shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${exp.gradient} flex items-center justify-center text-white shadow-lg`}>
-                              {exp.icon}
-                            </div>
-                            <div>
-                              <h3 className="text-xl sm:text-2xl font-display font-bold text-foreground group-hover:text-primary transition-colors">
-                                {exp.position}
-                              </h3>
-                              <div className="text-sm sm:text-base font-semibold text-primary/80 mt-1 flex items-center gap-2">
-                                {exp.company}
-                                {exp.link && (
-                                  <a href={exp.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 hover:bg-primary text-primary hover:text-white transition-colors">
-                                    <ExternalLink size={12} />
-                                  </a>
-                                )}
+                        <div className="relative z-10">
+                          {/* Mobile Node + Header Row */}
+                          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
+                            <div className="flex items-center gap-4 md:block md:gap-0">
+                              {/* Mobile Icon */}
+                              <div className={`md:hidden shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${exp.gradient} flex items-center justify-center text-white shadow-lg`}>
+                                {exp.icon}
+                              </div>
+                              <div>
+                                <h3 className="text-xl sm:text-2xl font-display font-bold text-foreground group-hover:text-primary transition-colors">
+                                  {exp.position}
+                                </h3>
+                                <div className="text-sm sm:text-base font-semibold text-primary/80 mt-1 flex items-center gap-2">
+                                  {exp.company}
+                                  {exp.link && (
+                                    <a href={exp.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 hover:bg-primary text-primary hover:text-white transition-colors">
+                                      <ExternalLink size={12} />
+                                    </a>
+                                  )}
+                                </div>
                               </div>
                             </div>
+
+                            {/* Meta Badges */}
+                            <div className="flex flex-wrap sm:flex-col items-start sm:items-end gap-2 text-[10px] sm:text-xs">
+                              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-background/50 border border-border/40 backdrop-blur-sm text-muted-foreground font-medium">
+                                <Calendar size={12} className="text-primary/70" /> {exp.duration}
+                              </span>
+                              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-background/50 border border-border/40 backdrop-blur-sm text-muted-foreground font-medium">
+                                <MapPin size={12} className="text-primary/70" /> {exp.location}
+                              </span>
+                            </div>
                           </div>
 
-                          {/* Meta Badges */}
-                          <div className="flex flex-wrap sm:flex-col items-start sm:items-end gap-2 text-[10px] sm:text-xs">
-                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-background/50 border border-border/40 backdrop-blur-sm text-muted-foreground font-medium">
-                              <Calendar size={12} className="text-primary/70" /> {exp.duration}
-                            </span>
-                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-background/50 border border-border/40 backdrop-blur-sm text-muted-foreground font-medium">
-                              <MapPin size={12} className="text-primary/70" /> {exp.location}
-                            </span>
+                          <div className={`sm:block ${isExpanded ? 'block' : 'hidden'}`}>
+                            {/* Description */}
+                            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
+                              {exp.description}
+                            </p>
+
+                            {/* Achievements */}
+                            <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-muted/20 border border-border/20">
+                              <h4 className="flex items-center gap-2 text-[11px] sm:text-xs font-mono font-bold text-primary mb-4 uppercase tracking-wider">
+                                <Sparkles size={12} /> Key Achievements
+                              </h4>
+                              <ul className="space-y-3">
+                                {exp.achievements.map((achievement, idx) => (
+                                  <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-foreground/80 leading-relaxed">
+                                    <span className={`flex-shrink-0 w-1.5 h-1.5 mt-1.5 rounded-full bg-gradient-to-r ${exp.gradient}`} />
+                                    {achievement}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
                           </div>
-                        </div>
 
-                        {/* Description */}
-                        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
-                          {exp.description}
-                        </p>
+                          {/* Mobile Collapsed State (Truncated Description) */}
+                          <div className={`sm:hidden ${!isExpanded ? 'block' : 'hidden'} mb-4`}>
+                            <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                              {exp.description}
+                            </p>
+                          </div>
 
-                        {/* Achievements */}
-                        <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-muted/20 border border-border/20">
-                          <h4 className="flex items-center gap-2 text-[11px] sm:text-xs font-mono font-bold text-primary mb-4 uppercase tracking-wider">
-                            <Sparkles size={12} /> Key Achievements
-                          </h4>
-                          <ul className="space-y-3">
-                            {exp.achievements.map((achievement, idx) => (
-                              <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-foreground/80 leading-relaxed">
-                                <span className={`flex-shrink-0 w-1.5 h-1.5 mt-1.5 rounded-full bg-gradient-to-r ${exp.gradient}`} />
-                                {achievement}
-                              </li>
+                          {/* Mobile Read More Toggle */}
+                          <button
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            className="sm:hidden w-full py-2.5 mt-2 mb-6 rounded-xl bg-primary/10 text-primary text-sm font-bold border border-primary/20 hover:bg-primary/20 transition-colors flex justify-center items-center gap-2"
+                          >
+                            {isExpanded ? 'Read less' : 'Read more'}
+                          </button>
+
+
+                          {/* Tech Stack */}
+                          <div className="flex flex-wrap gap-2">
+                            {exp.technologies.map((tech) => (
+                              <span key={tech} className="px-3 py-1 rounded-lg bg-background/60 border border-border/30 shadow-sm backdrop-blur-md text-[10px] sm:text-xs font-medium text-foreground hover:border-primary/40 hover:text-primary transition-colors cursor-default">
+                                {tech}
+                              </span>
                             ))}
-                          </ul>
-                        </div>
-
-                        {/* Tech Stack */}
-                        <div className="flex flex-wrap gap-2">
-                          {exp.technologies.map((tech) => (
-                            <span key={tech} className="px-3 py-1 rounded-lg bg-background/60 border border-border/30 shadow-sm backdrop-blur-md text-[10px] sm:text-xs font-medium text-foreground hover:border-primary/40 hover:text-primary transition-colors cursor-default">
-                              {tech}
-                            </span>
-                          ))}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
@@ -270,8 +291,8 @@ const Experience = () => {
                       <div
                         key={idx}
                         className={`group/cert relative overflow-hidden rounded-2xl border transition-all duration-300 ${cert.type === 'award'
-                            ? 'border-blue-500/30 hover:border-blue-500/60 shadow-md cursor-pointer hover:-translate-y-1'
-                            : 'border-border/30 hover:border-primary/20 bg-muted/10 hover:bg-muted/20'
+                          ? 'border-blue-500/30 hover:border-blue-500/60 shadow-md cursor-pointer hover:-translate-y-1'
+                          : 'border-border/30 hover:border-primary/20 bg-muted/10 hover:bg-muted/20'
                           }`}
                         onClick={() => cert.type === 'award' && openModal(cert)}
                       >
