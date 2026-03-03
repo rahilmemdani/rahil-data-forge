@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ScheduleConsultationModal from "./ScheduleConsultationModal";
+import { useTheme } from "./ThemeProvider";
+
+const navItems = [
+  { name: "Home", href: "#hero" },
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
+  { name: "Contact", href: "#contact" },
+];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showBookingOptions, setShowBookingOptions] = useState(false);
-  const location = useLocation();
-
-  const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Skills & Technologies", path: "/skills" },
-    { name: "Featured Projects", path: "/projects" },
-    { name: "Professional Experience", path: "/experience" },
-    { name: "Get In Touch", path: "/contact" },
-  ];
+  const [activeSection, setActiveSection] = useState("hero");
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -24,130 +26,136 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isActive = (path: string) => location.pathname === path;
+  // Intersection Observer for active section
+  useEffect(() => {
+    const sections = navItems.map(item => document.querySelector(item.href));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+    );
+
+    sections.forEach(section => { if (section) observer.observe(section); });
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollTo = useCallback((href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsOpen(false);
+    }
+  }, []);
 
   return (
     <>
-      {/* NAVBAR */}
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "glassmorphism shadow-lg" : "bg-transparent"
-          }`}
-      >
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+          ? "glassmorphism shadow-sm"
+          : "bg-transparent"
+        }`}>
         <div className="container-custom">
-          <div className="flex items-center justify-between h-16 md:h-20">
+          <div className="flex items-center justify-between h-16">
 
-            {/* LEFT — Hamburger + Desktop Nav */}
-            <div className="flex items-center gap-4">
+            {/* Logo */}
+            <button onClick={() => scrollTo("#hero")} className="font-display font-bold text-lg tracking-tight hover:text-primary transition-colors">
+              <span className="gradient-text">RM</span>
+              <span className="text-foreground">.</span>
+            </button>
 
-              {/* MOBILE HAMBURGER */}
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-1">
+              {navItems.map((item) => (
+                <button
+                  key={item.href}
+                  onClick={() => scrollTo(item.href)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${activeSection === item.href.slice(1)
+                      ? "text-primary bg-primary/10"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    }`}
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+
+            {/* Right side */}
+            <div className="flex items-center gap-2">
+              {/* Theme Toggle */}
               <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+                onClick={toggleTheme}
+                className="w-9 h-9 rounded-xl flex items-center justify-center bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-all duration-300"
+                aria-label="Toggle theme"
               >
-                {isOpen ? <X size={28} /> : <Menu size={28} />}
+                {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
               </button>
 
-              {/* DESKTOP NAV ITEMS */}
-              <div className="hidden md:flex items-center space-x-8">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={`text-sm font-medium transition-colors duration-300 hover:text-primary ${isActive(item.path)
-                      ? "text-primary border-b-2 border-primary pb-1"
-                      : "text-muted-foreground"
-                      }`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* RIGHT — Schedule Buttons */}
-            <div className="flex items-center">
-
-              {/* DESKTOP SCHEDULE BUTTON */}
-              <div className="hidden md:flex">
+              {/* Schedule - Desktop */}
+              <div className="hidden md:block">
                 <Button
-                  className="bg-gradient-to-r from-gold to-yellow-400 text-navy font-semibold shadow-md 
-                             hover:shadow-lg hover:scale-[1.03] transition-all duration-300"
+                  className="bg-gradient-to-r from-amber-500 to-yellow-400 text-gray-900 font-semibold text-xs rounded-xl shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300 h-9 px-4"
                   onClick={() => setShowBookingOptions(true)}
                 >
-                  Schedule Consultation
+                  Schedule Call
                 </Button>
               </div>
 
-              {/* MOBILE SCHEDULE BUTTON (TOP RIGHT) WITH MARGIN */}
-              <div className="md:hidden mr-2">
-                <Button
-                  className="bg-gradient-to-r from-gold to-yellow-400 text-navy font-semibold 
-                             px-4 py-2 rounded-lg shadow-md text-xs
-                             hover:scale-[1.05] transition-all duration-200"
-                  onClick={() => setShowBookingOptions(true)}
-                >
-                  Schedule Consultation
-                </Button>
-              </div>
-
+              {/* Mobile Hamburger */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="md:hidden w-9 h-9 rounded-xl flex items-center justify-center bg-muted/50 hover:bg-muted text-foreground transition-colors"
+              >
+                {isOpen ? <X size={18} /> : <Menu size={18} />}
+              </button>
             </div>
-
           </div>
         </div>
       </nav>
 
-      {/* MOBILE MENU OVERLAY */}
-      <div
-        className={`md:hidden fixed inset-0 z-[60] bg-background/95 backdrop-blur-lg transition-transform duration-300 ${isOpen
-          ? "translate-y-0 opacity-100 pointer-events-auto"
-          : "-translate-y-full opacity-0 pointer-events-none"
-          }`}
-      >
-        {/* CLOSE BUTTON */}
-        <button
-          onClick={() => setIsOpen(false)}
-          className="absolute top-6 right-6 text-foreground hover:text-primary transition-colors p-2 rounded-full"
-        >
-          <X size={32} className="shadow-lg rounded-full p-1 bg-muted/70" />
+      {/* Mobile Menu */}
+      <div className={`md:hidden fixed inset-0 z-[60] bg-background/98 backdrop-blur-xl transition-all duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}>
+        <button onClick={() => setIsOpen(false)}
+          className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors">
+          <X size={20} />
         </button>
 
-        {/* MENU ITEMS */}
-        <div className="flex flex-col items-center justify-center min-h-screen space-y-4 px-4">
+        <div className="flex flex-col items-center justify-center min-h-screen gap-2 px-8">
           {navItems.map((item, idx) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              onClick={() => setIsOpen(false)}
-              className={`block w-full text-center px-6 py-3 text-xl font-semibold rounded-lg transition-all duration-300 transform ${isActive(item.path)
-                ? "text-primary bg-primary/10 scale-105"
-                : "text-foreground hover:text-primary hover:bg-primary/10 hover:scale-105"
+            <button
+              key={item.href}
+              onClick={() => scrollTo(item.href)}
+              className={`w-full text-center px-6 py-3 text-lg font-display font-semibold rounded-xl transition-all duration-300 ${activeSection === item.href.slice(1)
+                  ? "text-primary bg-primary/10"
+                  : "text-foreground hover:text-primary hover:bg-primary/5"
                 }`}
-              style={{ transitionDelay: `${idx * 75}ms` }}
+              style={{ transitionDelay: `${idx * 50}ms` }}
             >
               {item.name}
-            </Link>
+            </button>
           ))}
 
-          {/* Mobile Full Button */}
-          <Button
-            className="w-full mt-6 bg-gradient-to-r from-gold to-yellow-400 text-navy font-semibold 
-                       rounded-lg shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-300"
-            onClick={() => {
-              setIsOpen(false);
-              setShowBookingOptions(true);
-            }}
-          >
-            Schedule Consultation
-          </Button>
+          <div className="flex items-center gap-3 mt-6">
+            <button onClick={toggleTheme}
+              className="w-12 h-12 rounded-xl flex items-center justify-center bg-muted text-foreground">
+              {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+            </button>
+            <Button
+              className="bg-gradient-to-r from-amber-500 to-yellow-400 text-gray-900 font-semibold rounded-xl shadow-md h-12 px-6"
+              onClick={() => { setIsOpen(false); setShowBookingOptions(true); }}
+            >
+              Schedule Call
+            </Button>
+          </div>
         </div>
       </div>
 
-      {/* MODAL (Render Once) */}
       {showBookingOptions && (
-        <ScheduleConsultationModal
-          open={showBookingOptions}
-          onClose={() => setShowBookingOptions(false)}
-        />
+        <ScheduleConsultationModal open={showBookingOptions} onClose={() => setShowBookingOptions(false)} />
       )}
     </>
   );

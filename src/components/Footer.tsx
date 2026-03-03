@@ -1,43 +1,45 @@
 import { Github, Linkedin, Mail, Phone, MapPin, Heart } from "lucide-react";
-import { Link } from "react-router-dom"; // or next/link
-import ScheduleConsultationModal from "./ScheduleConsultationModal";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 const navItems = [
-  { name: "Home", path: "/" },
-  { name: "Skills & Technologies", path: "/skills" },
-  { name: "Featured Projects", path: "/projects" },
-  { name: "Professional Experience", path: "/experience" },
-  { name: "Get In Touch", path: "/contact" },
+  { name: "Home", href: "#hero" },
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
+  { name: "Contact", href: "#contact" },
 ];
 
 const Footer = () => {
-  const [showBookingOptions, setShowBookingOptions] = useState(false);
+  const scrollTo = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) element.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <footer className="bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#111827] text-[#f9fafb] border-t border-gray-700">
+    <footer className="relative border-t border-border/50">
+      {/* Gradient accent line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
-      <div className="max-w-6xl mx-auto px-6 py-20">
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
 
-        {/* Main Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 mb-16">
-
-          {/* Brand Section */}
+          {/* Brand & Social */}
           <div className="text-center md:text-left">
-            <div className="flex justify-center md:justify-start space-x-4">
+            <div className="font-display font-bold text-2xl mb-3">
+              <span className="gradient-text">Rahil</span> Memdani
+            </div>
+            <p className="text-sm text-muted-foreground mb-5 max-w-xs mx-auto md:mx-0">
+              Full-Stack Engineer building scalable platforms with data-driven innovation.
+            </p>
+            <div className="flex justify-center md:justify-start gap-3">
               {[
                 { href: "https://github.com/rahilmemdani", icon: Github },
                 { href: "https://www.linkedin.com/in/rahil-memdani-8968681ab/", icon: Linkedin },
-                { href: "mailto:rmemdanib@gmail.com", icon: Mail }
+                { href: "mailto:rmemdanib@gmail.com", icon: Mail },
               ].map(({ href, icon: Icon }, idx) => (
-                <a
-                  key={idx}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gradient-to-r hover:from-[#00D4FF] hover:to-[#00FFE0] hover:text-black flex items-center justify-center transition-all duration-200 hover:scale-105"
-                >
-                  <Icon className="w-4 h-4 text-[#f9fafb]" />
+                <a key={idx} href={href} target="_blank" rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-xl bg-muted/50 hover:bg-primary/10 flex items-center justify-center text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110">
+                  <Icon className="w-4 h-4" />
                 </a>
               ))}
             </div>
@@ -45,66 +47,54 @@ const Footer = () => {
 
           {/* Navigation */}
           <div className="text-center md:text-left">
-            <h4 className="text-lg font-semibold mb-6">Explore</h4>
+            <h4 className="text-xs font-mono font-semibold text-muted-foreground uppercase tracking-wider mb-4">// explore</h4>
             <nav>
-              <ul className="space-y-3">
+              <ul className="space-y-2">
                 {navItems.map((item) => (
                   <li key={item.name}>
-                    <Link
-                      to={item.path}
-                      className="hover:gradient-text font-medium transition-colors duration-200"
-                    >
+                    <button onClick={() => scrollTo(item.href)}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
                       {item.name}
-                    </Link>
+                    </button>
                   </li>
                 ))}
               </ul>
             </nav>
           </div>
 
-          {/* Contact */}
+          {/* Contact Info */}
           <div className="text-center md:text-left">
-            <h4 className="text-lg font-semibold mb-6">Contact</h4>
-            <div className="space-y-4">
-              <div className="flex items-center justify-center md:justify-start">
-                <Mail className="w-4 h-4 mr-3" />
-                <a
-                  href="mailto:rmemdanib@gmail.com"
-                  className="hover:gradient-text transition-colors duration-200"
-                >
+            <h4 className="text-xs font-mono font-semibold text-muted-foreground uppercase tracking-wider mb-4">// contact</h4>
+            <div className="space-y-3">
+              <div className="flex items-center justify-center md:justify-start gap-2">
+                <Mail className="w-3.5 h-3.5 text-muted-foreground" />
+                <a href="mailto:rmemdanib@gmail.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   rmemdanib@gmail.com
                 </a>
               </div>
-              <div className="flex items-center justify-center md:justify-start">
-                <Phone className="w-4 h-4 mr-3" />
-                <a
-                  href="tel:9167156829"
-                  className="hover:gradient-text transition-colors duration-200"
-                >
+              <div className="flex items-center justify-center md:justify-start gap-2">
+                <Phone className="w-3.5 h-3.5 text-muted-foreground" />
+                <a href="tel:9167156829" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   +91 9167156829
                 </a>
               </div>
-              <div className="flex items-center justify-center md:justify-start">
-                <MapPin className="w-4 h-4 mr-3" />
-                <span>Mumbai, India</span>
+              <div className="flex items-center justify-center md:justify-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">Mumbai, India</span>
               </div>
             </div>
           </div>
         </div>
 
-
-        {/* Bottom Section */}
-        <div className="border-t border-gray-700 pt-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between text-sm">
-            <div className="flex items-center space-x-2 mb-4 sm:mb-0">
-              <span>© 2025 Built by Rahil Memdani</span>
-            </div>
-            <div>
-              <span>All rights reserved.</span>
-            </div>
-          </div>
+        {/* Bottom */}
+        <div className="border-t border-border/50 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Rahil Memdani. All rights reserved.
+          </p>
+          <p className="text-xs text-muted-foreground flex items-center gap-1">
+            Built with <Heart size={10} className="text-red-400" /> using React & TypeScript
+          </p>
         </div>
-
       </div>
     </footer>
   );

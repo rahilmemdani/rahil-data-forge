@@ -1,201 +1,220 @@
 import React, { useState } from 'react';
-import { Building2, Palette, ChefHat, BarChart3, Play, Globe, ExternalLink, Sparkles, FileSpreadsheet, Database, Calculator } from 'lucide-react';
-import agriCloudThumb from "/public/agricloud-thumbnail.svg";
-import { Link } from 'react-router-dom';
+import { Building2, Palette, BarChart3, Globe, ExternalLink, Sparkles, FileSpreadsheet, Database, Calculator, ArrowUpRight } from 'lucide-react';
 import { Button } from './ui/button';
 import ScheduleConsultationModal from './ScheduleConsultationModal';
 
 const Projects = () => {
   const [showBookingOptions, setShowBookingOptions] = useState(false);
+
+  const featuredProject = {
+    id: 4,
+    category: "Enterprise AgriTech",
+    title: "Grow Indigo — AgriCloud Platform",
+    description: "Scalable SaaS platform serving 2M+ farmers across 15+ Indian states, managing 7M+ acres of agricultural operations. Led the transformation from monolithic to multi-tenant architecture with real-time analytics, payment processing (5,000+ monthly transactions), and seller onboarding (600+ monthly registrations).",
+    technologies: ["React", "TypeScript", "Node.js", ".NET Core", "Snowflake", "PostgreSQL", "AWS"],
+    metrics: ["2M+ Users", "15+ States", "7M+ Acres", "35% Cost Reduction"],
+    url: "https://www.growindigo.co.in/",
+    icon: <Building2 className="w-8 h-8" />,
+    gradient: "from-blue-500 to-indigo-600",
+  };
+
   const projects = [
-    // Your projects array remains unchanged
     {
       id: 1,
       category: "Business Intelligence",
-      title: "Agricultural Data Analytics Dashboard",
+      title: "Agricultural Analytics Dashboard",
       description: "Comprehensive Power BI dashboard analyzing agricultural performance metrics, farmer engagement, and regional trends.",
-      technologies: ["Power BI", "DAX", "Power Query", "SQL"],
-      tagline: "Transforming agricultural data into actionable insights",
-      metrics: "15+ states · Real-time analytics",
-      icon: <BarChart3 className="w-6 h-6" />,
-      color: "from-yellow-500 to-orange-500",
+      technologies: ["Power BI", "DAX", "SQL"],
+      tagline: "Transforming agriculture data into insights",
+      icon: <BarChart3 className="w-5 h-5" />,
+      gradient: "from-amber-500 to-orange-500",
       url: "https://app.powerbi.com/view?r=eyJrIjoiOTM3MTJkY2YtMDdhYy00YjBlLWFiNTQtNGYxMDAzMmRjZTM0IiwidCI6IjhmYzRlMWZhLTc3NjItNGU0OS1iYzJlLTY0MWQ4YTZkNzUzMCJ9",
-      isPowerBI: true
     },
     {
       id: 2,
       category: "Data & Analytics",
-      title: "Snowflake Macros for Grow Indigo",
+      title: "Snowflake Macros — Grow Indigo",
       description: "Reusable Snowflake SQL macros for streamlined query logic across agricultural datasets.",
-      technologies: ["Snowflake", "SQL Macros", "Data Warehousing"],
+      technologies: ["Snowflake", "SQL Macros"],
       tagline: "Reusable data logic for scalable insights",
-      metrics: "Reduced query complexity",
-      icon: <Database className="w-6 h-6" />,
-      color: "from-sky-500 to-blue-600"
+      icon: <Database className="w-5 h-5" />,
+      gradient: "from-sky-500 to-blue-600",
     },
     {
       id: 3,
       category: "Data Reporting",
-      title: "Excel Reporting with Snowflake for Mahyco",
+      title: "Excel Reports — Mahyco",
       description: "Seamless Snowflake-Excel integration for real-time sales and R&D reporting.",
       technologies: ["Snowflake", "Excel", "Power Query"],
       tagline: "Excel-native reporting powered by Snowflake",
-      metrics: "Real-time data · Automated refresh",
-      icon: <FileSpreadsheet className="w-6 h-6" />,
-      color: "from-green-500 to-emerald-600"
-    },
-    {
-      id: 4,
-      category: "Enterprise",
-      title: "Grow Indigo - AgriTech Platform",
-      description: "Scalable platform serving 2M+ farmers across 15+ states with 7M+ acres coverage.",
-      technologies: ["React", "Typescript", "NodeJS", ".NET Core", "AWS"],
-      tagline: "Accelerated ag transformation",
-      metrics: "2M+ farmers · 15+ states",
-      icon: <Building2 className="w-6 h-6" />,
-      color: "from-blue-500 to-cyan-500",
-      url: "https://www.growindigo.co.in/"
+      icon: <FileSpreadsheet className="w-5 h-5" />,
+      gradient: "from-emerald-500 to-green-600",
     },
     {
       id: 5,
-      category: "Enterprise Dashboard",
-      title: "SaaS Platform",
+      category: "SaaS Platform",
+      title: "AgriCloud Dashboard",
       description: "SaaS platform streamlining onboarding, commissions, and payments with 20% time savings.",
-      technologies: ["React", "Typescript", "NodeJS", ".NET Core", ".NET Core", "AWS"],
+      technologies: ["React", "TypeScript", ".NET Core", "AWS"],
       tagline: "Streamlined seller operations",
-      metrics: "Part of AgriCloud · Automation",
-      icon: <BarChart3 className="w-6 h-6" />,
-      color: "from-purple-500 to-indigo-500",
-      isDemo: true,
-      demoVideoUrl: "https://www.loom.com/share/your-demo-link-here"
+      icon: <BarChart3 className="w-5 h-5" />,
+      gradient: "from-violet-500 to-purple-600",
     },
     {
       id: 6,
       category: "E-Commerce",
-      title: "Zoshe - Luxury Perfume Platform",
+      title: "Zoshe — Luxury Perfumes",
       description: "SEO-optimized e-commerce platform for premium fragrances with mobile-first design.",
-      technologies: [],
+      technologies: ["React", "SEO", "E-Commerce"],
       tagline: "Luxury meets technology",
-      metrics: "SEO optimized · Mobile-first",
-      icon: <Sparkles className="w-6 h-6" />,
-      color: "from-purple-500 to-pink-500",
+      icon: <Sparkles className="w-5 h-5" />,
+      gradient: "from-pink-500 to-rose-500",
       url: "https://www.zoshe.in/",
-      isFeatured: true
     },
     {
       id: 7,
       category: "Business Website",
-      title: "Zavlin Bookkeeping Services",
+      title: "Zavlin Bookkeeping",
       description: "Professional bookkeeping website with modern UX and SEO optimization.",
-      technologies: [],
+      technologies: ["React", "SEO"],
       tagline: "Simplifying bookkeeping",
-      metrics: "SEO optimized · Client-centric",
-      icon: <Calculator className="w-6 h-6" />,
-      color: "from-indigo-500 to-teal-500",
+      icon: <Calculator className="w-5 h-5" />,
+      gradient: "from-teal-500 to-cyan-500",
       url: "https://www.zavlinbookkeeping.com/",
-      isFeatured: true
     }
   ];
 
   return (
-    <section id="projects" className="section-padding bg-card/20">
-      <div className="container-custom">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Professional <span className="gradient-text">Projects</span>
+    <section id="projects" className="section-full section-padding relative noise-bg overflow-hidden">
+      <div className="container-custom relative z-10">
+        {/* Header */}
+        <div className="text-center mb-16 animate-fade-in-up">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-4">
+            <Sparkles size={12} /> Portfolio
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
+            Featured <span className="gradient-text">Projects</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover impactful projects built with cutting-edge technologies and scalable architectures.
+            Scalable systems with real-world impact, built with cutting-edge tech
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <div
-              key={project.id}
-              className={`card-glass group rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 ${project.isFeatured ? 'ring-2 ring-primary/20' : ''}`}
-              style={{ animationDelay: `${index * 0.1}s`, animation: 'fadeIn 0.5s ease-in-out' }}
-            >
-              {/* Thumbnail or Icon */}
-              <div className="relative h-40 bg-gradient-to-br from-card to-muted/20">
-                {project.isDemo && agriCloudThumb ? (
-                  <img
-                    src={agriCloudThumb}
-                    alt={`${project.title} thumbnail`}
-                    className="w-full h-full object-contain p-4"
-                  />
-                ) : (
-                  <div className={`absolute inset-0 flex items-center justify-center bg-gradient-to-r ${project.color}`}>
-                    {React.cloneElement(project.icon, { className: "w-12 h-12 text-white opacity-80" })}
-                  </div>
-                )}
-                {/* External Link Icon */}
-                {project.url && (
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute top-2 right-2 p-2 bg-background/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  >
-                    <ExternalLink className="w-5 h-5 text-primary" />
-                  </a>
-                )}
-              </div>
+        {/* Featured Project — Hero Card */}
+        <div className="mb-12 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+          <div className="group relative overflow-hidden rounded-3xl border border-border/50 bg-gradient-to-br from-muted/30 to-muted/10 dark:from-muted/20 dark:to-background p-8 md:p-10 transition-all duration-500 hover:shadow-2xl">
+            {/* Background gradient accent */}
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10"
+              style={{ background: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-end))', filter: 'blur(80px)' }}
+            />
 
-              {/* Content */}
-              <div className="p-4">
-                <div className="flex items-center mb-2">
-                  <span className={`text-xs font-medium text-primary ${project.isFeatured ? 'font-bold' : ''}`}>
-                    {project.category}
-                  </span>
-                </div>
-                <h3 className={`text-lg font-semibold group-hover:text-primary transition-colors ${project.isFeatured ? 'text-xl' : ''}`}>
-                  {project.title}
+            <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-4">
+                  ⭐ Featured • {featuredProject.category}
+                </span>
+                <h3 className="text-2xl md:text-3xl font-display font-bold mb-4 group-hover:text-primary transition-colors">
+                  {featuredProject.title}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                  {project.description}
+                <p className="text-muted-foreground mb-6 leading-relaxed text-sm md:text-base">
+                  {featuredProject.description}
                 </p>
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {project.technologies.slice(0, 3).map((tech) => (
-                    <span
-                      key={tech}
-                      className={`px-2 py-0.5 text-xs rounded-full ${project.isFeatured ? 'bg-primary/30 text-primary' : 'bg-primary/10 text-primary'}`}
-                    >
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {featuredProject.technologies.map((tech) => (
+                    <span key={tech} className="px-3 py-1 rounded-lg bg-primary/10 text-primary text-xs font-medium">
                       {tech}
                     </span>
                   ))}
                 </div>
-                {/* Tagline */}
-                <p className={`text-sm ${project.isFeatured ? 'text-primary font-medium' : 'text-muted-foreground'}`}>
-                  {project.tagline}
-                </p>
+                {featuredProject.url && (
+                  <a
+                    href={featuredProject.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary inline-flex"
+                  >
+                    Visit Website <ArrowUpRight size={16} />
+                  </a>
+                )}
               </div>
+
+              {/* Metrics Grid */}
+              <div className="grid grid-cols-2 gap-4">
+                {featuredProject.metrics.map((metric, i) => (
+                  <div key={i} className="card-glass p-4 text-center group/metric">
+                    <div className="text-xl md:text-2xl font-display font-bold gradient-text mb-1">
+                      {metric.split(' ')[0]}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {metric.split(' ').slice(1).join(' ')}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Projects Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {projects.map((project, index) => (
+            <div
+              key={project.id}
+              className="card-glass group p-5 flex flex-col"
+              style={{ animationDelay: `${(index + 3) * 100}ms` }}
+            >
+              {/* Icon & Category */}
+              <div className="flex items-center gap-3 mb-4">
+                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300`}>
+                  {project.icon}
+                </div>
+                <span className="text-xs font-medium text-primary">{project.category}</span>
+              </div>
+
+              {/* Title */}
+              <h3 className="text-base font-display font-semibold mb-2 group-hover:text-primary transition-colors">
+                {project.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-xs text-muted-foreground mb-4 leading-relaxed flex-1">
+                {project.description}
+              </p>
+
+              {/* Technologies */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {project.technologies.map((tech) => (
+                  <span key={tech} className="px-2 py-0.5 rounded-md bg-muted/50 dark:bg-muted/30 text-[10px] font-medium text-muted-foreground">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {/* Link */}
+              {project.url && (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline"
+                >
+                  View Project <ArrowUpRight size={12} />
+                </a>
+              )}
             </div>
           ))}
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-12">
-          <p className="text-lg text-muted-foreground mb-4">
-            Interested in collaborating on innovative projects?
-          </p>
-          {/* <Link to="/Contact">
-            <button className="btn-primary">
-              Let's Connect
-            </button>
-          </Link> */}
+        {/* CTA */}
+        <div className="text-center mt-16 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
+          <p className="text-muted-foreground mb-4">Interested in collaborating?</p>
+          <Button
+            className="bg-gradient-to-r from-amber-500 to-yellow-400 text-gray-900 font-semibold shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-300 rounded-xl"
+            onClick={() => setShowBookingOptions(true)}
+          >
+            Schedule Consultation
+          </Button>
 
-          {/* Desktop: Schedule Consultation Button */}
-          <div className="">
-            <Button
-              className="bg-gradient-to-r from-gold to-yellow-400 text-navy font-semibold shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-300"
-              onClick={() => setShowBookingOptions(true)}
-            >
-              Schedule Consultation
-            </Button>
-          </div>
-          {/* Booking Modal */}
           {showBookingOptions && (
             <ScheduleConsultationModal
               open={showBookingOptions}
