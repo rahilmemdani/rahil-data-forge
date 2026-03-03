@@ -65,8 +65,9 @@ const Skills = () => {
     indexRef.current = clamped;
   };
 
-  const prev = () => goTo(indexRef.current - 2);
-  const next = () => goTo(indexRef.current + 2);
+  const step = () => (typeof window !== 'undefined' && window.innerWidth >= 768) ? 2 : 1;
+  const prev = () => goTo(indexRef.current - step());
+  const next = () => goTo(indexRef.current + step());
 
   return (
     <section id="skills" className="section-full section-padding relative w-full overflow-hidden noise-bg">
