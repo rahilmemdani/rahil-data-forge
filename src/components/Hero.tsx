@@ -214,18 +214,6 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Floating badges */}
-              <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-background/90 backdrop-blur-sm shadow-lg border border-border/60 text-[10px] sm:text-xs font-semibold flex items-center gap-1 animate-float">
-                <span>🏆</span>
-                <span className="hidden xs:inline sm:inline">Snowflake</span> Award '25
-              </div>
-              <div
-                className="absolute -bottom-1 -left-3 sm:-bottom-2 sm:-left-4 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-background/90 backdrop-blur-sm shadow-lg border border-border/60 text-[10px] sm:text-xs font-semibold flex items-center gap-1 animate-float"
-                style={{ animationDelay: '2s' }}
-              >
-                <span className="text-emerald-500 text-xs">▲</span>
-                SDE-II @ Grow Indigo
-              </div>
             </div>
           </div>
         </div>
