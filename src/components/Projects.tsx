@@ -47,25 +47,11 @@ const Projects = () => {
 
   const projects: Project[] = [
     {
-      id: 8, category: "Fitness & Asset Management", title: "TechFit Active",
-      description: "Platform to manage fitness spaces like long-term assets — streamlined operations for gyms and fitness centres. Built to help gym owners track equipment lifecycle, maintenance schedules, and optimize space utilization for maximum ROI.",
-      tagline: "Manage fitness spaces like long-term assets",
-      icon: <Dumbbell className="w-5 h-5" />, gradient: "from-red-500 to-orange-500",
-      url: "https://www.techfitactive.com/",
-    },
-    {
-      id: 9, category: "Manufacturing", title: "TechFit Tech",
-      description: "India's premier manufacturer of MMA Cages & Commercial Gym Rigs — built for strength, engineered for performance. Comprehensive product catalog with detailed specifications, custom configuration options, and dealer inquiry system.",
-      tagline: "India's premier MMA & gym equipment manufacturer",
-      icon: <Globe className="w-5 h-5" />, gradient: "from-slate-600 to-zinc-700",
-      url: "http://techfittech.com/",
-    },
-    {
-      id: 10, category: "Event Management", title: "Seventy Seven — 7ty7",
-      description: "20+ years of legacy in event management. Transforming ideas into measurable impact, collaborating with international brands as a top global agency. The vision of three industry stalwarts gave Seventy Seven its shape, grounded in passion and the courage to do things differently.",
-      tagline: "Where every event becomes unforgettable",
-      icon: <Award className="w-5 h-5" />, gradient: "from-yellow-500 to-amber-600",
-      url: "https://7ty7.vercel.app",
+      id: 5, category: "SaaS Platform", title: "AgriCloud Dashboard",
+      description: "SaaS platform streamlining onboarding, commissions, and payments with 20% time savings. Handles 5,000+ monthly payment transactions and 600+ seller registrations with real-time reporting.",
+      tagline: "Streamlined seller operations",
+      icon: <BarChart3 className="w-5 h-5" />, gradient: "from-violet-500 to-purple-600",
+      url: "https://www.growindigo.co.in/agri-cloud/",
     },
     {
       id: 1, category: "Business Intelligence", title: "Agricultural Analytics Dashboard",
@@ -75,11 +61,25 @@ const Projects = () => {
       url: "https://app.powerbi.com/view?r=eyJrIjoiOTM3MTJkY2YtMDdhYy00YjBlLWFiNTQtNGYxMDAzMmRjZTM0IiwidCI6IjhmYzRlMWZhLTc3NjItNGU0OS1iYzJlLTY0MWQ4YTZkNzUzMCJ9",
     },
     {
-      id: 5, category: "SaaS Platform", title: "AgriCloud Dashboard",
-      description: "SaaS platform streamlining onboarding, commissions, and payments with 20% time savings. Handles 5,000+ monthly payment transactions and 600+ seller registrations with real-time reporting.",
-      tagline: "Streamlined seller operations",
-      icon: <BarChart3 className="w-5 h-5" />, gradient: "from-violet-500 to-purple-600",
-      url: "https://www.growindigo.co.in/agri-cloud/",
+      id: 10, category: "Event Management", title: "Seventy Seven — 7ty7",
+      description: "20+ years of legacy in event management. Transforming ideas into measurable impact, collaborating with international brands as a top global agency. The vision of three industry stalwarts gave Seventy Seven its shape, grounded in passion and the courage to do things differently.",
+      tagline: "Where every event becomes unforgettable",
+      icon: <Award className="w-5 h-5" />, gradient: "from-yellow-500 to-amber-600",
+      url: "https://7ty7.vercel.app",
+    },
+    {
+      id: 8, category: "Fitness & Asset Management", title: "TechFit Active",
+      description: "Platform to manage fitness spaces like long-term assets — streamlined operations for gyms and fitness centres. Built to help gym owners track equipment lifecycle, maintenance schedules, and optimize space utilization for maximum ROI.",
+      tagline: "Manage fitness spaces like long-term assets",
+      icon: <Dumbbell className="w-5 h-5" />, gradient: "from-red-500 to-orange-500",
+      url: "https://www.techfitactive.com/",
+    },
+    {
+      id: 6, category: "E-Commerce", title: "Zoshe — Luxury Perfumes",
+      description: "SEO-optimized e-commerce platform for premium fragrances with mobile-first design. Features product filtering, wishlist functionality, and an immersive brand experience.",
+      tagline: "Luxury meets technology",
+      icon: <Sparkles className="w-5 h-5" />, gradient: "from-pink-500 to-rose-500",
+      url: "https://www.zoshe.in/",
     },
     {
       id: 2, category: "Data & Analytics", title: "Snowflake Macros — Grow Indigo",
@@ -88,11 +88,11 @@ const Projects = () => {
       icon: <Database className="w-5 h-5" />, gradient: "from-sky-500 to-blue-600",
     },
     {
-      id: 6, category: "E-Commerce", title: "Zoshe — Luxury Perfumes",
-      description: "SEO-optimized e-commerce platform for premium fragrances with mobile-first design. Features product filtering, wishlist functionality, and an immersive brand experience.",
-      tagline: "Luxury meets technology",
-      icon: <Sparkles className="w-5 h-5" />, gradient: "from-pink-500 to-rose-500",
-      url: "https://www.zoshe.in/",
+      id: 9, category: "Manufacturing", title: "TechFit Tech",
+      description: "India's premier manufacturer of MMA Cages & Commercial Gym Rigs — built for strength, engineered for performance. Comprehensive product catalog with detailed specifications, custom configuration options, and dealer inquiry system.",
+      tagline: "India's premier MMA & gym equipment manufacturer",
+      icon: <Globe className="w-5 h-5" />, gradient: "from-slate-600 to-zinc-700",
+      url: "http://techfittech.com/",
     },
     {
       id: 3, category: "Data Reporting", title: "Excel Reports — Mahyco",
@@ -172,15 +172,15 @@ const Projects = () => {
                   </a>
                 )}
               </div>
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="grid grid-cols-2 gap-2 sm:gap-4">
                 {featuredProject.metrics.map((metric, i) => (
-                  <div key={i} className="relative rounded-2xl p-4 text-center border border-border/30 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                    style={{ background: 'rgba(255,255,255,0.3)' }}
+                  <div key={i} className="relative rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center border border-border/30 backdrop-blur-md transition-all duration-300 hover:bg-primary/5 active:scale-95 sm:hover:-translate-y-1 sm:hover:shadow-lg"
+                    style={{ background: 'rgba(255,255,255,0.2)' }}
                   >
-                    <div className="text-lg sm:text-xl md:text-2xl font-display font-bold gradient-text mb-1">
+                    <div className="text-base sm:text-xl md:text-2xl font-display font-bold gradient-text mb-0.5 sm:mb-1">
                       {metric.split(' ')[0]}
                     </div>
-                    <div className="text-[10px] sm:text-xs text-muted-foreground font-medium">
+                    <div className="text-[9px] sm:text-xs text-muted-foreground font-medium">
                       {metric.split(' ').slice(1).join(' ')}
                     </div>
                   </div>
@@ -210,9 +210,9 @@ const Projects = () => {
                     className="block no-underline cursor-pointer"
                     onClick={(e) => { if (!project.url) e.preventDefault(); }}
                   >
-                    {/* Site Preview */}
-                    {project.url && (
-                      <div className="relative z-10 h-[100px] sm:h-[140px] md:h-[160px] overflow-hidden border-b border-border/20 bg-muted/10">
+                    {/* ── Site Preview (Desktop Only for Performance) ── */}
+                    {!isMobile && project.url && (
+                      <div className="relative z-10 hidden sm:block h-[140px] md:h-[160px] overflow-hidden border-b border-border/20 bg-muted/10">
                         <div className="absolute inset-0" style={{ transform: 'scale(0.25)', transformOrigin: 'top left', width: '400%', height: '400%' }}>
                           <iframe
                             src={project.url}
@@ -223,19 +223,22 @@ const Projects = () => {
                             tabIndex={-1}
                           />
                         </div>
-                        <div className="absolute inset-0" />
+                        <div className="absolute inset-0 z-20" />
                       </div>
                     )}
 
-                    {!project.url && (
-                      <div className="relative z-10 flex h-[100px] sm:h-[140px] md:h-[160px] items-center justify-center border-b border-border/20 bg-muted/5">
-                        <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-white opacity-20`}>
+                    {/* Icon pattern for mobile or no-url */}
+                    {(isMobile || !project.url) && (
+                      <div className="relative z-10 flex h-[90px] sm:h-[140px] md:h-[160px] items-center justify-center border-b border-border/20 bg-muted/5 overflow-hidden">
+                        {/* Decorative abstract background instead of heavy iframe */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-[0.03]`} />
+                        <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-white opacity-20 transform -rotate-6`}>
                           {project.icon}
                         </div>
                       </div>
                     )}
 
-                    <div className="relative z-10 p-3 sm:p-4">
+                    <div className="relative z-10 p-4">
                       <div className="flex items-start gap-2 sm:gap-3 mb-1.5 sm:mb-2">
                         <div className={`w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-lg sm:rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-white shadow-md`}>
                           <span className="scale-75 sm:scale-100">{project.icon}</span>
@@ -253,12 +256,12 @@ const Projects = () => {
                     </div>
                   </a>
 
-                  {/* Read more → opens modal (separate from card link) */}
-                  <div className="relative z-10 px-3 sm:px-4 pb-3 sm:pb-4">
-                    <div className="pt-1.5 sm:pt-2 border-t border-border/20">
+                  {/* Read more → opens modal */}
+                  <div className="relative z-10 px-4 pb-4">
+                    <div className="pt-2 sm:pt-3 border-t border-border/20 flex items-center justify-between">
                       <button
                         onClick={() => setSelectedProject(project)}
-                        className="text-[9px] sm:text-xs font-semibold text-primary hover:underline cursor-pointer bg-transparent border-0 p-0"
+                        className="text-[10px] sm:text-xs font-semibold text-primary sm:hover:underline cursor-pointer bg-transparent border-0 p-1 -ml-1 flex items-center justify-center w-full sm:w-auto active:scale-95 transition-transform"
                       >
                         Read more →
                       </button>
