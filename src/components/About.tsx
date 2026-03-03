@@ -55,7 +55,7 @@ const About = () => {
             About Me
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
-            Passionate about <span className="gradient-text">impact</span>
+            Passionate About <span className="gradient-text">Impact</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Transforming complex data into actionable business insights at enterprise scale
@@ -125,10 +125,10 @@ const About = () => {
                   <div
                     key={index}
                     className={`absolute inset-0 transition-all duration-500 ease-in-out ${index === currentCard
-                        ? 'opacity-100 translate-x-0 scale-100'
-                        : index < currentCard
-                          ? 'opacity-0 -translate-x-full scale-95'
-                          : 'opacity-0 translate-x-full scale-95'
+                      ? 'opacity-100 translate-x-0 scale-100'
+                      : index < currentCard
+                        ? 'opacity-0 -translate-x-full scale-95'
+                        : 'opacity-0 translate-x-full scale-95'
                       }`}
                   >
                     <div className="card-glass h-full p-8 sm:p-10 flex flex-col justify-between group">
@@ -156,8 +156,8 @@ const About = () => {
                               key={i}
                               onClick={() => setCurrentCard(i)}
                               className={`w-2 h-2 rounded-full transition-all duration-300 ${i === currentCard
-                                  ? 'bg-primary scale-125'
-                                  : 'bg-muted-foreground/20 hover:bg-muted-foreground/40'
+                                ? 'bg-primary scale-125'
+                                : 'bg-muted-foreground/20 hover:bg-muted-foreground/40'
                                 }`}
                               aria-label={`Go to card ${i + 1}`}
                             />
