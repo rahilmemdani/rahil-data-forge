@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Download, Github, Linkedin, Mail, ExternalLink, ChevronDown, ArrowRight } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
+import ScheduleConsultationModal from './ScheduleConsultationModal';
 
 const Hero = () => {
   const { theme } = useTheme();
+  const [showBookingOptions, setShowBookingOptions] = useState(false);
 
   const [typingText, setTypingText] = useState('');
   const skills = [
@@ -153,12 +155,21 @@ const Hero = () => {
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-col xs:flex-row sm:flex-row gap-3">
-              <button onClick={scrollToProjects} className="btn-primary text-sm">
+            <div className="flex flex-col xs:flex-row gap-3">
+              <button onClick={scrollToProjects} className="hidden sm:inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border border-primary/40 text-foreground hover:border-primary hover:bg-primary/10 transition-all text-sm font-semibold justify-center bg-transparent backdrop-blur-md">
                 View Projects
                 <ArrowRight size={16} />
               </button>
-              <button onClick={handleDownloadResume} className="btn-secondary text-sm">
+
+              {/* Mobile-only Schedule Call Button */}
+              <button
+                onClick={() => setShowBookingOptions(true)}
+                className="sm:hidden btn-secondary text-sm flex-1 justify-center"
+              >
+                Schedule Call
+              </button>
+
+              <button onClick={handleDownloadResume} className="btn-primary text-sm flex-1 xs:flex-none justify-center">
                 <Download size={16} />
                 Download CV
               </button>
@@ -219,6 +230,9 @@ const Hero = () => {
         </div>
 
       </div>
+
+      {/* Search Modal */}
+      <ScheduleConsultationModal open={showBookingOptions} onClose={() => setShowBookingOptions(false)} />
     </section>
   );
 };
