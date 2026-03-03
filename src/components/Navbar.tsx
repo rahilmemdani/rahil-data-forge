@@ -202,14 +202,14 @@ const Navbar = () => {
           {/* Scrollable Content Area */}
           <div className="flex-1 overflow-y-auto flex flex-col w-full pb-4 scrollbar-hide">
             {/* Logo at top */}
-            <div className="mb-6 flex flex-col items-center gap-2 shrink-0">
+            {/* <div className="mb-6 flex flex-col items-center gap-2 shrink-0">
               <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shadow-md">
                 <Terminal size={22} className="text-primary-foreground" />
               </div>
               <span className="text-xl font-display font-bold">
                 rahil<span className="text-primary">.dev</span>
               </span>
-            </div>
+            </div> */}
 
             <div className="w-full max-w-[280px] sm:max-w-[320px] mx-auto flex flex-col gap-2 shrink-0">
               {navItems.map((item, idx) => (
