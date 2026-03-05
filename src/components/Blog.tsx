@@ -134,12 +134,12 @@ const Blog = React.memo(() => {
                     <div className="lg:col-span-12 xl:col-span-7 order-2 lg:order-1 overflow-visible">
 
                         {/* ── NATIVE SCROLL (Mobile & Tablet) ── */}
-                        <div className="lg:hidden w-[calc(100%+3rem)] sm:w-[calc(100%+4rem)] -mx-6 sm:-mx-8 px-6 sm:px-8 pb-8 overflow-x-auto snap-x snap-mandatory flex gap-4 hide-scrollbar">
+                        <div className="lg:hidden w-screen -ml-6 sm:-ml-8 px-6 sm:px-8 pb-8 overflow-x-auto snap-x snap-mandatory scroll-px-6 sm:scroll-px-8 flex gap-4 hide-scrollbar">
                             {blogs.map((post, index) => (
                                 <article
                                     key={post.slug}
                                     onClick={() => navigate(`/blog/${post.slug}`)}
-                                    className="relative overflow-hidden rounded-[2rem] border border-border/40 bg-card/40 backdrop-blur-xl shrink-0 snap-center flex flex-col h-auto cursor-pointer"
+                                    className="relative overflow-hidden rounded-[2rem] border border-border/40 bg-card/40 backdrop-blur-xl shrink-0 snap-start flex flex-col h-auto cursor-pointer"
                                     style={{ width: `${CARD_WIDTH}px` }}
                                 >
                                     {/* Image */}
