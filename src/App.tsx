@@ -19,6 +19,7 @@ const About = lazy(() => import("./components/About"));
 const Skills = lazy(() => import("./components/Skills"));
 const Projects = lazy(() => import("./components/Projects"));
 const Experience = lazy(() => import("./components/Experience"));
+const Blog = lazy(() => import("./components/Blog"));
 const Contact = lazy(() => import("./components/Contact"));
 
 // Optional/Heavy Components
@@ -26,6 +27,7 @@ const ParticleBackground = lazy(() => import('./components/ParticleBackground'))
 
 // Pages
 import NotFound from "./pages/NotFound";
+const BlogPost = lazy(() => import("./pages/BlogPost"));
 
 const queryClient = new QueryClient();
 
@@ -40,6 +42,7 @@ const HomePage = () => (
     <Skills />
     <Projects />
     <Experience />
+    <Blog />
     <Contact />
   </Suspense>
 );
@@ -60,6 +63,7 @@ const App = () => {
               </Suspense>
               <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/blog/:slug" element={<Suspense fallback={<SectionLoading />}><BlogPost /></Suspense>} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Layout>
