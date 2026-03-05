@@ -236,106 +236,106 @@ const App = () => {
         parts: [{ text: "Sorry, I'm having trouble connecting right now. Please try again in a moment! 🔄" }]
       };
       setChatHistory(prevHistory => [...prevHistory, errorMessage]);
-    }finally {
+    } finally {
       setIsLoading(false);
     }
   };
 
   // Enhanced API function with better personality
-//   const callGeminiAPI = async (history, retries = 3, delay = 1000) => {
-//     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-//     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+  //   const callGeminiAPI = async (history, retries = 3, delay = 1000) => {
+  //     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  //     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
-//     const systemInstruction = {
-//       role: "system",
-//       parts: [{
-//         text: `You are Rahil Memdani's enthusiastic and knowledgeable AI assistant. You're genuinely excited about his achievements and career growth! Be conversational, friendly, and use emojis naturally. Highlight his recent promotion to SDE-II, his Snowflake Data for Good APJ Award 2025, and his impressive work with 2M+ farmers. 
+  //     const systemInstruction = {
+  //       role: "system",
+  //       parts: [{
+  //         text: `You are Rahil Memdani's enthusiastic and knowledgeable AI assistant. You're genuinely excited about his achievements and career growth! Be conversational, friendly, and use emojis naturally. Highlight his recent promotion to SDE-II, his Snowflake Data for Good APJ Award 2025, and his impressive work with 2M+ farmers. 
 
-// Key things to emphasize:
-// - His career transition from Electronics Engineering to Software Development
-// - Recent promotion to SDE-II in July 2025
-// - Snowflake expertise and data analytics skills
-// - Leadership and mentoring capabilities
-// - Diverse project portfolio across industries
-// - His passion for using technology for positive impact
+  // Key things to emphasize:
+  // - His career transition from Electronics Engineering to Software Development
+  // - Recent promotion to SDE-II in July 2025
+  // - Snowflake expertise and data analytics skills
+  // - Leadership and mentoring capabilities
+  // - Diverse project portfolio across industries
+  // - His passion for using technology for positive impact
 
-// Answer questions based ONLY on the provided resume information. If someone asks about information not in the resume, politely suggest they contact Rahil directly using his contact details. Be helpful in providing his contact information when appropriate.
+  // Answer questions based ONLY on the provided resume information. If someone asks about information not in the resume, politely suggest they contact Rahil directly using his contact details. Be helpful in providing his contact information when appropriate.
 
-// Here is the comprehensive resume information:\n\n${resumeData}`
-//       }]
-//     };
+  // Here is the comprehensive resume information:\n\n${resumeData}`
+  //       }]
+  //     };
 
-//     const payload = {
-//       contents: history,
-//       systemInstruction: systemInstruction,
-//       generationConfig: {
-//         temperature: 0.8,
-//         maxOutputTokens: 1000,
-//       }
-//     };
+  //     const payload = {
+  //       contents: history,
+  //       systemInstruction: systemInstruction,
+  //       generationConfig: {
+  //         temperature: 0.8,
+  //         maxOutputTokens: 1000,
+  //       }
+  //     };
 
-//     for (let i = 0; i < retries; i++) {
-//       try {
-//         const response = await fetch(apiUrl, {
-//           method: 'POST',
-//           headers: { 'Content-Type': 'application/json' },
-//           body: JSON.stringify(payload)
-//         });
+  //     for (let i = 0; i < retries; i++) {
+  //       try {
+  //         const response = await fetch(apiUrl, {
+  //           method: 'POST',
+  //           headers: { 'Content-Type': 'application/json' },
+  //           body: JSON.stringify(payload)
+  //         });
 
-//         if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
-//         const result = await response.json();
+  //         if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
+  //         const result = await response.json();
 
-//         if (result.candidates && result.candidates[0].content) {
-//           return result.candidates[0].content;
-//         } else {
-//           return { role: "model", parts: [{ text: "I received an unusual response. Could you rephrase that? 🤔" }] };
-//         }
-//       } catch (error) {
-//         console.warn(`API call attempt ${i + 1} failed. Retrying in ${delay}ms...`);
-//         if (i === retries - 1) throw error;
-//         await new Promise(resolve => setTimeout(resolve, delay));
-//         delay *= 2;
-//       }
-//     }
-//   };
+  //         if (result.candidates && result.candidates[0].content) {
+  //           return result.candidates[0].content;
+  //         } else {
+  //           return { role: "model", parts: [{ text: "I received an unusual response. Could you rephrase that? 🤔" }] };
+  //         }
+  //       } catch (error) {
+  //         console.warn(`API call attempt ${i + 1} failed. Retrying in ${delay}ms...`);
+  //         if (i === retries - 1) throw error;
+  //         await new Promise(resolve => setTimeout(resolve, delay));
+  //         delay *= 2;
+  //       }
+  //     }
+  //   };
 
-async function callGeminiAPI(userInput) {
-  try {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-    if (!apiKey) throw new Error("API key not found. Add it to your .env file.");
+  async function callGeminiAPI(userInput) {
+    try {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      if (!apiKey) throw new Error("API key not found. Add it to your .env file.");
 
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [
-          { role: "user", parts: [{ text: userInput }] }
-        ]
-      })
-    });
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [
+            { role: "user", parts: [{ text: userInput }] }
+          ]
+        })
+      });
 
-    if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+      if (!response.ok) throw new Error(`Request failed: ${response.status}`);
 
-    const data = await response.json();
-    console.log("Gemini response:", data);
+      const data = await response.json();
+      console.log("Gemini response:", data);
 
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response from Gemini";
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response from Gemini";
 
-    // ✅ Always return consistent object
-    return {
-      role: "model",
-      parts: [{ text }]
-    };
-  } catch (error) {
-    console.error("Gemini API Error:", error);
-    return {
-      role: "model",
-      parts: [{ text: "Sorry, something went wrong. 🔄" }]
-    };
+      // ✅ Always return consistent object
+      return {
+        role: "model",
+        parts: [{ text }]
+      };
+    } catch (error) {
+      console.error("Gemini API Error:", error);
+      return {
+        role: "model",
+        parts: [{ text: "Sorry, something went wrong. 🔄" }]
+      };
+    }
   }
-}
 
 
 
@@ -411,8 +411,8 @@ async function callGeminiAPI(userInput) {
                 {message.role === 'model' && <BotIcon />}
                 <div
                   className={`max-w-[80%] p-4 rounded-2xl shadow-md transition-all duration-200 hover:shadow-lg ${message.role === 'user'
-                      ? 'bg-primary text-white rounded-br-md'
-                      : 'bg-white text-gray-800 rounded-bl-md border border-gray-100'
+                    ? 'bg-primary text-white rounded-br-md'
+                    : 'bg-white text-gray-800 rounded-bl-md border border-gray-100'
                     }`}
                 >
                   <div

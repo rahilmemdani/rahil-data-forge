@@ -18,6 +18,7 @@ import Layout from "./components/Layout";
 const About = lazy(() => import("./components/About"));
 const Skills = lazy(() => import("./components/Skills"));
 const Projects = lazy(() => import("./components/Projects"));
+const SnowflakeLab = lazy(() => import("./components/SnowflakeLab"));
 const Experience = lazy(() => import("./components/Experience"));
 const Blog = lazy(() => import("./components/Blog"));
 const Contact = lazy(() => import("./components/Contact"));
@@ -41,6 +42,7 @@ const HomePage = () => (
     <About />
     <Skills />
     <Projects />
+    <SnowflakeLab />
     <Experience />
     <Blog />
     <Contact />

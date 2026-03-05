@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Building2, BarChart3, Globe, Sparkles, FileSpreadsheet, Database, Calculator, ArrowUpRight, ChevronLeft, ChevronRight, Dumbbell, Award, X } from 'lucide-react';
+import { Building2, BarChart3, Globe, Sparkles, FileSpreadsheet, Database, Calculator, ArrowUpRight, ChevronLeft, ChevronRight, Dumbbell, Award, X, Layers } from 'lucide-react';
 import { Button } from './ui/button';
 import ScheduleConsultationModal from './ScheduleConsultationModal';
+import ArchitectureSlider from './ArchitectureSlider';
+import TradeOffToggle from './TradeOffToggle';
 
 interface Project {
   id: number;
@@ -34,8 +36,6 @@ const Projects = React.memo(() => {
     }
     return () => { document.body.style.overflow = ''; };
   }, [selectedProject]);
-
-
 
   const featuredProject = {
     category: "Enterprise AgriTech",
@@ -118,13 +118,11 @@ const Projects = React.memo(() => {
   const goToPage = (p: number) => {
     const next = Math.max(0, Math.min(p, totalPages - 1));
     setCurrentPage(next);
-    // Scroll to top of grid section
     gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
     <section id="projects" className="section-full section-padding relative noise-bg overflow-hidden">
-      {/* Background */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-[0.04] pointer-events-none"
         style={{ background: 'radial-gradient(circle, var(--gradient-start), transparent)', filter: 'blur(100px)' }}
       />
@@ -133,7 +131,6 @@ const Projects = React.memo(() => {
       />
 
       <div className="container-custom relative z-10 px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="text-center mb-12 sm:mb-16 animate-fade-in-up">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-3 sm:mb-4">
             <Sparkles size={12} /> Portfolio
@@ -152,39 +149,51 @@ const Projects = React.memo(() => {
             style={{ background: 'rgba(255,255,255,0.5)', boxShadow: '0 8px 32px rgba(0,0,0,0.06)' }}
           >
             <div className="absolute inset-0 bg-card/70 dark:bg-card/80 backdrop-blur-xl rounded-3xl" />
-            <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full opacity-[0.12] pointer-events-none"
-              style={{ background: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-end))', filter: 'blur(60px)' }}
-            />
-            <div className="relative z-10 p-6 sm:p-8 md:p-10 grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-4">
-                  ⭐ Featured • {featuredProject.category}
-                </span>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-bold mb-4 group-hover:text-primary transition-colors">
-                  {featuredProject.title}
-                </h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed text-xs sm:text-sm md:text-base">
-                  {featuredProject.description}
-                </p>
-                {featuredProject.url && (
-                  <a href={featuredProject.url} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex text-sm">
-                    Visit Website <ArrowUpRight size={16} />
-                  </a>
-                )}
+
+            <div className="relative z-10">
+              <div className="p-6 sm:p-8 md:p-10 grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-4">
+                    ⭐ Featured • {featuredProject.category}
+                  </span>
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-bold mb-4 group-hover:text-primary transition-colors">
+                    {featuredProject.title}
+                  </h3>
+                  <p className="text-muted-foreground mb-6 leading-relaxed text-xs sm:text-sm md:text-base">
+                    {featuredProject.description}
+                  </p>
+                  {featuredProject.url && (
+                    <a href={featuredProject.url} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex text-sm">
+                      Visit Website <ArrowUpRight size={16} />
+                    </a>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 gap-2 sm:gap-4">
+                  {featuredProject.metrics.map((metric, i) => (
+                    <div key={i} className="relative rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center border border-border/30 backdrop-blur-md transition-all duration-300 hover:bg-primary/5 active:scale-95 sm:hover:-translate-y-1 sm:hover:shadow-lg"
+                      style={{ background: 'rgba(255,255,255,0.2)' }}
+                    >
+                      <div className="text-base sm:text-xl md:text-2xl font-display font-bold gradient-text mb-0.5 sm:mb-1">
+                        {metric.split(' ')[0]}
+                      </div>
+                      <div className="text-[9px] sm:text-xs text-muted-foreground font-medium">
+                        {metric.split(' ').slice(1).join(' ')}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="grid grid-cols-2 gap-2 sm:gap-4">
-                {featuredProject.metrics.map((metric, i) => (
-                  <div key={i} className="relative rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center border border-border/30 backdrop-blur-md transition-all duration-300 hover:bg-primary/5 active:scale-95 sm:hover:-translate-y-1 sm:hover:shadow-lg"
-                    style={{ background: 'rgba(255,255,255,0.2)' }}
-                  >
-                    <div className="text-base sm:text-xl md:text-2xl font-display font-bold gradient-text mb-0.5 sm:mb-1">
-                      {metric.split(' ')[0]}
-                    </div>
-                    <div className="text-[9px] sm:text-xs text-muted-foreground font-medium">
-                      {metric.split(' ').slice(1).join(' ')}
-                    </div>
-                  </div>
-                ))}
+
+              {/* Added Interactive Depth */}
+              <div className="border-t border-border/10 bg-muted/5 p-6 sm:p-10">
+                <div className="mb-12">
+                  <h4 className="text-xl font-display font-bold mb-6 flex items-center gap-2">
+                    <Layers className="text-primary" size={20} /> AgriCloud Architecture Evolution
+                  </h4>
+                  <ArchitectureSlider />
+                </div>
+
+                <TradeOffToggle />
               </div>
             </div>
           </div>
@@ -202,7 +211,6 @@ const Projects = React.memo(() => {
                   <div className="absolute inset-0 bg-card/60 dark:bg-card/80 backdrop-blur-xl rounded-2xl" />
                   <div className={`absolute -bottom-10 -right-10 w-28 h-28 rounded-full bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-[0.08] transition-all duration-500 blur-2xl pointer-events-none`} />
 
-                  {/* Clickable area → opens URL */}
                   <a
                     href={project.url || '#'}
                     target={project.url ? '_blank' : undefined}
@@ -210,7 +218,6 @@ const Projects = React.memo(() => {
                     className="block no-underline cursor-pointer"
                     onClick={(e) => { if (!project.url) e.preventDefault(); }}
                   >
-                    {/* ── Site Preview (Desktop Only for Performance) ── */}
                     {!isMobile && project.url && (
                       <div className="relative z-10 hidden sm:block h-[140px] md:h-[160px] overflow-hidden border-b border-border/20 bg-muted/10">
                         <div className="absolute inset-0" style={{ transform: 'scale(0.25)', transformOrigin: 'top left', width: '400%', height: '400%' }}>
@@ -227,10 +234,8 @@ const Projects = React.memo(() => {
                       </div>
                     )}
 
-                    {/* Icon pattern for mobile or no-url */}
                     {(isMobile || !project.url) && (
                       <div className="relative z-10 flex h-[90px] sm:h-[140px] md:h-[160px] items-center justify-center border-b border-border/20 bg-muted/5 overflow-hidden">
-                        {/* Decorative abstract background instead of heavy iframe */}
                         <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-[0.03]`} />
                         <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-white opacity-20 transform -rotate-6`}>
                           {project.icon}
@@ -256,7 +261,6 @@ const Projects = React.memo(() => {
                     </div>
                   </a>
 
-                  {/* Read more → opens modal */}
                   <div className="relative z-10 px-4 pb-4">
                     <div className="pt-2 sm:pt-3 border-t border-border/20 flex items-center justify-between">
                       <button
@@ -272,7 +276,6 @@ const Projects = React.memo(() => {
             ))}
           </div>
 
-          {/* Pagination */}
           {totalPages > 1 && (
             <div className="flex items-center justify-center gap-2 sm:gap-3 mt-10 sm:mt-12">
               <button onClick={() => goToPage(safePage - 1)} disabled={safePage === 0}
@@ -303,20 +306,6 @@ const Projects = React.memo(() => {
             </div>
           )}
         </div>
-
-        {/* CTA */}
-        {/* <div className="text-center mt-12 sm:mt-16 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
-          <p className="text-muted-foreground mb-4 text-sm sm:text-base">Interested in collaborating?</p>
-          <Button
-            className="bg-gradient-to-r from-amber-500 to-yellow-400 text-gray-900 font-semibold shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-300 rounded-xl"
-            onClick={() => setShowBookingOptions(true)}
-          >
-            Schedule Consultation
-          </Button>
-          {showBookingOptions && (
-            <ScheduleConsultationModal open={showBookingOptions} onClose={() => setShowBookingOptions(false)} />
-          )}
-        </div> */}
       </div>
 
       {/* ═══ Project Detail Modal ═══ */}
@@ -332,7 +321,6 @@ const Projects = React.memo(() => {
             <div className={`absolute -top-16 -right-16 w-40 h-40 rounded-full bg-gradient-to-br ${selectedProject.gradient} opacity-[0.12] blur-2xl pointer-events-none`} />
 
             <div className="relative z-10">
-              {/* Modal header */}
               <div className="p-6 sm:p-8 pb-0">
                 <div className="flex items-start justify-between mb-5">
                   <div className="flex items-center gap-3">
@@ -354,7 +342,6 @@ const Projects = React.memo(() => {
                 </div>
               </div>
 
-              {/* Modal body */}
               <div className="px-6 sm:px-8 pb-6 sm:pb-8">
                 <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-5">
                   {selectedProject.description}
