@@ -18,7 +18,7 @@ import Layout from "./components/Layout";
 const About = lazy(() => import("./components/About"));
 const Skills = lazy(() => import("./components/Skills"));
 const Projects = lazy(() => import("./components/Projects"));
-const SnowflakeLab = lazy(() => import("./components/SnowflakeLab"));
+const AIOrchestrator = lazy(() => import("./components/AIOrchestrator"));
 const Experience = lazy(() => import("./components/Experience"));
 const Blog = lazy(() => import("./components/Blog"));
 const Contact = lazy(() => import("./components/Contact"));
@@ -29,6 +29,7 @@ const ParticleBackground = lazy(() => import('./components/ParticleBackground'))
 // Pages
 import NotFound from "./pages/NotFound";
 const BlogPost = lazy(() => import("./pages/BlogPost"));
+const Chatbot = lazy(() => import("./components/Chatbot"));
 
 const queryClient = new QueryClient();
 
@@ -42,7 +43,7 @@ const HomePage = () => (
     <About />
     <Skills />
     <Projects />
-    <SnowflakeLab />
+    <AIOrchestrator />
     <Experience />
     <Blog />
     <Contact />
@@ -82,6 +83,9 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <AppContent />
+            <Suspense fallback={null}>
+              {/* <Chatbot /> */}
+            </Suspense>
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>

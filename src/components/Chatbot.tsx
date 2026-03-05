@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Send, Bot, User, Sparkles } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, User } from 'lucide-react';
 
 // --- Enhanced Resume Data ---
 const resumeData = `
@@ -168,25 +168,20 @@ HOW TO CONNECT WITH RAHIL:
 - Best Contact Method: Email or LinkedIn for initial outreach
 `;
 
-// --- Helper Components (Enhanced) ---
-const SendIcon = () => (
-  <Send className="w-5 h-5 text-white" />
-);
-
+// --- Helper Components ---
 const BotIcon = () => (
-  <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white shadow-md">
+  <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white shadow-md flex-shrink-0">
     <Bot size={18} />
   </div>
 );
 
 const UserIcon = () => (
-  <div className="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center text-white shadow-md">
+  <div className="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center text-white shadow-md flex-shrink-0">
     <User size={18} />
   </div>
 );
 
-// --- Main Chat Component ---
-const App = () => {
+const Chatbot = () => {
   const [userInput, setUserInput] = useState('');
   const [chatHistory, setChatHistory] = useState([
     {
@@ -197,15 +192,15 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [hasSentFirstMessage, setHasSentFirstMessage] = useState(false);
-  const chatContainerRef = useRef(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const suggestionQuestions = [
     "🚀 Tell me about his career journey and promotion",
-    "💼 What's his experience with Snowflake and data analytics?",
-    "🏆 What awards and recognition has he received?",
-    "📊 Show me his project portfolio and achievements",
-    "🎯 What are his career goals and availability?",
-    "💡 What's his working style and leadership approach?",
+    "💼 What's his experience with Snowflake?",
+    "🏆 What awards has he received?",
+    "📊 Show me his projects",
+    "🎯 What are his career goals?",
+    "💡 What's his working style?",
   ];
 
   useEffect(() => {
@@ -214,250 +209,109 @@ const App = () => {
     }
   }, [chatHistory]);
 
-  // Same function logic as yours
-  const handleSendMessage = async (messageText) => {
-    if (!messageText.trim() || isLoading) return;
-
-    setHasSentFirstMessage(true);
-
-    const newUserMessage = { role: "user", parts: [{ text: messageText }] };
-    const newHistory = [...chatHistory, newUserMessage];
-
-    setChatHistory(newHistory);
-    setIsLoading(true);
-
-    try {
-      const aiResponse = await callGeminiAPI(messageText);
-      setChatHistory(prevHistory => [...prevHistory, aiResponse]);
-    } catch (error) {
-      console.error("Error calling Gemini API:", error);
-      const errorMessage = {
-        role: "model",
-        parts: [{ text: "Sorry, I'm having trouble connecting right now. Please try again in a moment! 🔄" }]
-      };
-      setChatHistory(prevHistory => [...prevHistory, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Enhanced API function with better personality
-  //   const callGeminiAPI = async (history, retries = 3, delay = 1000) => {
-  //     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-  //     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-
-  //     const systemInstruction = {
-  //       role: "system",
-  //       parts: [{
-  //         text: `You are Rahil Memdani's enthusiastic and knowledgeable AI assistant. You're genuinely excited about his achievements and career growth! Be conversational, friendly, and use emojis naturally. Highlight his recent promotion to SDE-II, his Snowflake Data for Good APJ Award 2025, and his impressive work with 2M+ farmers. 
-
-  // Key things to emphasize:
-  // - His career transition from Electronics Engineering to Software Development
-  // - Recent promotion to SDE-II in July 2025
-  // - Snowflake expertise and data analytics skills
-  // - Leadership and mentoring capabilities
-  // - Diverse project portfolio across industries
-  // - His passion for using technology for positive impact
-
-  // Answer questions based ONLY on the provided resume information. If someone asks about information not in the resume, politely suggest they contact Rahil directly using his contact details. Be helpful in providing his contact information when appropriate.
-
-  // Here is the comprehensive resume information:\n\n${resumeData}`
-  //       }]
-  //     };
-
-  //     const payload = {
-  //       contents: history,
-  //       systemInstruction: systemInstruction,
-  //       generationConfig: {
-  //         temperature: 0.8,
-  //         maxOutputTokens: 1000,
-  //       }
-  //     };
-
-  //     for (let i = 0; i < retries; i++) {
-  //       try {
-  //         const response = await fetch(apiUrl, {
-  //           method: 'POST',
-  //           headers: { 'Content-Type': 'application/json' },
-  //           body: JSON.stringify(payload)
-  //         });
-
-  //         if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
-  //         const result = await response.json();
-
-  //         if (result.candidates && result.candidates[0].content) {
-  //           return result.candidates[0].content;
-  //         } else {
-  //           return { role: "model", parts: [{ text: "I received an unusual response. Could you rephrase that? 🤔" }] };
-  //         }
-  //       } catch (error) {
-  //         console.warn(`API call attempt ${i + 1} failed. Retrying in ${delay}ms...`);
-  //         if (i === retries - 1) throw error;
-  //         await new Promise(resolve => setTimeout(resolve, delay));
-  //         delay *= 2;
-  //       }
-  //     }
-  //   };
-
-  async function callGeminiAPI(userInput) {
+  const callGeminiAPI = async (userInput: string) => {
     try {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      if (!apiKey) throw new Error("API key not found. Add it to your .env file.");
+      if (!apiKey) throw new Error("API key not found.");
 
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          contents: [
-            { role: "user", parts: [{ text: userInput }] }
-          ]
+          contents: [{ role: "user", parts: [{ text: `You are Rahil's AI assistant. Answer based on this data: ${resumeData}\n\nUser: ${userInput}` }] }]
         })
       });
 
       if (!response.ok) throw new Error(`Request failed: ${response.status}`);
-
       const data = await response.json();
-      console.log("Gemini response:", data);
-
       const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response from Gemini";
 
-      // ✅ Always return consistent object
-      return {
-        role: "model",
-        parts: [{ text }]
-      };
+      return { role: "model", parts: [{ text }] };
     } catch (error) {
-      console.error("Gemini API Error:", error);
-      return {
-        role: "model",
-        parts: [{ text: "Sorry, something went wrong. 🔄" }]
-      };
+      return { role: "model", parts: [{ text: "Sorry, I'm having trouble connecting right now. 🔄" }] };
     }
-  }
-
-
-
-  const handleSendClick = () => {
-    handleSendMessage(userInput);
-    setUserInput('');
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendClick();
+  const handleSendMessage = async (messageText: string) => {
+    if (!messageText.trim() || isLoading) return;
+    setHasSentFirstMessage(true);
+    const newUserMessage = { role: "user", parts: [{ text: messageText }] };
+    setChatHistory(prev => [...prev, newUserMessage]);
+    setIsLoading(true);
+
+    try {
+      const aiResponse = await callGeminiAPI(messageText);
+      setChatHistory(prev => [...prev, aiResponse]);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
       {isVisible && (
-        <div className="fixed bottom-4 right-4 z-50 w-[90vw] max-w-md h-[85vh] max-h-[90vh] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 sm:w-[400px] sm:h-[600px] animate-slide-up">
-
-          {/* Enhanced Header */}
-          <header className="bg-primary text-white p-4 rounded-t-2xl relative overflow-hidden">
-            {/* Subtle animated background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary opacity-90"></div>
-            <div className="absolute top-0 left-0 w-full h-full">
-              {[...Array(6)].map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * 2}s`,
-                  }}
-                />
-              ))}
-            </div>
-
+        <div className="fixed bottom-4 right-4 z-[9999] w-[90vw] max-w-sm h-[600px] max-h-[85vh] bg-card text-card-foreground rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-border sm:w-[380px] animate-slide-up ring-1 ring-primary/10">
+          <header className="bg-primary text-primary-foreground p-5 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/80 opacity-90"></div>
             <div className="relative z-10 flex justify-between items-center">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                  <Bot size={20} className="text-white" />
+                <div className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20">
+                  <Bot size={22} className="text-white" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold">Rahil's AI Assistant</h1>
-                  <p className="text-sm text-white/80 flex items-center gap-1">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    Ready to help!
+                  <h1 className="text-lg font-bold tracking-tight">AI Assistant</h1>
+                  <p className="text-[10px] text-white/70 flex items-center gap-1.5 uppercase tracking-widest font-mono">
+                    <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+                    Online
                   </p>
                 </div>
               </div>
-              <button
-                onClick={() => setIsVisible(false)}
-                className="text-white/80 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all duration-200"
-              >
+              <button onClick={() => setIsVisible(false)} className="text-white/70 hover:text-white hover:bg-white/10 p-2 rounded-xl transition-all duration-300">
                 <X size={20} />
               </button>
             </div>
           </header>
 
-          {/* Enhanced Chat area */}
-          <main
-            ref={chatContainerRef}
-            className="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth bg-gradient-to-b from-gray-50 to-white"
-          >
+          <main ref={chatContainerRef} className="flex-1 overflow-y-auto p-5 space-y-5 scroll-smooth bg-gradient-to-b from-background to-muted/20">
             {chatHistory.map((message, index) => (
-              <div
-                key={index}
-                className={`flex items-start gap-3 animate-fade-in ${message.role === 'user' ? 'justify-end' : ''
-                  }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
+              <div key={index} className={`flex items-start gap-3 animate-fade-in ${message.role === 'user' ? 'justify-end' : ''}`}>
                 {message.role === 'model' && <BotIcon />}
-                <div
-                  className={`max-w-[80%] p-4 rounded-2xl shadow-md transition-all duration-200 hover:shadow-lg ${message.role === 'user'
-                    ? 'bg-primary text-white rounded-br-md'
-                    : 'bg-white text-gray-800 rounded-bl-md border border-gray-100'
-                    }`}
-                >
-                  <div
-                    className="whitespace-pre-wrap leading-relaxed text-[15px]"
-                    dangerouslySetInnerHTML={{
-                      __html: message.parts[0].text
-                        .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>')
-                        .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
-                        .replace(/\n/g, '<br>')
-                    }}
-                  />
+                <div className={`max-w-[85%] p-4 rounded-2xl shadow-sm border ${message.role === 'user' ? 'bg-primary text-primary-foreground border-primary rounded-tr-none' : 'bg-card text-foreground border-border/40 rounded-tl-none'}`}>
+                  <div className="whitespace-pre-wrap leading-relaxed text-sm" dangerouslySetInnerHTML={{
+                    __html: message.parts[0].text
+                      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-primary">$1</strong>')
+                      .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
+                      .replace(/\n/g, '<br>')
+                  }} />
                 </div>
                 {message.role === 'user' && <UserIcon />}
               </div>
             ))}
-
-            {/* Enhanced Loading indicator */}
             {isLoading && (
               <div className="flex items-start gap-3 animate-fade-in">
                 <BotIcon />
-                <div className="p-4 bg-white rounded-2xl rounded-bl-md shadow-md border border-gray-100">
-                  <div className="flex items-center gap-2">
+                <div className="p-4 bg-card rounded-2xl rounded-tl-none border border-border/40 shadow-sm">
+                  <div className="flex items-center gap-3">
                     <div className="flex gap-1">
-                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
                     </div>
-                    <span className="text-sm text-gray-500 ml-2">Thinking about Rahil...</span>
                   </div>
                 </div>
               </div>
             )}
           </main>
 
-          {/* Enhanced Suggestion Chips */}
           {!isLoading && !hasSentFirstMessage && (
-            <div className="px-4 pb-4">
-              <p className="text-sm text-gray-500 mb-3 text-center font-medium">Discover more about Rahil:</p>
-              <div className="grid grid-cols-1 gap-2 max-h-40 overflow-y-auto">
-                {suggestionQuestions.map((q, i) => (
-                  <button
-                    key={i}
-                    onClick={() => handleSendMessage(q)}
-                    className="px-4 py-3 bg-gray-50 hover:bg-primary/10 border border-gray-200 hover:border-primary/30 rounded-xl text-sm text-gray-700 hover:text-primary transition-all duration-200 text-left font-medium shadow-sm hover:shadow-md"
-                  >
+            <div className="px-5 pb-5 bg-background">
+              <div className="flex flex-col gap-2">
+                {suggestionQuestions.slice(0, 3).map((q, i) => (
+                  <button key={i} onClick={() => handleSendMessage(q)} className="px-4 py-2 bg-muted/30 hover:bg-primary/5 border border-border/40 hover:border-primary/30 rounded-xl text-xs text-foreground/80 hover:text-primary transition-all duration-300 text-left">
                     {q}
                   </button>
                 ))}
@@ -465,112 +319,39 @@ const App = () => {
             </div>
           )}
 
-          {/* Enhanced Footer */}
-          <footer className="bg-gray-50/80 backdrop-blur-sm border-t border-gray-200 p-4">
-            <div className="flex gap-3 items-end">
-              <div className="flex-1 relative">
-                <textarea
-                  value={userInput}
-                  onChange={(e) => setUserInput(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Ask me anything about Rahil's journey, skills, or projects..."
-                  className="w-full p-3 pr-12 border-2 border-gray-200 text-black rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm bg-white placeholder-gray-500"
-                  disabled={isLoading}
-                  maxLength={500}
-                  style={{ maxHeight: '100px', minHeight: '48px' }}
-                />
-                <div className="absolute right-3 bottom-3 text-xs text-gray-400">
-                  {userInput.length}/500
-                </div>
-              </div>
-              <button
-                onClick={handleSendClick}
-                disabled={isLoading || !userInput.trim()}
-                className="p-3 bg-primary hover:bg-primary/90 disabled:bg-gray-300 text-white rounded-xl transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95 disabled:transform-none disabled:hover:bg-gray-300"
-              >
-                <SendIcon />
+          <footer className="bg-card border-t border-border p-4">
+            <div className="flex gap-2 items-center">
+              <input
+                type="text"
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') handleSendMessage(userInput); }}
+                placeholder="Type a message..."
+                className="flex-1 bg-muted/50 border border-border/50 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+              />
+              <button onClick={() => { handleSendMessage(userInput); setUserInput(''); }} disabled={!userInput.trim() || isLoading} className="p-2.5 bg-primary text-primary-foreground rounded-xl shadow-lg disabled:opacity-50">
+                <Send size={18} />
               </button>
             </div>
           </footer>
         </div>
       )}
 
-      {/* Enhanced Floating Button */}
       {!isVisible && (
-        <button
-          className="fixed bottom-6 right-6 z-50 bg-primary hover:bg-primary/90 text-white p-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95 group"
-          onClick={() => setIsVisible(true)}
-        >
-          <MessageCircle size={24} className="group-hover:animate-pulse" />
-
-          {/* Notification badge */}
-
-          {/* <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center shadow-md animate-bounce">
-            1
-          </div> */}
-          {!hasSentFirstMessage && (
-            <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center shadow-md animate-bounce text-white text-xs font-bold">
-              1
-            </div>
-          )}
-
-          {/* Pulse effect */}
-          <div className="absolute inset-0 bg-primary rounded-full animate-ping opacity-20"></div>
+        <button onClick={() => setIsVisible(true)} className="fixed bottom-6 right-6 z-[9999] bg-primary text-primary-foreground p-4 rounded-[22px] shadow-2xl hover:scale-110 transition-transform group">
+          <MessageCircle size={26} className="group-hover:rotate-12 transition-transform" />
+          {!hasSentFirstMessage && <span className="absolute top-2 right-2 w-3 h-3 bg-rose-500 rounded-full border-2 border-primary" />}
         </button>
       )}
 
-      {/* Enhanced CSS Animations */}
       <style>{`
-        @keyframes slide-up {
-          from {
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-        
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .animate-slide-up {
-          animation: slide-up 0.4s ease-out;
-        }
-        
-        .animate-fade-in {
-          animation: fade-in 0.5s ease-out;
-        }
-
-        /* Custom scrollbar */
-        *::-webkit-scrollbar {
-          width: 6px;
-        }
-        
-        *::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        
-        *::-webkit-scrollbar-thumb {
-          background: rgba(156, 163, 175, 0.4);
-          border-radius: 3px;
-        }
-        
-        *::-webkit-scrollbar-thumb:hover {
-          background: rgba(156, 163, 175, 0.6);
-        }
+        .animate-slide-up { animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .animate-fade-in { animation: fade-in 0.4s ease-out forwards; }
+        @keyframes slide-up { from { opacity: 0; transform: translateY(40px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
     </>
   );
 };
 
-export default App;
+export default Chatbot;
