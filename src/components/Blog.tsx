@@ -58,14 +58,14 @@ const Blog = React.memo(() => {
     }, [currentIndex, snapToIndex]);
 
     // Auto-play
-    useEffect(() => {
-        if (isPaused) return;
-        const timer = setInterval(() => {
-            const next = currentIndex >= blogs.length - 1 ? 0 : currentIndex + 1;
-            snapToIndex(next);
-        }, 4000);
-        return () => clearInterval(timer);
-    }, [currentIndex, isPaused, snapToIndex]);
+    // useEffect(() => {
+    //     if (isPaused) return;
+    //     const timer = setInterval(() => {
+    //         const next = currentIndex >= blogs.length - 1 ? 0 : currentIndex + 1;
+    //         snapToIndex(next);
+    //     }, 4000);
+    //     return () => clearInterval(timer);
+    // }, [currentIndex, isPaused, snapToIndex]);
 
     return (
         <section id="blogs" className="relative z-10 noise-bg py-16 md:py-32 overflow-hidden">
@@ -136,7 +136,7 @@ const Blog = React.memo(() => {
                         onMouseLeave={() => setIsPaused(false)}
                     >
                         <div className="relative w-full">
-                            <div ref={carouselRef} className="relative w-full overflow-hidden min-h-[450px]">
+                            <div ref={carouselRef} className="relative w-full overflow-hidden min-h-[340px] sm:min-h-[380px] lg:min-h-[450px]">
                                 <motion.div
                                     ref={contentRef}
                                     drag="x"
@@ -148,7 +148,7 @@ const Blog = React.memo(() => {
                                     animate={controls}
                                     style={{ x }}
                                     onDragEnd={handleDragEnd}
-                                    className="flex touch-pan-y cursor-grab active:cursor-grabbing transform-gpu py-8 pr-8 lg:px-4"
+                                    className="flex touch-pan-y cursor-grab active:cursor-grabbing transform-gpu py-5 pr-6 lg:px-4"
                                 >
                                     {blogs.map((post, index) => (
                                         <motion.article
@@ -164,7 +164,7 @@ const Blog = React.memo(() => {
                                             className="relative overflow-hidden rounded-[2rem] border border-border/40 bg-card/40 backdrop-blur-xl hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] hover:border-primary/30 cursor-pointer flex flex-col h-auto"
                                         >
                                             {/* Image */}
-                                            <div className="relative h-[200px] w-full overflow-hidden shrink-0">
+                                            <div className="relative h-[150px] sm:h-[170px] lg:h-[200px] w-full overflow-hidden shrink-0">
                                                 <motion.img
                                                     src={post.coverImage}
                                                     alt={post.title}
@@ -182,7 +182,7 @@ const Blog = React.memo(() => {
                                             </div>
 
                                             {/* Content */}
-                                            <div className="p-6 md:p-8 flex flex-col flex-1">
+                                            <div className="p-4 sm:p-5 md:p-8 flex flex-col flex-1">
                                                 <div className="flex items-center gap-3 text-[11px] font-semibold text-muted-foreground/80 mb-4 uppercase tracking-[0.15em]">
                                                     <Calendar size={13} className="text-primary/70" />
                                                     {post.date}
@@ -238,7 +238,7 @@ const Blog = React.memo(() => {
                         </div>
 
                         {/* Mobile: dot indicators + drag hint (OG Style) */}
-                        <div className="lg:hidden flex flex-col items-center gap-3 mt-4">
+                        <div className="lg:hidden flex flex-col items-center gap-2 mt-3">
                             <div className="flex items-center gap-1.5">
                                 {blogs.map((_, i) => (
                                     <button
@@ -251,7 +251,7 @@ const Blog = React.memo(() => {
                             <motion.span
                                 animate={{ opacity: [0.4, 0.8, 0.4] }}
                                 transition={{ duration: 2, repeat: Infinity }}
-                                className="text-[11px] uppercase tracking-widest font-semibold text-muted-foreground/50"
+                                className="text-[10px] uppercase tracking-widest font-medium text-muted-foreground/50"
                             >
                                 Drag to explore
                             </motion.span>
