@@ -117,14 +117,14 @@ const Blog = React.memo(() => {
                                 Technical deep dives, architectural decisions, and product lessons from scaling platforms for millions of users.
                             </p>
 
-                            <div className="flex items-center gap-3 text-sm font-medium text-foreground mt-5 sm:mt-6 lg:flex hidden">
+                            {/* <div className="flex items-center gap-3 text-sm font-medium text-foreground mt-5 sm:mt-6 lg:flex hidden">
                                 <span className="relative flex h-2.5 w-2.5">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
                                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
                                 </span>
 
                                 <span>{blogs.length} posts published</span>
-                            </div>
+                            </div> */}
 
                         </div>
 
