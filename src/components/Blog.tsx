@@ -1,212 +1,252 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, Clock, BookOpen, ChevronLeft, ChevronRight, ArrowRight, MousePointerClick } from 'lucide-react';
+import { Calendar, Clock, BookOpen, ArrowRight, ChevronLeft, ChevronRight, Briefcase } from 'lucide-react';
+import { motion, useMotionValue, useAnimation } from 'framer-motion';
 import { blogs } from '../data/blogs';
+
+const CARD_WIDTH = 340;
+const CARD_GAP = 24;
+const CARD_STRIDE = CARD_WIDTH + CARD_GAP;
 
 const Blog = React.memo(() => {
     const navigate = useNavigate();
-    const [current, setCurrent] = useState(0);
-    const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isPaused, setIsPaused] = useState(false);
+    const [isTouch, setIsTouch] = useState(false);
+    const [dragConstraint, setDragConstraint] = useState(0);
 
-    const scroll = (direction: 'left' | 'right') => {
-        if (!scrollContainerRef.current) return;
+    const contentRef = useRef<HTMLDivElement>(null);
+    const carouselRef = useRef<HTMLDivElement>(null);
 
-        const container = scrollContainerRef.current;
+    const x = useMotionValue(0);
+    const controls = useAnimation();
 
-        // Find the first actual article element to measure its exact width
-        const firstCard = container.querySelector('article');
-        if (!firstCard) return;
-
-        // gap is 24px on lg+, 20px on sm, 16px default
-        const gap = window.innerWidth >= 1024 ? 24 : window.innerWidth >= 640 ? 20 : 16;
-        const scrollAmount = firstCard.offsetWidth + gap;
-
-        if (direction === 'left') {
-            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        } else {
-            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        }
-    };
-
+    // Detect touch device
     useEffect(() => {
-        const handleScroll = () => {
-            if (!scrollContainerRef.current) return;
-            const container = scrollContainerRef.current;
+        setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    }, []);
 
-            const firstCard = container.querySelector('article');
-            if (!firstCard) return;
-
-            const cardWidth = firstCard.offsetWidth;
-            const gap = window.innerWidth >= 1024 ? 24 : window.innerWidth >= 640 ? 20 : 16;
-
-            // Calculate current index cleanly
-            const newCurrent = Math.round(container.scrollLeft / (cardWidth + gap));
-            setCurrent(newCurrent);
-        };
-
-        const container = scrollContainerRef.current;
-        if (container) {
-            container.addEventListener('scroll', handleScroll, { passive: true });
-            return () => container.removeEventListener('scroll', handleScroll);
+    // Calculate drag constraint
+    useEffect(() => {
+        if (contentRef.current && carouselRef.current) {
+            const totalWidth = blogs.length * CARD_STRIDE - CARD_GAP;
+            const containerWidth = carouselRef.current.offsetWidth;
+            setDragConstraint(Math.max(0, totalWidth - containerWidth));
         }
     }, []);
 
+    const snapToIndex = useCallback((index: number) => {
+        const clamped = Math.max(0, Math.min(index, blogs.length - 1));
+        setCurrentIndex(clamped);
+        controls.start({
+            x: -clamped * CARD_STRIDE,
+            transition: { type: 'spring', stiffness: 300, damping: 30 }
+        });
+    }, [controls]);
+
+    const handleDragEnd = useCallback((_: any, info: any) => {
+        const velocity = info.velocity.x;
+        const offset = info.offset.x;
+
+        if (Math.abs(velocity) > 500) {
+            snapToIndex(velocity < 0 ? currentIndex + 1 : currentIndex - 1);
+        } else if (Math.abs(offset) > CARD_STRIDE / 3) {
+            snapToIndex(offset < 0 ? currentIndex + 1 : currentIndex - 1);
+        } else {
+            snapToIndex(currentIndex);
+        }
+    }, [currentIndex, snapToIndex]);
+
+    // Auto-play
+    useEffect(() => {
+        if (isPaused) return;
+        const timer = setInterval(() => {
+            const next = currentIndex >= blogs.length - 1 ? 0 : currentIndex + 1;
+            snapToIndex(next);
+        }, 4000);
+        return () => clearInterval(timer);
+    }, [currentIndex, isPaused, snapToIndex]);
+
     return (
-        <section id="blogs" className="section-padding relative noise-bg overflow-hidden py-16 lg:py-28">
-            {/* Background Elements */}
-            <div
-                className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-[0.03] pointer-events-none"
-                style={{ background: 'radial-gradient(circle, var(--gradient-end), transparent)', filter: 'blur(100px)' }}
-            />
-            <div
-                className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-[0.04] pointer-events-none"
-                style={{ background: 'radial-gradient(circle, var(--gradient-start), transparent)', filter: 'blur(100px)' }}
-            />
+        <section id="blogs" className="relative z-10 noise-bg py-24 md:py-32 overflow-hidden">
+            {/* Animated Background Mesh - GPU Optimized */}
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                <motion.div
+                    animate={{
+                        rotate: [0, 360],
+                        scale: [1, 1.2, 1],
+                        x: [0, 100, 0],
+                        y: [0, -50, 0]
+                    }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute -top-[20%] right-[10%] w-[80vw] h-[80vw] bg-purple-200/20 rounded-full blur-[120px] mix-blend-multiply opacity-50 will-change-transform transform-gpu"
+                />
+                <motion.div
+                    animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.05, 0.15, 0.05]
+                    }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute bottom-1/2 left-0 w-[60vw] h-[60vw] bg-pink-200/15 rounded-full blur-[100px] mix-blend-multiply will-change-transform transform-gpu"
+                />
+            </div>
 
-            <div className="container-custom relative z-10 box-border">
+            <div className="container mx-auto max-w-[90rem] px-4 relative z-10">
+                <div className="grid lg:grid-cols-12 gap-12 items-center">
 
-                {/* ═══ 2-Column Layout ═══ */}
-                <div className="lg:grid lg:grid-cols-[280px_1fr] xl:grid-cols-[340px_1fr] lg:gap-8 xl:gap-14 items-center relative">
-
-                    {/* ── LEFT PANEL: Header ── */}
-                    <div className="mb-8 lg:mb-0 lg:sticky lg:top-32 animate-fade-in-up pr-2">
-                        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-4 border border-primary/20">
-                            <BookOpen size={14} />
-                            Writing
-                        </span>
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold leading-[1.15] mb-5 tracking-tight">
-                            Inside the <span className="gradient-text">Process</span>
-                        </h2>
-                        <p className="text-muted-foreground text-[15px] sm:text-base leading-relaxed mb-6">
-                            Technical deep dives, architectural decisions, and product lessons from scaling platforms for millions of users.
-                        </p>
-
-                        <div className="flex items-center gap-3 text-sm font-medium text-foreground mb-4">
-                            <span className="relative flex h-2.5 w-2.5">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60"></span>
-                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+                    {/* ── LEFT PANEL: Header Content (Order 1 on Mobile) ── */}
+                    <div className="lg:col-span-12 xl:col-span-5 order-1 lg:order-2 lg:pl-16 text-center lg:text-left">
+                        <div className="text-center mb-16 sm:mb-24 animate-fade-in-up">
+                            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-3 sm:mb-4 border border-primary/20 backdrop-blur-md">
+                                <BookOpen size={12} /> Writing
                             </span>
-                            <span>{blogs.length} posts published</span>
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
+                                Inside The <span className="gradient-text">Process</span>
+                            </h2>
+                            <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+                                Technical deep dives, architectural decisions, and product lessons from scaling platforms for millions of users.
+                            </p>
                         </div>
 
-                        {/* Desktop Dot Indicators */}
-                        <div className="hidden lg:flex items-center gap-1.5 mt-6 mb-2">
-                            {blogs.map((_, i) => (
-                                <div
-                                    key={i}
-                                    className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'bg-primary w-5' : 'bg-border/60 w-1.5'}`}
-                                />
-                            ))}
-                        </div>
                     </div>
 
-
-                    {/* ── RIGHT PANEL: Carousel with Flanking Arrows ── */}
-                    {/* Using -mx-4 to allow full bleed on mobile devices, pulling it back in tightly */}
-                    <div className="relative animate-fade-in-up -mx-4 sm:mx-0" style={{ animationDelay: '150ms' }}>
-
-                        {/* Desktop Navigation Arrows - Positioned exactly on the left and right edges */}
-                        {/* Using disabled:opacity-30 instead of 0 to ensure they are visible as 'disabled' on ends */}
-                        <button
-                            onClick={() => scroll('left')}
-                            disabled={current === 0}
-                            className="hidden lg:flex absolute top-[45%] -translate-y-1/2 left-0 lg:-left-5 xl:-left-6 z-50 w-12 h-12 rounded-full border border-border bg-background/95 hover:bg-muted backdrop-blur-xl items-center justify-center text-foreground transition-all duration-300 hover:scale-[1.05] shadow-xl hover:shadow-2xl disabled:opacity-30 disabled:hover:scale-100 disabled:cursor-not-allowed cursor-pointer"
-                            aria-label="Previous posts"
-                        >
-                            <ChevronLeft size={22} className="mr-0.5" />
-                        </button>
-                        <button
-                            onClick={() => scroll('right')}
-                            disabled={current >= blogs.length - 1}
-                            className="hidden lg:flex absolute top-[45%] -translate-y-1/2 right-0 lg:-right-5 xl:-right-6 z-50 w-12 h-12 rounded-full border border-border bg-background/95 hover:bg-muted backdrop-blur-xl items-center justify-center text-foreground transition-all duration-300 hover:scale-[1.05] shadow-xl hover:shadow-2xl disabled:opacity-30 disabled:hover:scale-100 disabled:cursor-not-allowed cursor-pointer"
-                            aria-label="Next posts"
-                        >
-                            <ChevronRight size={22} className="ml-0.5" />
-                        </button>
-
-                        {/* Scroll Container 
-                Added items-stretch so ALL flex children naturally stretch to equal height.
-            */}
-                        <div
-                            ref={scrollContainerRef}
-                            className="flex items-stretch gap-4 sm:gap-5 lg:gap-6 overflow-x-auto snap-x snap-mandatory py-4 px-4 sm:px-2 scrollbar-none"
-                            style={{
-                                msOverflowStyle: 'none',
-                                scrollbarWidth: 'none',
-                                WebkitOverflowScrolling: 'touch'
-                            }}
-                        >
-                            {/* Inject CSS to absolutely hide webkit scrollbars */}
-                            <style dangerouslySetInnerHTML={{
-                                __html: `
-                .scrollbar-none::-webkit-scrollbar { display: none; }
-              `}} />
-
-                            {blogs.map((post) => (
-                                <article
-                                    key={post.slug}
-                                    onClick={() => navigate(`/blog/${post.slug}`)}
-                                    // Uses h-auto with flex-1 inside so flex items naturally align to tallest card
-                                    className="group w-[80vw] sm:w-[300px] lg:w-[320px] xl:w-[350px] shrink-0 snap-center relative overflow-hidden rounded-[1.25rem] sm:rounded-3xl border border-border/40 bg-card/40 hover:bg-card/60 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] hover:border-primary/20 cursor-pointer flex flex-col h-auto"
+                    {/* ── RIGHT PANEL: Carousel/Slider (Order 2 on Mobile) ── */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.7, delay: 0.15 }}
+                        className="lg:col-span-12 xl:col-span-7 order-2 lg:order-1 overflow-visible"
+                        onMouseEnter={() => setIsPaused(true)}
+                        onMouseLeave={() => setIsPaused(false)}
+                    >
+                        <div className="relative w-full">
+                            <div ref={carouselRef} className="relative w-full overflow-hidden min-h-[450px]">
+                                <motion.div
+                                    ref={contentRef}
+                                    drag="x"
+                                    dragConstraints={{ right: 0, left: -dragConstraint }}
+                                    dragElastic={0.15}
+                                    dragMomentum={true}
+                                    dragTransition={{ bounceStiffness: 300, bounceDamping: 30, power: 0.3, timeConstant: 200 }}
+                                    whileTap={{ cursor: 'grabbing' }}
+                                    animate={controls}
+                                    style={{ x }}
+                                    onDragEnd={handleDragEnd}
+                                    className="flex touch-pan-y cursor-grab active:cursor-grabbing transform-gpu py-8 px-4 sm:px-2"
                                 >
-                                    {/* Image Section - Scaled beautifully */}
-                                    <div className="relative h-[180px] sm:h-[190px] w-full overflow-hidden shrink-0">
-                                        <img
-                                            src={post.coverImage}
-                                            alt={post.title}
-                                            className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[800ms] ease-out group-hover:scale-105"
-                                            loading="lazy"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
+                                    {blogs.map((post, index) => (
+                                        <motion.article
+                                            key={post.slug}
+                                            onClick={() => navigate(`/blog/${post.slug}`)}
+                                            style={{ width: CARD_WIDTH, marginRight: CARD_GAP, flexShrink: 0 }}
+                                            whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                                            animate={{
+                                                scale: index === currentIndex ? 1 : 0.96,
+                                                opacity: index === currentIndex ? 1 : 0.7,
+                                            }}
+                                            transition={{ duration: 0.4 }}
+                                            className="relative overflow-hidden rounded-[2rem] border border-border/40 bg-card/40 backdrop-blur-xl hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] hover:border-primary/30 cursor-pointer flex flex-col h-auto"
+                                        >
+                                            {/* Image */}
+                                            <div className="relative h-[200px] w-full overflow-hidden shrink-0">
+                                                <motion.img
+                                                    src={post.coverImage}
+                                                    alt={post.title}
+                                                    className="absolute inset-0 w-full h-full object-cover"
+                                                    whileHover={{ scale: 1.1 }}
+                                                    transition={{ duration: 0.8 }}
+                                                    loading="lazy"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                                                <div className="absolute top-5 left-5">
+                                                    <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase bg-black/60 backdrop-blur-md text-white border border-white/10">
+                                                        {post.category}
+                                                    </span>
+                                                </div>
+                                            </div>
 
-                                        <div className="absolute top-4 left-4">
-                                            <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold tracking-wider uppercase bg-black/50 backdrop-blur-md text-white border border-white/10 shadow-sm">
-                                                {post.category}
-                                            </span>
-                                        </div>
-                                    </div>
+                                            {/* Content */}
+                                            <div className="p-6 md:p-8 flex flex-col flex-1">
+                                                <div className="flex items-center gap-3 text-[11px] font-semibold text-muted-foreground/80 mb-4 uppercase tracking-[0.15em]">
+                                                    <Calendar size={13} className="text-primary/70" />
+                                                    {post.date}
+                                                </div>
 
-                                    {/* Content Section */}
-                                    <div className="p-5 sm:p-6 flex flex-col flex-1 relative z-10 transition-colors duration-300">
-                                        <div className="flex items-center gap-3 text-[11px] font-medium text-muted-foreground/80 mb-3 uppercase tracking-wider">
-                                            <span className="flex items-center gap-1.5">
-                                                <Calendar size={12} className="text-primary/70" />
-                                                {post.date}
-                                            </span>
-                                        </div>
+                                                <h3 className="text-2xl font-display font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-3 leading-[1.25] line-clamp-2">
+                                                    {post.title}
+                                                </h3>
 
-                                        <h3 className="text-xl sm:text-[22px] font-display font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-2.5 leading-[1.3] line-clamp-3">
-                                            {post.title}
-                                        </h3>
+                                                <p className="text-muted-foreground text-[14px] leading-relaxed line-clamp-2 mb-8 flex-1 opacity-90 font-light">
+                                                    {post.excerpt}
+                                                </p>
 
-                                        {/* Excerpt flex-1 pushes footer to the bottom evenly */}
-                                        <p className="text-muted-foreground text-[13px] leading-relaxed line-clamp-2 mb-6 flex-1 opacity-90">
-                                            {post.excerpt}
-                                        </p>
+                                                <div className="pt-6 border-t border-border/30 flex items-center justify-between mt-auto">
+                                                    <span className="text-xs font-bold text-primary/90 flex items-center gap-2 group/btn">
+                                                        READ ARTICLE
+                                                        <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                                                            <ArrowRight size={14} />
+                                                        </motion.div>
+                                                    </span>
+                                                    <span className="flex items-center gap-2 text-[11px] text-muted-foreground font-medium">
+                                                        <Clock size={13} />
+                                                        {post.readTime}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </motion.article>
+                                    ))}
+                                </motion.div>
+                            </div>
 
-                                        <div className="pt-4 border-t border-border/30 flex items-center justify-between mt-auto">
-                                            <span className="text-xs font-semibold text-primary/80 group-hover:text-primary transition-colors flex items-center gap-1.5">
-                                                Read Article
-                                                <ArrowRight size={13} className="transform group-hover:translate-x-1 transition-transform" />
-                                            </span>
-                                            <span className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
-                                                <Clock size={12} />
-                                                {post.readTime}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-                            ))}
+                            {/* Centered Side Arrows */}
+                            {!isTouch && (
+                                <>
+                                    <button
+                                        onClick={() => snapToIndex(currentIndex - 1)}
+                                        disabled={currentIndex === 0}
+                                        className="absolute left-4 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-14 h-14 rounded-full border border-border/50 bg-white/95 backdrop-blur-md hover:bg-slate-50 disabled:opacity-30 transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95 disabled:cursor-not-allowed group"
+                                        aria-label="Previous slide"
+                                    >
+                                        <ArrowRight className="w-6 h-6 text-primary rotate-180 group-hover:-translate-x-1 transition-transform" />
+                                    </button>
+                                    <button
+                                        onClick={() => snapToIndex(currentIndex + 1)}
+                                        disabled={currentIndex >= blogs.length - 1}
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-14 h-14 rounded-full border border-border/50 bg-white/95 backdrop-blur-md hover:bg-slate-50 disabled:opacity-30 transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95 disabled:cursor-not-allowed group"
+                                        aria-label="Next slide"
+                                    >
+                                        <ArrowRight className="w-6 h-6 text-primary group-hover:translate-x-1 transition-transform" />
+                                    </button>
+                                </>
+                            )}
                         </div>
 
-                        {/* Mobile Drag Instruction */}
-                        <div className="lg:hidden flex justify-center mt-3 animate-pulse">
-                            <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-widest font-semibold text-muted-foreground/50">
-                                <MousePointerClick size={12} /> Drag to explore
-                            </span>
-                        </div>
+                        {/* Mobile: dot indicators + CTA */}
+                        <div className="lg:hidden flex flex-col items-center gap-8 mt-4">
+                            <div className="flex items-center gap-2">
+                                {blogs.map((_, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => snapToIndex(i)}
+                                        className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'bg-primary w-6' : 'bg-border/60 w-1.5'}`}
+                                    />
+                                ))}
+                            </div>
 
-                    </div>
+                            <button
+                                onClick={() => navigate('/blogs')}
+                                className="group/btn relative inline-flex items-center gap-4 py-2"
+                            >
+                                <span className="text-sm font-serif font-bold tracking-[0.2em] text-slate-900 border-b-2 border-slate-900 pb-1 group-hover/btn:text-primary group-hover/btn:border-primary transition-colors duration-300 uppercase">
+                                    Read All
+                                </span>
+                                <div className="w-10 h-10 rounded-full border border-primary flex items-center justify-center transform group-hover/btn:translate-x-2 group-hover/btn:bg-primary transition-all duration-300 shadow-lg">
+                                    <ArrowRight className="w-5 h-5 text-primary group-hover/btn:text-white transition-colors" />
+                                </div>
+                            </button>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
         </section>
