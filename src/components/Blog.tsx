@@ -39,6 +39,7 @@ const Blog = React.memo(() => {
             const cardWidth = firstCard.offsetWidth;
             const gap = window.innerWidth >= 1024 ? 24 : window.innerWidth >= 640 ? 20 : 16;
 
+            // Calculate current index cleanly
             const newCurrent = Math.round(container.scrollLeft / (cardWidth + gap));
             setCurrent(newCurrent);
         };
@@ -65,7 +66,7 @@ const Blog = React.memo(() => {
             <div className="container-custom relative z-10 box-border">
 
                 {/* ═══ 2-Column Layout ═══ */}
-                <div className="lg:grid lg:grid-cols-[280px_1fr] xl:grid-cols-[340px_1fr] lg:gap-8 xl:gap-14 items-center">
+                <div className="lg:grid lg:grid-cols-[280px_1fr] xl:grid-cols-[340px_1fr] lg:gap-8 xl:gap-14 items-center relative">
 
                     {/* ── LEFT PANEL: Header ── */}
                     <div className="mb-8 lg:mb-0 lg:sticky lg:top-32 animate-fade-in-up pr-2">
@@ -89,7 +90,7 @@ const Blog = React.memo(() => {
                         </div>
 
                         {/* Desktop Dot Indicators */}
-                        <div className="hidden lg:flex items-center gap-1.5 mt-6">
+                        <div className="hidden lg:flex items-center gap-1.5 mt-6 mb-2">
                             {blogs.map((_, i) => (
                                 <div
                                     key={i}
@@ -105,10 +106,11 @@ const Blog = React.memo(() => {
                     <div className="relative animate-fade-in-up -mx-4 sm:mx-0" style={{ animationDelay: '150ms' }}>
 
                         {/* Desktop Navigation Arrows - Positioned exactly on the left and right edges */}
+                        {/* Using disabled:opacity-30 instead of 0 to ensure they are visible as 'disabled' on ends */}
                         <button
                             onClick={() => scroll('left')}
                             disabled={current === 0}
-                            className="hidden lg:flex absolute top-[45%] -translate-y-1/2 -left-6 z-40 w-12 h-12 rounded-full border border-border/60 bg-background hover:bg-muted backdrop-blur-xl items-center justify-center text-foreground transition-all duration-300 hover:scale-105 shadow-xl disabled:opacity-0 disabled:-translate-x-4 cursor-pointer"
+                            className="hidden lg:flex absolute top-[45%] -translate-y-1/2 left-0 lg:-left-5 xl:-left-6 z-50 w-12 h-12 rounded-full border border-border bg-background/95 hover:bg-muted backdrop-blur-xl items-center justify-center text-foreground transition-all duration-300 hover:scale-[1.05] shadow-xl hover:shadow-2xl disabled:opacity-30 disabled:hover:scale-100 disabled:cursor-not-allowed cursor-pointer"
                             aria-label="Previous posts"
                         >
                             <ChevronLeft size={22} className="mr-0.5" />
@@ -116,16 +118,18 @@ const Blog = React.memo(() => {
                         <button
                             onClick={() => scroll('right')}
                             disabled={current >= blogs.length - 1}
-                            className="hidden lg:flex absolute top-[45%] -translate-y-1/2 -right-6 xl:-right-10 z-40 w-12 h-12 rounded-full border border-border/60 bg-background hover:bg-muted backdrop-blur-xl items-center justify-center text-foreground transition-all duration-300 hover:scale-105 shadow-xl disabled:opacity-0 disabled:translate-x-4 cursor-pointer"
+                            className="hidden lg:flex absolute top-[45%] -translate-y-1/2 right-0 lg:-right-5 xl:-right-6 z-50 w-12 h-12 rounded-full border border-border bg-background/95 hover:bg-muted backdrop-blur-xl items-center justify-center text-foreground transition-all duration-300 hover:scale-[1.05] shadow-xl hover:shadow-2xl disabled:opacity-30 disabled:hover:scale-100 disabled:cursor-not-allowed cursor-pointer"
                             aria-label="Next posts"
                         >
                             <ChevronRight size={22} className="ml-0.5" />
                         </button>
 
-                        {/* Scroll Container (No Scrollbars, extremely smooth snap padding) */}
+                        {/* Scroll Container 
+                Added items-stretch so ALL flex children naturally stretch to equal height.
+            */}
                         <div
                             ref={scrollContainerRef}
-                            className="flex gap-4 sm:gap-5 lg:gap-6 overflow-x-auto snap-x snap-mandatory py-4 px-4 sm:px-2 scrollbar-none"
+                            className="flex items-stretch gap-4 sm:gap-5 lg:gap-6 overflow-x-auto snap-x snap-mandatory py-4 px-4 sm:px-2 scrollbar-none"
                             style={{
                                 msOverflowStyle: 'none',
                                 scrollbarWidth: 'none',
@@ -142,8 +146,8 @@ const Blog = React.memo(() => {
                                 <article
                                     key={post.slug}
                                     onClick={() => navigate(`/blog/${post.slug}`)}
-                                    // Slightly smaller widths on phone for tighter smooth look
-                                    className="group w-[80vw] sm:w-[300px] lg:w-[320px] xl:w-[350px] shrink-0 snap-center relative overflow-hidden rounded-3xl border border-border/40 bg-card/40 hover:bg-card/60 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] hover:border-primary/20 cursor-pointer flex flex-col h-full"
+                                    // Uses h-auto with flex-1 inside so flex items naturally align to tallest card
+                                    className="group w-[80vw] sm:w-[300px] lg:w-[320px] xl:w-[350px] shrink-0 snap-center relative overflow-hidden rounded-[1.25rem] sm:rounded-3xl border border-border/40 bg-card/40 hover:bg-card/60 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] hover:border-primary/20 cursor-pointer flex flex-col h-auto"
                                 >
                                     {/* Image Section - Scaled beautifully */}
                                     <div className="relative h-[180px] sm:h-[190px] w-full overflow-hidden shrink-0">
@@ -163,7 +167,7 @@ const Blog = React.memo(() => {
                                     </div>
 
                                     {/* Content Section */}
-                                    <div className="p-5 sm:p-6 flex flex-col flex-1 relative z-10">
+                                    <div className="p-5 sm:p-6 flex flex-col flex-1 relative z-10 transition-colors duration-300">
                                         <div className="flex items-center gap-3 text-[11px] font-medium text-muted-foreground/80 mb-3 uppercase tracking-wider">
                                             <span className="flex items-center gap-1.5">
                                                 <Calendar size={12} className="text-primary/70" />
@@ -175,6 +179,7 @@ const Blog = React.memo(() => {
                                             {post.title}
                                         </h3>
 
+                                        {/* Excerpt flex-1 pushes footer to the bottom evenly */}
                                         <p className="text-muted-foreground text-[13px] leading-relaxed line-clamp-2 mb-6 flex-1 opacity-90">
                                             {post.excerpt}
                                         </p>

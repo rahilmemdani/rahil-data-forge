@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import ScrollToTop from "../src/ScrollToTop";
 
 // Theme
@@ -47,6 +47,30 @@ const HomePage = () => (
   </Suspense>
 );
 
+// Wrapper to conditionally render layout elements based on route
+const AppContent = () => {
+  const location = useLocation();
+  const isBlogPost = location.pathname.startsWith('/blog/');
+
+  return (
+    <>
+      {/* Hide Navbar when viewing a blog post */}
+      {!isBlogPost && <Navbar />}
+      <Layout>
+        <ScrollToTop />
+        <Suspense fallback={null}>
+          <ParticleBackground />
+        </Suspense>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/blog/:slug" element={<Suspense fallback={<SectionLoading />}><BlogPost /></Suspense>} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Layout>
+    </>
+  );
+};
+
 const App = () => {
   return (
     <ThemeProvider>
@@ -55,18 +79,7 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Navbar />
-            <Layout>
-              <ScrollToTop />
-              <Suspense fallback={null}>
-                <ParticleBackground />
-              </Suspense>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/blog/:slug" element={<Suspense fallback={<SectionLoading />}><BlogPost /></Suspense>} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Layout>
+            <AppContent />
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>
