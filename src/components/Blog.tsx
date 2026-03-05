@@ -45,23 +45,24 @@ const Blog = React.memo(() => {
     }, [controls]);
 
     const handleDragEnd = useCallback((_: any, info: any) => {
-        const velocity = info.velocity.x;
         const currentX = x.get();
-        // Project where the drag would naturally stop with momentum
-        const projectedX = currentX + velocity * 0.2;
-        let targetIndex = Math.round(-projectedX / CARD_STRIDE);
+        const velocity = info.velocity.x;
 
-        // Fallback for fast but short swipes
-        if (Math.abs(velocity) > 500 && targetIndex === currentIndex) {
+        // Project where the card would naturally stop with no friction
+        // Multiplier controls how far a swipe travels
+        const projectedTargetX = currentX + (velocity * 0.2);
+
+        let targetIndex = Math.round(-projectedTargetX / CARD_STRIDE);
+
+        // Ensure a user always moves at least one card if they swipe meaningfully
+        if (Math.abs(velocity) > 400 && targetIndex === currentIndex) {
             targetIndex = velocity < 0 ? currentIndex + 1 : currentIndex - 1;
-        } else if (Math.abs(info.offset.x) > CARD_STRIDE / 4 && targetIndex === currentIndex) {
-            targetIndex = info.offset.x < 0 ? currentIndex + 1 : currentIndex - 1;
         }
 
         snapToIndex(targetIndex);
     }, [x, currentIndex, snapToIndex]);
 
-    // Auto-play
+    // Auto-play (Desktop only)
     // useEffect(() => {
     //     if (isPaused) return;
     //     const timer = setInterval(() => {
@@ -129,18 +130,85 @@ const Blog = React.memo(() => {
 
                     </div>
 
-                    {/* ── RIGHT PANEL: Carousel/Slider (Order 2 on Mobile) ── */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -40 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.7, delay: 0.15 }}
-                        className="lg:col-span-12 xl:col-span-7 order-2 lg:order-1 overflow-visible"
-                        onMouseEnter={() => setIsPaused(true)}
-                        onMouseLeave={() => setIsPaused(false)}
-                    >
-                        <div className="relative w-full">
-                            <div ref={carouselRef} className="relative w-full overflow-hidden min-h-[340px] sm:min-h-[380px] lg:min-h-[450px]">
+                    {/* ── RIGHT PANEL: Carousel/Slider ── */}
+                    <div className="lg:col-span-12 xl:col-span-7 order-2 lg:order-1 overflow-visible">
+
+                        {/* ── NATIVE SCROLL (Mobile & Tablet) ── */}
+                        <div className="lg:hidden w-[calc(100%+3rem)] sm:w-[calc(100%+4rem)] -mx-6 sm:-mx-8 px-6 sm:px-8 pb-8 overflow-x-auto snap-x snap-mandatory flex gap-4 hide-scrollbar">
+                            {blogs.map((post, index) => (
+                                <article
+                                    key={post.slug}
+                                    onClick={() => navigate(`/blog/${post.slug}`)}
+                                    className="relative overflow-hidden rounded-[2rem] border border-border/40 bg-card/40 backdrop-blur-xl shrink-0 snap-center flex flex-col h-auto cursor-pointer"
+                                    style={{ width: `${CARD_WIDTH}px` }}
+                                >
+                                    {/* Image */}
+                                    <div className="relative h-[200px] w-full overflow-hidden shrink-0">
+                                        <img
+                                            src={post.coverImage}
+                                            alt={post.title}
+                                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                                            loading="lazy"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                                        <div className="absolute top-5 left-5">
+                                            <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase bg-black/60 backdrop-blur-md text-white border border-white/10">
+                                                {post.category}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* Content */}
+                                    <div className="p-5 md:p-8 flex flex-col flex-1">
+                                        <div className="flex items-center gap-3 text-[11px] font-semibold text-muted-foreground/80 mb-4 uppercase tracking-[0.15em]">
+                                            <Calendar size={13} className="text-primary/70" />
+                                            {post.date}
+                                        </div>
+
+                                        <h3 className="text-2xl font-display font-bold text-foreground mb-3 leading-[1.25] line-clamp-2">
+                                            {post.title}
+                                        </h3>
+
+                                        <p className="text-muted-foreground text-[14px] leading-relaxed line-clamp-2 mb-8 flex-1 opacity-90 font-light">
+                                            {post.excerpt}
+                                        </p>
+
+                                        <div className="pt-6 border-t border-border/30 flex items-center justify-between mt-auto">
+                                            <span className="text-xs font-bold text-primary/90 flex items-center gap-2">
+                                                READ ARTICLE
+                                                <ArrowRight size={14} />
+                                            </span>
+                                            <span className="flex items-center gap-2 text-[11px] text-muted-foreground font-medium">
+                                                <Clock size={13} />
+                                                {post.readTime}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </article>
+                            ))}
+
+                            {/* Spacer to ensure the scroll reaches the end with proper padding on mobile */}
+                            <div className="w-2 sm:w-4 shrink-0" aria-hidden="true" />
+                        </div>
+
+                        {/* Mobile Swipe Hint */}
+                        <div className="lg:hidden flex justify-center mt-2">
+                            <span className="text-[10px] uppercase tracking-widest font-medium text-muted-foreground/50 animate-pulse">
+                                Swipe to explore
+                            </span>
+                        </div>
+
+                        {/* ── FRAMER MOTION DRAG (Desktop Only) ── */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -40 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.7, delay: 0.15 }}
+                            className="hidden lg:block relative w-full"
+                            onMouseEnter={() => setIsPaused(true)}
+                            onMouseLeave={() => setIsPaused(false)}
+                        >
+                            <div ref={carouselRef} className="relative w-full overflow-hidden min-h-[450px]">
                                 <motion.div
                                     ref={contentRef}
                                     drag="x"
@@ -167,8 +235,7 @@ const Blog = React.memo(() => {
                                             transition={{ duration: 0.4 }}
                                             className="relative overflow-hidden rounded-[2rem] border border-border/40 bg-card/40 backdrop-blur-xl hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] hover:border-primary/30 cursor-pointer flex flex-col h-auto"
                                         >
-                                            {/* Image */}
-                                            <div className="relative h-[150px] sm:h-[170px] lg:h-[200px] w-full overflow-hidden shrink-0">
+                                            <div className="relative h-[200px] w-full overflow-hidden shrink-0">
                                                 <motion.img
                                                     src={post.coverImage}
                                                     alt={post.title}
@@ -186,7 +253,7 @@ const Blog = React.memo(() => {
                                             </div>
 
                                             {/* Content */}
-                                            <div className="p-4 sm:p-5 md:p-8 flex flex-col flex-1">
+                                            <div className="p-6 md:p-8 flex flex-col flex-1">
                                                 <div className="flex items-center gap-3 text-[11px] font-semibold text-muted-foreground/80 mb-4 uppercase tracking-[0.15em]">
                                                     <Calendar size={13} className="text-primary/70" />
                                                     {post.date}
@@ -239,28 +306,9 @@ const Blog = React.memo(() => {
                                     </button>
                                 </>
                             )}
-                        </div>
-
-                        {/* Mobile: dot indicators + drag hint (OG Style) */}
-                        <div className="lg:hidden flex flex-col items-center gap-2 mt-3">
-                            <div className="flex items-center gap-1.5">
-                                {blogs.map((_, i) => (
-                                    <button
-                                        key={i}
-                                        onClick={() => snapToIndex(i)}
-                                        className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'bg-primary w-5' : 'bg-border/60 w-1.5'}`}
-                                    />
-                                ))}
-                            </div>
-                            <motion.span
-                                animate={{ opacity: [0.4, 0.8, 0.4] }}
-                                transition={{ duration: 2, repeat: Infinity }}
-                                className="text-[10px] uppercase tracking-widest font-medium text-muted-foreground/50"
-                            >
-                                Drag to explore
-                            </motion.span>
-                        </div>
-                    </motion.div>
+                        </motion.div>
+                        {/* ── /END RIGHT PANEL ── */}
+                    </div>
                 </div>
             </div>
         </section>

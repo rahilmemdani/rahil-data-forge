@@ -477,6 +477,18 @@
   background: linear-gradient(135deg, var(--gradient-end), var(--gradient-start));
 }
 
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari and Opera */
+}
+
 /* ═══════════════ DECORATIVE BLOBS ═══════════════ */
 .blob-decoration {
   position: absolute;
