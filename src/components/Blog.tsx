@@ -50,7 +50,7 @@ const Blog = React.memo(() => {
 
         if (Math.abs(velocity) > 500) {
             snapToIndex(velocity < 0 ? currentIndex + 1 : currentIndex - 1);
-        } else if (Math.abs(offset) > CARD_STRIDE / 3) {
+        } else if (Math.abs(offset) > CARD_STRIDE / 4) {
             snapToIndex(offset < 0 ? currentIndex + 1 : currentIndex - 1);
         } else {
             snapToIndex(currentIndex);
@@ -142,13 +142,13 @@ const Blog = React.memo(() => {
                                     drag="x"
                                     dragConstraints={{ right: 0, left: -dragConstraint }}
                                     dragElastic={0.15}
-                                    dragMomentum={true}
+                                    dragMomentum={false}
                                     dragTransition={{ bounceStiffness: 300, bounceDamping: 30, power: 0.3, timeConstant: 200 }}
                                     whileTap={{ cursor: 'grabbing' }}
                                     animate={controls}
                                     style={{ x }}
                                     onDragEnd={handleDragEnd}
-                                    className="flex touch-pan-y cursor-grab active:cursor-grabbing transform-gpu py-5 pr-6 lg:px-4"
+                                    className="flex touch-pan-x cursor-grab active:cursor-grabbing transform-gpu py-5 pr-6 lg:px-4"
                                 >
                                     {blogs.map((post, index) => (
                                         <motion.article
