@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { X, Calendar, Phone, MessageCircle, Clock } from "lucide-react";
 
@@ -14,6 +15,13 @@ const ScheduleConsultationModal = ({
   serviceName = "",
 }: ScheduleConsultationModalProps) => {
 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
   // ✅ Correct Cal.com modal opener
   const openCalComScheduling = () => {
     if ((window as any).Cal) {
@@ -26,9 +34,9 @@ const ScheduleConsultationModal = ({
     }
   };
 
-  if (!open) return null;
+  if (!open || !mounted) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 m-0" onClick={onClose}>
       <div
         className="bg-white rounded-2xl max-w-md w-full shadow-2xl relative max-h-[90vh] overflow-y-auto"
@@ -114,6 +122,8 @@ const ScheduleConsultationModal = ({
 
       </div>
     </div>
+    ,
+    document.body
   );
 };
 
