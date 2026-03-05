@@ -68,7 +68,7 @@ const Blog = React.memo(() => {
     }, [currentIndex, isPaused, snapToIndex]);
 
     return (
-        <section id="blogs" className="relative z-10 noise-bg py-24 md:py-32 overflow-hidden">
+        <section id="blogs" className="relative z-10 noise-bg py-16 md:py-32 overflow-hidden">
             {/* Animated Background Mesh - GPU Optimized */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                 <motion.div
@@ -91,21 +91,36 @@ const Blog = React.memo(() => {
                 />
             </div>
 
-            <div className="container mx-auto max-w-[90rem] px-4 relative z-10">
+            <div className="container-custom px-6 sm:px-8 lg:px-4 lg:max-w-[90rem] relative z-10">
                 <div className="grid lg:grid-cols-12 gap-12 items-center">
 
                     {/* ── LEFT PANEL: Header Content (Order 1 on Mobile) ── */}
-                    <div className="lg:col-span-12 xl:col-span-5 order-1 lg:order-2 lg:pl-16 text-center lg:text-left">
-                        <div className="text-center mb-16 sm:mb-24 animate-fade-in-up">
-                            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-3 sm:mb-4 border border-primary/20 backdrop-blur-md">
-                                <BookOpen size={12} /> Writing
+                    <div className="col-span-12 xl:col-span-5 order-1 lg:order-2 text-left">
+
+                        <div className="mb-8 sm:mb-10 lg:mb-0 animate-fade-in-up lg:sticky lg:top-32 max-w-xl lg:max-w-none lg:pl-12 xl:pl-16">
+
+                            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-3 sm:mb-4 border border-primary/20 backdrop-blur-md uppercase tracking-wider">
+                                <BookOpen size={12} />
+                                Writing
                             </span>
-                            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
+
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 tracking-tight leading-[1.15]">
                                 Inside The <span className="gradient-text">Process</span>
                             </h2>
-                            <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+
+                            <p className="text-[15px] sm:text-base md:text-lg text-muted-foreground leading-relaxed max-w-md sm:max-w-lg break-words">
                                 Technical deep dives, architectural decisions, and product lessons from scaling platforms for millions of users.
                             </p>
+
+                            <div className="flex items-center gap-3 text-sm font-medium text-foreground mt-5 sm:mt-6 lg:flex hidden">
+                                <span className="relative flex h-2.5 w-2.5">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
+                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
+                                </span>
+
+                                <span>{blogs.length} posts published</span>
+                            </div>
+
                         </div>
 
                     </div>
@@ -133,7 +148,7 @@ const Blog = React.memo(() => {
                                     animate={controls}
                                     style={{ x }}
                                     onDragEnd={handleDragEnd}
-                                    className="flex touch-pan-y cursor-grab active:cursor-grabbing transform-gpu py-8 px-4 sm:px-2"
+                                    className="flex touch-pan-y cursor-grab active:cursor-grabbing transform-gpu py-8 pr-8 lg:px-4"
                                 >
                                     {blogs.map((post, index) => (
                                         <motion.article
@@ -199,13 +214,13 @@ const Blog = React.memo(() => {
                                 </motion.div>
                             </div>
 
-                            {/* Centered Side Arrows */}
+                            {/* Centered Side Arrows (Desktop Only) */}
                             {!isTouch && (
                                 <>
                                     <button
                                         onClick={() => snapToIndex(currentIndex - 1)}
                                         disabled={currentIndex === 0}
-                                        className="absolute left-4 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-14 h-14 rounded-full border border-border/50 bg-white/95 backdrop-blur-md hover:bg-slate-50 disabled:opacity-30 transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95 disabled:cursor-not-allowed group"
+                                        className="absolute left-4 top-1/2 -translate-y-1/2 z-30 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-border/50 bg-white/95 backdrop-blur-md hover:bg-slate-50 disabled:opacity-30 transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95 disabled:cursor-not-allowed group"
                                         aria-label="Previous slide"
                                     >
                                         <ArrowRight className="w-6 h-6 text-primary rotate-180 group-hover:-translate-x-1 transition-transform" />
@@ -213,7 +228,7 @@ const Blog = React.memo(() => {
                                     <button
                                         onClick={() => snapToIndex(currentIndex + 1)}
                                         disabled={currentIndex >= blogs.length - 1}
-                                        className="absolute right-4 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-14 h-14 rounded-full border border-border/50 bg-white/95 backdrop-blur-md hover:bg-slate-50 disabled:opacity-30 transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95 disabled:cursor-not-allowed group"
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 z-30 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-border/50 bg-white/95 backdrop-blur-md hover:bg-slate-50 disabled:opacity-30 transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95 disabled:cursor-not-allowed group"
                                         aria-label="Next slide"
                                     >
                                         <ArrowRight className="w-6 h-6 text-primary group-hover:translate-x-1 transition-transform" />
@@ -222,29 +237,24 @@ const Blog = React.memo(() => {
                             )}
                         </div>
 
-                        {/* Mobile: dot indicators + CTA */}
-                        <div className="lg:hidden flex flex-col items-center gap-8 mt-4">
-                            <div className="flex items-center gap-2">
+                        {/* Mobile: dot indicators + drag hint (OG Style) */}
+                        <div className="lg:hidden flex flex-col items-center gap-3 mt-4">
+                            <div className="flex items-center gap-1.5">
                                 {blogs.map((_, i) => (
                                     <button
                                         key={i}
                                         onClick={() => snapToIndex(i)}
-                                        className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'bg-primary w-6' : 'bg-border/60 w-1.5'}`}
+                                        className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'bg-primary w-5' : 'bg-border/60 w-1.5'}`}
                                     />
                                 ))}
                             </div>
-
-                            <button
-                                onClick={() => navigate('/blogs')}
-                                className="group/btn relative inline-flex items-center gap-4 py-2"
+                            <motion.span
+                                animate={{ opacity: [0.4, 0.8, 0.4] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                className="text-[11px] uppercase tracking-widest font-semibold text-muted-foreground/50"
                             >
-                                <span className="text-sm font-serif font-bold tracking-[0.2em] text-slate-900 border-b-2 border-slate-900 pb-1 group-hover/btn:text-primary group-hover/btn:border-primary transition-colors duration-300 uppercase">
-                                    Read All
-                                </span>
-                                <div className="w-10 h-10 rounded-full border border-primary flex items-center justify-center transform group-hover/btn:translate-x-2 group-hover/btn:bg-primary transition-all duration-300 shadow-lg">
-                                    <ArrowRight className="w-5 h-5 text-primary group-hover/btn:text-white transition-colors" />
-                                </div>
-                            </button>
+                                Drag to explore
+                            </motion.span>
                         </div>
                     </motion.div>
                 </div>
