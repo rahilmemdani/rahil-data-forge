@@ -29,11 +29,14 @@ const ScheduleConsultationModal = ({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl max-w-md w-full shadow-xl relative max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 m-0" onClick={onClose}>
+      <div
+        className="bg-white rounded-2xl max-w-md w-full shadow-2xl relative max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
 
         {/* Header */}
-        <div className="sticky top-0 bg-white z-10 border-b border-gray-100 flex justify-between items-center p-4 rounded-t-2xl">
+        <div className="sticky top-0 bg-white z-[110] border-b border-gray-100 flex justify-between items-center p-4 rounded-t-2xl">
           <h2 className="text-lg font-semibold text-gray-900">
             Schedule Consultation
           </h2>
