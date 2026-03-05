@@ -94,8 +94,8 @@ const AIOrchestrator = () => {
                                 key={s.id}
                                 onClick={() => { setActiveScenario(s); setShowResult(true); }}
                                 className={`w-full text-left p-6 rounded-2xl border transition-all duration-500 group relative overflow-hidden animate-fade-in-up ${activeScenario.id === s.id
-                                        ? 'bg-card border-primary/50 shadow-2xl shadow-primary/10 scale-[1.02]'
-                                        : 'bg-card/40 border-border/40 hover:border-primary/30'
+                                    ? 'bg-card border-primary/50 shadow-2xl shadow-primary/10 scale-[1.02]'
+                                    : 'bg-card/40 border-border/40 hover:border-primary/30'
                                     }`}
                                 style={{ animationDelay: `${idx * 150}ms` }}
                             >
@@ -184,9 +184,9 @@ const AIOrchestrator = () => {
                                                 <div className="flex items-center gap-2 text-emerald-400 text-[10px] sm:text-xs font-bold font-mono tracking-wider">
                                                     <CheckCircle2 size={16} className="text-emerald-500 animate-bounce" /> PIPELINE_SUCCESS [1.5s]
                                                 </div>
-                                                <div className="px-2 py-0.5 rounded bg-white/5 text-[9px] text-white/40 font-mono uppercase tracking-widest border border-white/5">
+                                                {/* <div className="px-2 py-0.5 rounded bg-white/5 text-[9px] text-white/40 font-mono uppercase tracking-widest border border-white/5">
                                                     Model: Gemini 1.5 Flash
-                                                </div>
+                                                </div> */}
                                             </div>
 
                                             <div className="overflow-x-auto relative z-10">
