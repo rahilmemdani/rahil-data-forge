@@ -45,14 +45,14 @@ const ArchitectureSlider = () => {
     const currentStage = stages[activeStage];
 
     return (
-        <div className="w-full max-w-5xl mx-auto p-6 sm:p-10 rounded-3xl border border-border/30 bg-card/30 backdrop-blur-xl shadow-2xl overflow-hidden mb-16 relative">
+        <div className="w-full max-w-5xl mx-auto p-4 sm:p-6 md:p-10 rounded-2xl md:rounded-3xl border border-border/30 bg-card/30 backdrop-blur-xl shadow-2xl overflow-hidden mb-16 relative">
             {/* Subtle background flow */}
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
-            <div className="flex flex-col md:flex-row gap-10 items-center relative z-10">
+            <div className="flex flex-col lg:flex-row gap-8 md:gap-10 items-center relative z-10">
                 {/* Info Side */}
-                <div className="w-full md:w-1/3 space-y-6">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-primary/10 text-primary border border-primary/20">
+                <div className="w-full lg:w-1/3 space-y-4 md:space-y-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest bg-primary/10 text-primary border border-primary/20">
                         System Evolution
                     </div>
 
@@ -63,43 +63,43 @@ const ArchitectureSlider = () => {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 20 }}
                             transition={{ duration: 0.4, ease: "easeOut" }}
-                            className="space-y-4"
+                            className="space-y-3 md:space-y-4"
                         >
-                            <h3 className="text-2xl sm:text-3xl font-display font-bold leading-tight gradient-text">
+                            <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-bold leading-tight gradient-text">
                                 {currentStage.title}
                             </h3>
-                            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed opacity-80">
+                            <p className="text-muted-foreground text-xs md:text-sm lg:text-base leading-relaxed opacity-80">
                                 {currentStage.description}
                             </p>
-                            <div className="p-4 rounded-2xl bg-primary/5 border border-primary/10 backdrop-blur-sm">
-                                <span className="text-[10px] font-bold text-primary uppercase tracking-widest block mb-1">Impact Insight:</span>
-                                <p className="text-sm font-medium leading-relaxed">{currentStage.impact}</p>
+                            <div className="p-3 md:p-4 rounded-xl md:rounded-2xl bg-primary/5 border border-primary/10 backdrop-blur-sm">
+                                <span className="text-[9px] md:text-[10px] font-bold text-primary uppercase tracking-widest block mb-1">Impact Insight:</span>
+                                <p className="text-xs md:text-sm font-medium leading-relaxed">{currentStage.impact}</p>
                             </div>
                         </motion.div>
                     </AnimatePresence>
 
-                    <div className="flex items-center gap-3 pt-4">
+                    <div className="flex flex-row items-center gap-2 md:gap-3 pt-2 md:pt-4">
                         <button
                             onClick={() => setActiveStage(0)}
-                            className={`flex-1 py-3.5 rounded-xl text-xs font-bold transition-all duration-300 ${activeStage === 0 ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-[1.02]' : 'bg-muted/50 hover:bg-muted opacity-70'}`}
+                            className={`flex-1 py-2.5 md:py-3.5 rounded-lg md:rounded-xl text-[10px] md:text-xs font-bold transition-all duration-300 ${activeStage === 0 ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-[1.02]' : 'bg-muted/50 hover:bg-muted opacity-70'}`}
                         >
-                            The Monolith
+                            Stage 1
                         </button>
                         <button
                             onClick={() => setActiveStage(1)}
-                            className={`flex-1 py-3.5 rounded-xl text-xs font-bold transition-all duration-300 ${activeStage === 1 ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-[1.02]' : 'bg-muted/50 hover:bg-muted opacity-70'}`}
+                            className={`flex-1 py-2.5 md:py-3.5 rounded-lg md:rounded-xl text-[10px] md:text-xs font-bold transition-all duration-300 ${activeStage === 1 ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-[1.02]' : 'bg-muted/50 hover:bg-muted opacity-70'}`}
                         >
-                            Multi-tenant
+                            Stage 2
                         </button>
                     </div>
                 </div>
 
                 {/* Visual Side */}
-                <div className="w-full md:w-2/3 h-[420px] relative bg-muted/10 rounded-3xl border border-border/20 flex items-center justify-center p-8 overflow-hidden group/viz">
+                <div className="w-full lg:w-2/3 h-[320px] sm:h-[380px] md:h-[420px] relative bg-muted/10 rounded-2xl md:rounded-3xl border border-border/20 flex items-center justify-center p-4 md:p-8 overflow-hidden group/viz">
                     {/* Animated grid background */}
                     <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
 
-                    <div className="relative z-10 flex flex-wrap justify-center items-center gap-8 md:gap-14 w-full h-full">
+                    <div className="relative z-10 flex flex-wrap justify-center items-center gap-6 sm:gap-8 md:gap-14 w-full h-full max-w-full overflow-hidden">
                         <AnimatePresence mode="popLayout">
                             {currentStage.nodes.map((node) => (
                                 <motion.div
@@ -109,13 +109,13 @@ const ArchitectureSlider = () => {
                                     animate={{ scale: 1, opacity: 1 }}
                                     exit={{ scale: 0.8, opacity: 0 }}
                                     transition={{ type: "spring", damping: 20, stiffness: 120 }}
-                                    className="flex flex-col items-center gap-3"
+                                    className="flex flex-col items-center gap-2"
                                 >
-                                    <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-[22px] ${node.color} flex items-center justify-center text-white shadow-2xl relative group/node overflow-hidden`}>
+                                    <div className={`w-12 h-12 xs:w-16 xs:h-16 md:w-20 md:h-20 rounded-xl md:rounded-[22px] ${node.color} flex items-center justify-center text-white shadow-2xl relative group/node overflow-hidden`}>
                                         <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/node:opacity-100 transition-opacity" />
-                                        {node.icon}
+                                        {React.cloneElement(node.icon as React.ReactElement, { size: 24, className: "w-6 h-6 md:w-8 md:h-8" })}
                                     </div>
-                                    <span className="text-[10px] sm:text-xs font-bold text-center w-28 leading-tight opacity-70 group-hover:opacity-100 transition-opacity">
+                                    <span className="text-[9px] md:text-[10px] lg:text-xs font-bold text-center w-20 md:w-28 leading-tight opacity-70 group-hover:opacity-100 transition-opacity truncate md:whitespace-normal">
                                         {node.label}
                                     </span>
                                 </motion.div>

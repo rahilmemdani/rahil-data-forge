@@ -181,7 +181,7 @@ const UserIcon = () => (
   </div>
 );
 
-const Chatbot = () => {
+const Chatbot = ({ onFirstMessageSent, onClose }: { onFirstMessageSent?: () => void, onClose?: () => void }) => {
   const [userInput, setUserInput] = useState('');
   const [chatHistory, setChatHistory] = useState([
     {
@@ -190,7 +190,6 @@ const Chatbot = () => {
     }
   ]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const [hasSentFirstMessage, setHasSentFirstMessage] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -236,6 +235,9 @@ const Chatbot = () => {
 
   const handleSendMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
+    if (!hasSentFirstMessage && onFirstMessageSent) {
+      onFirstMessageSent();
+    }
     setHasSentFirstMessage(true);
     const newUserMessage = { role: "user", parts: [{ text: messageText }] };
     setChatHistory(prev => [...prev, newUserMessage]);
@@ -253,96 +255,87 @@ const Chatbot = () => {
 
   return (
     <>
-      {isVisible && (
-        <div className="fixed bottom-4 right-4 z-[9999] w-[90vw] max-w-sm h-[600px] max-h-[85vh] bg-card text-card-foreground rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-border sm:w-[380px] animate-slide-up ring-1 ring-primary/10">
-          <header className="bg-primary text-primary-foreground p-5 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/80 opacity-90"></div>
-            <div className="relative z-10 flex justify-between items-center">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20">
-                  <Bot size={22} className="text-white" />
-                </div>
-                <div>
-                  <h1 className="text-lg font-bold tracking-tight">AI Assistant</h1>
-                  <p className="text-[10px] text-white/70 flex items-center gap-1.5 uppercase tracking-widest font-mono">
-                    <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
-                    Online
-                  </p>
-                </div>
+      <div className="fixed bottom-4 right-4 z-[9999] w-[90vw] max-w-sm h-[600px] max-h-[85vh] bg-card text-card-foreground rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-border sm:w-[380px] animate-slide-up ring-1 ring-primary/10">
+        <header className="bg-primary text-primary-foreground p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/80 opacity-90"></div>
+          <div className="relative z-10 flex justify-between items-center">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20">
+                <Bot size={22} className="text-white" />
               </div>
-              <button onClick={() => setIsVisible(false)} className="text-white/70 hover:text-white hover:bg-white/10 p-2 rounded-xl transition-all duration-300">
-                <X size={20} />
-              </button>
+              <div>
+                <h1 className="text-lg font-bold tracking-tight">AI Assistant</h1>
+                <p className="text-[10px] text-white/70 flex items-center gap-1.5 uppercase tracking-widest font-mono">
+                  <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+                  Online
+                </p>
+              </div>
             </div>
-          </header>
+            <button onClick={onClose} className="text-white/70 hover:text-white hover:bg-white/10 p-2 rounded-xl transition-all duration-300">
+              <X size={20} />
+            </button>
+          </div>
+        </header>
 
-          <main ref={chatContainerRef} className="flex-1 overflow-y-auto p-5 space-y-5 scroll-smooth bg-gradient-to-b from-background to-muted/20">
-            {chatHistory.map((message, index) => (
-              <div key={index} className={`flex items-start gap-3 animate-fade-in ${message.role === 'user' ? 'justify-end' : ''}`}>
-                {message.role === 'model' && <BotIcon />}
-                <div className={`max-w-[85%] p-4 rounded-2xl shadow-sm border ${message.role === 'user' ? 'bg-primary text-primary-foreground border-primary rounded-tr-none' : 'bg-card text-foreground border-border/40 rounded-tl-none'}`}>
-                  <div className="whitespace-pre-wrap leading-relaxed text-sm" dangerouslySetInnerHTML={{
-                    __html: message.parts[0].text
-                      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-primary">$1</strong>')
-                      .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
-                      .replace(/\n/g, '<br>')
-                  }} />
-                </div>
-                {message.role === 'user' && <UserIcon />}
+        <main ref={chatContainerRef} className="flex-1 overflow-y-auto p-5 space-y-5 scroll-smooth bg-gradient-to-b from-background to-muted/20">
+          {chatHistory.map((message, index) => (
+            <div key={index} className={`flex items-start gap-3 animate-fade-in ${message.role === 'user' ? 'justify-end' : ''}`}>
+              {message.role === 'model' && <BotIcon />}
+              <div className={`max-w-[85%] p-4 rounded-2xl shadow-sm border ${message.role === 'user' ? 'bg-primary text-primary-foreground border-primary rounded-tr-none' : 'bg-card text-foreground border-border/40 rounded-tl-none'}`}>
+                <div className="whitespace-pre-wrap leading-relaxed text-sm" dangerouslySetInnerHTML={{
+                  __html: message.parts[0].text
+                    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-primary">$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
+                    .replace(/\n/g, '<br>')
+                }} />
               </div>
-            ))}
-            {isLoading && (
-              <div className="flex items-start gap-3 animate-fade-in">
-                <BotIcon />
-                <div className="p-4 bg-card rounded-2xl rounded-tl-none border border-border/40 shadow-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="flex gap-1">
-                      <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                      <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                      <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
-                    </div>
+              {message.role === 'user' && <UserIcon />}
+            </div>
+          ))}
+          {isLoading && (
+            <div className="flex items-start gap-3 animate-fade-in">
+              <BotIcon />
+              <div className="p-4 bg-card rounded-2xl rounded-tl-none border border-border/40 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <div className="flex gap-1">
+                    <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                    <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                    <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
                   </div>
                 </div>
               </div>
-            )}
-          </main>
-
-          {!isLoading && !hasSentFirstMessage && (
-            <div className="px-5 pb-5 bg-background">
-              <div className="flex flex-col gap-2">
-                {suggestionQuestions.slice(0, 3).map((q, i) => (
-                  <button key={i} onClick={() => handleSendMessage(q)} className="px-4 py-2 bg-muted/30 hover:bg-primary/5 border border-border/40 hover:border-primary/30 rounded-xl text-xs text-foreground/80 hover:text-primary transition-all duration-300 text-left">
-                    {q}
-                  </button>
-                ))}
-              </div>
             </div>
           )}
+        </main>
 
-          <footer className="bg-card border-t border-border p-4">
-            <div className="flex gap-2 items-center">
-              <input
-                type="text"
-                value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
-                onKeyDown={(e) => { if (e.key === 'Enter') handleSendMessage(userInput); }}
-                placeholder="Type a message..."
-                className="flex-1 bg-muted/50 border border-border/50 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
-              />
-              <button onClick={() => { handleSendMessage(userInput); setUserInput(''); }} disabled={!userInput.trim() || isLoading} className="p-2.5 bg-primary text-primary-foreground rounded-xl shadow-lg disabled:opacity-50">
-                <Send size={18} />
-              </button>
+        {!isLoading && !hasSentFirstMessage && (
+          <div className="px-5 pb-5 bg-background">
+            <div className="flex flex-col gap-2">
+              {suggestionQuestions.slice(0, 3).map((q, i) => (
+                <button key={i} onClick={() => handleSendMessage(q)} className="px-4 py-2 bg-muted/30 hover:bg-primary/5 border border-border/40 hover:border-primary/30 rounded-xl text-xs text-foreground/80 hover:text-primary transition-all duration-300 text-left">
+                  {q}
+                </button>
+              ))}
             </div>
-          </footer>
-        </div>
-      )}
+          </div>
+        )}
 
-      {!isVisible && (
-        <button onClick={() => setIsVisible(true)} className="fixed bottom-6 right-6 z-[9999] bg-primary text-primary-foreground p-4 rounded-[22px] shadow-2xl hover:scale-110 transition-transform group">
-          <MessageCircle size={26} className="group-hover:rotate-12 transition-transform" />
-          {!hasSentFirstMessage && <span className="absolute top-2 right-2 w-3 h-3 bg-rose-500 rounded-full border-2 border-primary" />}
-        </button>
-      )}
+        <footer className="bg-card border-t border-border p-4">
+          <div className="flex gap-2 items-center">
+            <input
+              type="text"
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleSendMessage(userInput); }}
+              placeholder="Type a message..."
+              className="flex-1 bg-muted/50 border border-border/50 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+            />
+            <button onClick={() => { handleSendMessage(userInput); setUserInput(''); }} disabled={!userInput.trim() || isLoading} className="p-2.5 bg-primary text-primary-foreground rounded-xl shadow-lg disabled:opacity-50">
+              <Send size={18} />
+            </button>
+          </div>
+        </footer>
+      </div>
 
       <style>{`
         .animate-slide-up { animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
