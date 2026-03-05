@@ -14,13 +14,10 @@ const BlogPost: React.FC = () => {
     }, [slug]);
 
     const handleBack = () => {
-        // Navigate back to home route
         navigate('/');
-        // Instantly jump to #blogs without smooth scroll travelling
         setTimeout(() => {
             const el = document.getElementById('blogs');
             if (el) {
-                // Find navbar height roughly to offset
                 const y = el.getBoundingClientRect().top + window.scrollY - 80;
                 window.scrollTo({ top: y, behavior: 'instant' });
             }
@@ -32,23 +29,23 @@ const BlogPost: React.FC = () => {
             <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4">
                 <span className="text-6xl mb-6">🔍</span>
                 <h1 className="text-3xl font-display font-bold text-foreground mb-3">Post not found</h1>
-                <p className="text-muted-foreground mb-8 text-center">That blog post hasn't been written yet. Check back soon.</p>
-                <button onClick={handleBack} className="btn-primary">Back to all posts</button>
+                <p className="text-muted-foreground mb-8 text-center">That blog post hasn't been written yet.</p>
+                <button onClick={handleBack} className="btn-primary">Back to Posts</button>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-background text-foreground pb-24">
+        <div className="min-h-screen bg-background text-foreground pb-24 relative">
 
-            {/* ═══ Persistent sticky back button ═══ */}
-            <div className="fixed top-20 left-4 sm:left-6 lg:left-10 z-50">
+            {/* ═══ Persistent sticky back button (top) ═══ */}
+            <div className="fixed top-24 left-4 sm:left-6 lg:left-10 z-50">
                 <button
                     onClick={handleBack}
                     className="flex items-center gap-2 pr-4 pl-3 py-2 rounded-full bg-background/90 backdrop-blur-xl border border-border/60 text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-300 shadow-sm hover:shadow-md group"
                 >
                     <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
-                    <span>All posts</span>
+                    <span>Back to Posts</span>
                 </button>
             </div>
 
@@ -87,7 +84,7 @@ const BlogPost: React.FC = () => {
                     </span>
                 </div>
 
-                {/* ═══ Hero Image (Boxed, sharp, proper ratio) ═══ */}
+                {/* ═══ Hero Image ═══ */}
                 {post.coverImage && (
                     <div className="w-full mb-16 rounded-3xl overflow-hidden shadow-2xl border border-border/50 bg-muted/20">
                         <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full max-h-[500px]">
@@ -125,13 +122,13 @@ const BlogPost: React.FC = () => {
                 <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent mb-12" />
 
                 {/* Author card */}
-                <div className="p-8 rounded-3xl border border-border/50 bg-card/40 backdrop-blur-xl shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-6 relative overflow-hidden">
+                <div className="p-8 pb-10 rounded-3xl border border-border/50 bg-card/40 backdrop-blur-xl shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-6 relative overflow-hidden mb-8">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl" />
 
                     <div className="w-20 h-20 shrink-0 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-3xl font-display shadow-lg border-4 border-background">
                         R
                     </div>
-                    <div className="text-center sm:text-left relative z-10">
+                    <div className="text-center sm:text-left relative z-10 flex-1">
                         <h3 className="font-display font-bold text-xl text-foreground mb-2">Rahil Memdani</h3>
                         <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
                             Full-Stack Software Engineer specialising in data engineering, SaaS architecture, and enterprise-scale systems. Currently building predictive platforms for millions of users at Grow Indigo.
@@ -146,6 +143,17 @@ const BlogPost: React.FC = () => {
                             <ArrowUpRight size={16} className="transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </a>
                     </div>
+                </div>
+
+                {/* ═══ Bottom back button ═══ */}
+                <div className="flex justify-center mt-6">
+                    <button
+                        onClick={handleBack}
+                        className="flex items-center gap-2 pr-5 pl-4 py-3 rounded-full bg-primary/5 hover:bg-primary/10 border border-primary/20 text-sm font-semibold text-foreground transition-all duration-300 shadow-sm hover:shadow-md group"
+                    >
+                        <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform text-primary" />
+                        <span>Back to Posts</span>
+                    </button>
                 </div>
 
             </div>

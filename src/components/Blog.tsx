@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Calendar, Clock, Tag, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar, Clock, Tag, BookOpen, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { blogs } from '../data/blogs';
 
 const Blog = React.memo(() => {
@@ -8,7 +8,6 @@ const Blog = React.memo(() => {
     const [current, setCurrent] = useState(0);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-    // Allow manual scroll on desktop/touch
     const scroll = (direction: 'left' | 'right') => {
         if (!scrollContainerRef.current) return;
 
@@ -16,26 +15,26 @@ const Blog = React.memo(() => {
         const cardElement = container.firstElementChild as HTMLElement;
         if (!cardElement) return;
 
-        // gap is 24px (gap-6)
-        const scrollAmount = cardElement.offsetWidth + 24;
+        // gap is 16px (gap-4) or 20px depending on screen, using a safe baseline offset
+        const gap = window.innerWidth >= 1024 ? 24 : 16;
+        const scrollAmount = cardElement.offsetWidth + gap;
 
         if (direction === 'left') {
             container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            setCurrent((prev) => Math.max(0, prev - 1));
         } else {
             container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            setCurrent((prev) => Math.min(blogs.length - 1, prev + 1));
         }
     };
 
-    // Update current dot based on scroll position
     useEffect(() => {
         const handleScroll = () => {
             if (!scrollContainerRef.current) return;
             const container = scrollContainerRef.current;
             const cardWidth = (container.firstElementChild as HTMLElement)?.offsetWidth || 0;
             if (cardWidth === 0) return;
-            const newCurrent = Math.round(container.scrollLeft / (cardWidth + 24));
+
+            const gap = window.innerWidth >= 1024 ? 24 : 16;
+            const newCurrent = Math.round(container.scrollLeft / (cardWidth + gap));
             setCurrent(newCurrent);
         };
 
@@ -47,174 +46,148 @@ const Blog = React.memo(() => {
     }, []);
 
     return (
-        <section id="blogs" className="section-padding relative noise-bg overflow-hidden py-24 lg:py-32">
-            {/* Premium Background Elements */}
+        <section id="blogs" className="section-padding relative noise-bg overflow-hidden py-20 lg:py-28">
+            {/* Background Elements */}
             <div
-                className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-[0.03] pointer-events-none"
-                style={{ background: 'radial-gradient(circle, var(--gradient-end), transparent)', filter: 'blur(120px)' }}
+                className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-[0.03] pointer-events-none"
+                style={{ background: 'radial-gradient(circle, var(--gradient-end), transparent)', filter: 'blur(100px)' }}
             />
             <div
-                className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full opacity-[0.04] pointer-events-none"
+                className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-[0.04] pointer-events-none"
                 style={{ background: 'radial-gradient(circle, var(--gradient-start), transparent)', filter: 'blur(100px)' }}
             />
-            <div className="absolute inset-0 bg-background/50 backdrop-blur-[2px] pointer-events-none"></div>
 
             <div className="container-custom relative z-10 box-border">
 
                 {/* ═══ 2-Column Layout ═══ */}
-                <div className="lg:grid lg:grid-cols-[1fr_1.5fr] xl:grid-cols-[380px_1fr] lg:gap-12 xl:gap-16 items-center">
+                <div className="lg:grid lg:grid-cols-[280px_1fr] xl:grid-cols-[340px_1fr] lg:gap-10 xl:gap-14 items-center">
 
-                    {/* ── LEFT PANEL: Header ── */}
-                    <div className="mb-12 lg:mb-0 lg:sticky lg:top-32 animate-fade-in-up pr-4">
-                        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-5 border border-primary/20 shadow-sm">
+                    {/* ── LEFT PANEL: Header & Arrows ── */}
+                    <div className="mb-10 lg:mb-0 lg:sticky lg:top-32 animate-fade-in-up pr-2">
+                        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-5 border border-primary/20">
                             <BookOpen size={14} />
-                            Insights & Engineering
+                            Insights
                         </span>
-                        <h2 className="text-4xl sm:text-5xl lg:text-5xl font-display font-extrabold leading-[1.15] mb-6 tracking-tight">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold leading-[1.15] mb-5 tracking-tight">
                             Inside the <span className="gradient-text">Process</span>
                         </h2>
-                        <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-8">
-                            Real world technical deep dives, architectural decisions, and product lessons learned from scaling platforms for millions of users. No filler, just what works.
+                        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-8">
+                            Technical deep dives, architecture decisions, and product lessons from scaling platforms for millions of users.
                         </p>
 
-                        <div className="h-px w-full bg-gradient-to-r from-primary/40 via-primary/20 to-transparent mb-8" />
+                        {/* Desktop Navigation Arrows inside Left Panel */}
+                        <div className="hidden lg:flex flex-row items-center gap-3 mb-8">
+                            <button
+                                onClick={() => scroll('left')}
+                                className="w-11 h-11 rounded-full border border-border/50 bg-background/80 hover:bg-muted/80 backdrop-blur-md flex items-center justify-center text-foreground transition-all duration-300 hover:scale-[1.05] shadow-sm hover:border-border"
+                                aria-label="Previous posts"
+                            >
+                                <ChevronLeft size={20} />
+                            </button>
+                            <button
+                                onClick={() => scroll('right')}
+                                className="w-11 h-11 rounded-full border border-border/50 bg-background/80 hover:bg-muted/80 backdrop-blur-md flex items-center justify-center text-foreground transition-all duration-300 hover:scale-[1.05] shadow-sm hover:border-border"
+                                aria-label="Next posts"
+                            >
+                                <ChevronRight size={20} />
+                            </button>
+                        </div>
 
-                        <div className="flex items-center gap-3 text-sm font-medium text-foreground mb-8">
-                            <span className="relative flex h-3 w-3">
+                        <div className="flex items-center gap-3 text-sm font-medium text-foreground mb-6">
+                            <span className="relative flex h-2.5 w-2.5">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
                             </span>
                             <span>{blogs.length} posts published</span>
                         </div>
 
-                        <div className="flex flex-wrap gap-2 mb-8">
-                            {['Data Engineering', 'Architecture', 'AgriTech', 'Side Projects'].map((tag) => (
-                                <span
-                                    key={tag}
-                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-muted/50 text-muted-foreground border border-border/50"
-                                >
-                                    <Tag size={10} />
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
-
                         {/* Desktop Dot Indicators */}
-                        <div className="hidden lg:flex items-center gap-2 mt-4">
+                        <div className="hidden lg:flex items-center gap-1.5 mt-2">
                             {blogs.map((_, i) => (
                                 <div
                                     key={i}
-                                    className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'bg-primary w-6' : 'bg-border w-2'}`}
+                                    className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'bg-primary w-5' : 'bg-border/60 w-1.5'}`}
                                 />
                             ))}
                         </div>
                     </div>
 
 
-                    {/* ── RIGHT PANEL: Carousel & Arrows ── */}
-                    <div className="relative animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+                    {/* ── RIGHT PANEL: Smaller Carousel ── */}
+                    <div className="relative animate-fade-in-up" style={{ animationDelay: '150ms' }}>
 
-                        {/* Desktop Left/Right Arrows for Carousel — Inside right panel, flanking the cards */}
-                        <button
-                            onClick={() => scroll('left')}
-                            disabled={current === 0}
-                            className="hidden lg:flex absolute top-1/2 -translate-y-1/2 -left-6 xl:-left-8 z-20 w-12 h-12 rounded-full border border-border/50 bg-background/90 backdrop-blur-xl items-center justify-center text-foreground transition-all duration-300 hover:scale-110 hover:border-primary/40 hover:text-primary shadow-xl disabled:opacity-0 pointer-events-auto"
-                            aria-label="Previous post"
-                        >
-                            <ChevronLeft size={22} />
-                        </button>
-
-                        <button
-                            onClick={() => scroll('right')}
-                            disabled={current >= blogs.length - 1} // Simplified logic assumes 1 card visible
-                            className="hidden lg:flex absolute top-1/2 -translate-y-1/2 -right-6 xl:-right-8 z-20 w-12 h-12 rounded-full border border-border/50 bg-background/90 backdrop-blur-xl items-center justify-center text-foreground transition-all duration-300 hover:scale-110 hover:border-primary/40 hover:text-primary shadow-xl disabled:opacity-0 pointer-events-auto"
-                            aria-label="Next post"
-                        >
-                            <ChevronRight size={22} />
-                        </button>
-
-                        {/* Mobile Arrows */}
-                        <div className="lg:hidden absolute top-1/2 -translate-y-1/2 left-2 right-2 flex justify-between z-20 pointer-events-none">
-                            <button
-                                onClick={() => scroll('left')}
-                                className={`w-10 h-10 rounded-full bg-background/90 shadow-lg border border-border flex items-center justify-center text-foreground pointer-events-auto transition-opacity duration-300 ${current === 0 ? 'opacity-0' : 'opacity-100'}`}
-                            >
-                                <ChevronLeft size={20} />
-                            </button>
-                            <button
-                                onClick={() => scroll('right')}
-                                className={`w-10 h-10 rounded-full bg-background/90 shadow-lg border border-border flex items-center justify-center text-foreground pointer-events-auto transition-opacity duration-300 ${current >= blogs.length - 1 ? 'opacity-0' : 'opacity-100'}`}
-                            >
-                                <ChevronRight size={20} />
-                            </button>
-                        </div>
-
-
-                        {/* Scroll Container */}
+                        {/* Scroll Container (No Scrollbars) */}
                         <div
                             ref={scrollContainerRef}
-                            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide py-4 px-1"
+                            className="flex gap-4 sm:gap-5 lg:gap-6 overflow-x-auto snap-x snap-mandatory py-4 px-1 scrollbar-none"
+                            style={{
+                                msOverflowStyle: 'none',
+                                scrollbarWidth: 'none',
+                                WebkitOverflowScrolling: 'touch'
+                            }}
                         >
-                            {blogs.map((post, index) => (
+                            {/* Inject CSS to absolutely hide webkit scrollbars */}
+                            <style dangerouslySetInnerHTML={{
+                                __html: `
+                .scrollbar-none::-webkit-scrollbar { display: none; }
+              `}} />
+
+                            {blogs.map((post) => (
                                 <article
                                     key={post.slug}
                                     onClick={() => navigate(`/blog/${post.slug}`)}
-                                    className="group w-[85vw] sm:w-[400px] lg:w-[100%] xl:w-[440px] shrink-0 snap-center relative overflow-hidden rounded-[2rem] border border-border/40 bg-card/40 backdrop-blur-xl transition-all duration-500 hover:shadow-2xl hover:border-primary/30 cursor-pointer flex flex-col h-full"
-                                    style={{
-                                        boxShadow: '0 10px 40px -10px rgba(0,0,0,0.05)',
-                                    }}
+                                    // Smaller widths on phone (75vw), tablet (340px) and desktop (360px)
+                                    className="group w-[78vw] sm:w-[320px] lg:w-[350px] xl:w-[380px] shrink-0 snap-center relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] border border-border/50 bg-card/30 hover:bg-card/60 backdrop-blur-lg transition-all duration-400 hover:shadow-xl hover:border-primary/20 cursor-pointer flex flex-col h-full"
                                 >
-                                    <div className="absolute inset-0 bg-card/60 dark:bg-card/80 backdrop-blur-xl rounded-[2rem]" />
-
-                                    {/* Image Section */}
-                                    <div className="relative h-[220px] sm:h-[260px] w-full overflow-hidden shrink-0">
+                                    {/* Image Section - Reduced height */}
+                                    <div className="relative h-[180px] sm:h-[200px] w-full overflow-hidden shrink-0">
                                         <img
                                             src={post.coverImage}
                                             alt={post.title}
-                                            className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[800ms] ease-out group-hover:scale-105"
+                                            className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                                             loading="lazy"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
 
-                                        <div className="absolute top-5 left-5">
-                                            <span className="inline-flex items-center px-3.5 py-1.5 rounded-full text-[11px] font-bold tracking-wide uppercase bg-black/60 backdrop-blur-md text-white shadow-sm border border-white/10">
+                                        <div className="absolute top-4 left-4">
+                                            <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-black/60 backdrop-blur-md text-white border border-white/10 shadow-sm">
                                                 {post.category}
                                             </span>
                                         </div>
                                     </div>
 
                                     {/* Content Section */}
-                                    <div className="p-6 sm:p-8 flex flex-col flex-1 relative z-10 bg-gradient-to-b from-transparent to-background/5">
-                                        <div className="flex items-center gap-4 text-xs font-semibold text-muted-foreground mb-4">
+                                    <div className="p-5 sm:p-6 flex flex-col flex-1 relative z-10">
+                                        <div className="flex items-center gap-3 text-[11px] sm:text-xs font-medium text-muted-foreground mb-3">
                                             <span className="flex items-center gap-1.5">
-                                                <Calendar size={14} className="text-primary/80" />
+                                                <Calendar size={13} className="text-primary/70" />
                                                 {post.date}
                                             </span>
                                             <span className="flex items-center gap-1.5">
-                                                <Clock size={14} className="text-primary/80" />
+                                                <Clock size={13} className="text-primary/70" />
                                                 {post.readTime}
                                             </span>
                                         </div>
 
-                                        <h3 className="text-xl sm:text-2xl font-display font-bold text-foreground group-hover:text-primary transition-colors duration-400 mb-3 leading-snug line-clamp-2">
+                                        <h3 className="text-lg sm:text-xl font-display font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-2.5 leading-snug line-clamp-2">
                                             {post.title}
                                         </h3>
 
-                                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 mb-8 flex-1">
+                                        <p className="text-muted-foreground text-[13px] sm:text-sm leading-relaxed line-clamp-3 mb-6 flex-1 opacity-90">
                                             {post.excerpt}
                                         </p>
 
-                                        <div className="pt-6 border-t border-border/40 flex items-center justify-between mt-auto">
-                                            <div className="flex flex-wrap gap-2">
+                                        <div className="pt-4 sm:pt-5 border-t border-border/30 flex items-center justify-between mt-auto">
+                                            <div className="flex flex-wrap gap-1.5">
                                                 {post.tags.slice(0, 2).map((tag) => (
-                                                    <span key={tag} className="text-[11px] font-semibold tracking-wide text-foreground bg-muted/60 px-3 py-1 rounded-md border border-border/50">
+                                                    <span key={tag} className="text-[10px] font-semibold tracking-wide text-muted-foreground bg-muted/40 px-2 py-1 rounded border border-border/30">
                                                         {tag}
                                                     </span>
                                                 ))}
                                             </div>
 
-                                            <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 shadow-sm">
-                                                <ArrowRight size={18} className="transform group-hover:translate-x-0.5 transition-transform" />
+                                            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                                                <ArrowRight size={14} className="transform group-hover:translate-x-0.5 transition-transform" />
                                             </div>
                                         </div>
                                     </div>
@@ -222,14 +195,33 @@ const Blog = React.memo(() => {
                             ))}
                         </div>
 
-                        {/* Mobile Scroll Indicators */}
-                        <div className="flex items-center justify-center gap-2 mt-4 lg:hidden">
-                            {blogs.map((_, i) => (
-                                <div
-                                    key={i}
-                                    className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'bg-primary w-6' : 'bg-border w-2'}`}
-                                />
-                            ))}
+                        {/* Mobile Scroll Indicators & Arrows below carousel */}
+                        <div className="flex flex-col items-center gap-4 mt-6 lg:hidden">
+                            <div className="flex items-center gap-1.5">
+                                {blogs.map((_, i) => (
+                                    <div
+                                        key={i}
+                                        className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'bg-primary w-5' : 'bg-border/60 w-1.5'}`}
+                                    />
+                                ))}
+                            </div>
+
+                            <div className="flex items-center gap-3">
+                                <button
+                                    onClick={() => scroll('left')}
+                                    className="w-10 h-10 rounded-full border border-border/50 bg-background/50 backdrop-blur-md flex items-center justify-center text-foreground active:scale-95 transition-all"
+                                    aria-label="Previous"
+                                >
+                                    <ChevronLeft size={18} />
+                                </button>
+                                <button
+                                    onClick={() => scroll('right')}
+                                    className="w-10 h-10 rounded-full border border-border/50 bg-background/50 backdrop-blur-md flex items-center justify-center text-foreground active:scale-95 transition-all"
+                                    aria-label="Next"
+                                >
+                                    <ChevronRight size={18} />
+                                </button>
+                            </div>
                         </div>
 
                     </div>
