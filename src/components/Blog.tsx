@@ -139,11 +139,11 @@ const Blog = React.memo(() => {
                                 <article
                                     key={post.slug}
                                     onClick={() => navigate(`/blog/${post.slug}`)}
-                                    className="relative overflow-hidden rounded-[2rem] border border-border/40 bg-card/40 backdrop-blur-xl shrink-0 snap-start flex flex-col h-auto cursor-pointer"
-                                    style={{ width: `${CARD_WIDTH}px` }}
+                                    className="relative overflow-hidden rounded-[1.2rem] border border-border/40 bg-card/40 backdrop-blur-xl shrink-0 snap-start flex flex-col h-auto cursor-pointer"
+                                    style={{ width: '220px' }}
                                 >
                                     {/* Image */}
-                                    <div className="relative h-[200px] w-full overflow-hidden shrink-0">
+                                    <div className="relative h-[110px] w-full overflow-hidden shrink-0">
                                         <img
                                             src={post.coverImage}
                                             alt={post.title}
@@ -151,35 +151,35 @@ const Blog = React.memo(() => {
                                             loading="lazy"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                                        <div className="absolute top-5 left-5">
-                                            <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase bg-black/60 backdrop-blur-md text-white border border-white/10">
+                                        <div className="absolute top-3 left-3">
+                                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[8px] font-bold tracking-widest uppercase bg-black/60 backdrop-blur-md text-white border border-white/10">
                                                 {post.category}
                                             </span>
                                         </div>
                                     </div>
 
                                     {/* Content */}
-                                    <div className="p-5 md:p-8 flex flex-col flex-1">
-                                        <div className="flex items-center gap-3 text-[11px] font-semibold text-muted-foreground/80 mb-4 uppercase tracking-[0.15em]">
-                                            <Calendar size={13} className="text-primary/70" />
+                                    <div className="p-4 flex flex-col flex-1">
+                                        <div className="flex items-center gap-2 text-[9px] font-semibold text-muted-foreground/80 mb-2 uppercase tracking-[0.1em]">
+                                            <Calendar size={10} className="text-primary/70" />
                                             {post.date}
                                         </div>
 
-                                        <h3 className="text-2xl font-display font-bold text-foreground mb-3 leading-[1.25] line-clamp-2">
+                                        <h3 className="text-base font-display font-bold text-foreground mb-1.5 leading-[1.3] line-clamp-2">
                                             {post.title}
                                         </h3>
 
-                                        <p className="text-muted-foreground text-[14px] leading-relaxed line-clamp-2 mb-8 flex-1 opacity-90 font-light">
+                                        <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2 mb-4 flex-1 opacity-90 font-light">
                                             {post.excerpt}
                                         </p>
 
-                                        <div className="pt-6 border-t border-border/30 flex items-center justify-between mt-auto">
-                                            <span className="text-xs font-bold text-primary/90 flex items-center gap-2">
+                                        <div className="pt-3 border-t border-border/30 flex items-center justify-between mt-auto">
+                                            <span className="text-[9px] font-bold text-primary/90 flex items-center gap-1.5">
                                                 READ ARTICLE
-                                                <ArrowRight size={14} />
+                                                <ArrowRight size={10} />
                                             </span>
-                                            <span className="flex items-center gap-2 text-[11px] text-muted-foreground font-medium">
-                                                <Clock size={13} />
+                                            <span className="flex items-center gap-1.5 text-[9px] text-muted-foreground font-medium">
+                                                <Clock size={10} />
                                                 {post.readTime}
                                             </span>
                                         </div>
