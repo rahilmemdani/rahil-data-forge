@@ -141,7 +141,7 @@ const Hero = () => {
               <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-[10px] sm:text-xs font-medium text-primary">Open to opportunities</span>
             </div> */}
-
+            {/* . */}
             {/* Name */}
             <div className="space-y-2 sm:space-y-3">
               <h1 className="text-[2.75rem] leading-[0.95] sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-display font-bold tracking-tight">
