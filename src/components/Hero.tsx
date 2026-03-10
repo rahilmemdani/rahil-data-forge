@@ -137,10 +137,10 @@ const Hero = () => {
           <div className="lg:col-span-7 space-y-5 sm:space-y-6 animate-fade-in-up">
 
             {/* Status badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-primary/8 border border-primary/15 backdrop-blur-sm">
+            {/* <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-primary/8 border border-primary/15 backdrop-blur-sm">
               <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-[10px] sm:text-xs font-medium text-primary">Open to opportunities</span>
-            </div>
+            </div> */}
 
             {/* Name */}
             <div className="space-y-2 sm:space-y-3">
