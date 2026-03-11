@@ -27,10 +27,14 @@ const SubstackCard: React.FC<SubstackCardProps> = ({ className, style, isMobile 
     }, []);
 
     const content = (
-        <div className=" Substacks-embed-container w-full h-full p-1">
+        <div className="Substack-embed-wrapper w-full h-full flex flex-col items-center justify-center p-0.5">
             <div 
                 className="substack-post-embed" 
-                style={{ background: 'transparent' }}
+                style={{ 
+                    background: 'transparent',
+                    width: '100%',
+                    margin: '0 auto'
+                }}
             >
                 <p lang="en">The One Thing AI Will Never Automate by Rahil</p>
                 <p>on the difference between processing and presence</p>
@@ -47,8 +51,8 @@ const SubstackCard: React.FC<SubstackCardProps> = ({ className, style, isMobile 
     if (isMobile) {
         return (
             <article
-                className={`relative overflow-hidden rounded-[1.2rem] border border-border/40 bg-card/40 backdrop-blur-xl shrink-0 snap-start flex flex-col h-auto ${className}`}
-                style={{ ...style, width: '220px', minHeight: '300px' }}
+                className={`relative overflow-hidden rounded-[1.2rem] border border-border/40 bg-card/40 backdrop-blur-xl shrink-0 snap-start flex flex-col ${className}`}
+                style={{ ...style, width: '220px', height: '280px' }}
             >
                 {content}
             </article>
@@ -57,7 +61,7 @@ const SubstackCard: React.FC<SubstackCardProps> = ({ className, style, isMobile 
 
     return (
         <motion.article
-            style={style}
+            style={{ ...style, minHeight: '400px' }}
             whileHover={{ y: -10, transition: { duration: 0.3 } }}
             className={`relative overflow-hidden rounded-[2rem] border border-border/40 bg-card/40 backdrop-blur-xl hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] hover:border-primary/30 flex flex-col h-auto ${className}`}
         >
