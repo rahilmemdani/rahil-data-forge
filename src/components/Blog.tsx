@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Calendar, Clock, BookOpen, ArrowRight, ChevronLeft, ChevronRight, Briefcase } from 'lucide-react';
 import { motion, useMotionValue, useAnimation } from 'framer-motion';
 import { blogs } from '../data/blogs';
+import SubstackCard from './SubstackCard';
 
 const CARD_WIDTH = 340;
 const CARD_GAP = 24;
@@ -29,14 +30,14 @@ const Blog = React.memo(() => {
     // Calculate drag constraint
     useEffect(() => {
         if (contentRef.current && carouselRef.current) {
-            const totalWidth = blogs.length * CARD_STRIDE - CARD_GAP;
+            const totalWidth = (blogs.length + 1) * CARD_STRIDE - CARD_GAP;
             const containerWidth = carouselRef.current.offsetWidth;
             setDragConstraint(Math.max(0, totalWidth - containerWidth));
         }
     }, []);
 
     const snapToIndex = useCallback((index: number) => {
-        const clamped = Math.max(0, Math.min(index, blogs.length - 1));
+        const clamped = Math.max(0, Math.min(index, blogs.length));
         setCurrentIndex(clamped);
         controls.start({
             x: -clamped * CARD_STRIDE,
@@ -135,6 +136,7 @@ const Blog = React.memo(() => {
 
                         {/* ── NATIVE SCROLL (Mobile & Tablet) ── */}
                         <div className="lg:hidden w-screen -ml-6 sm:-ml-8 px-6 sm:px-8 pb-8 overflow-x-auto snap-x snap-mandatory scroll-px-6 sm:scroll-px-8 flex gap-4 hide-scrollbar">
+                            <SubstackCard isMobile={true} />
                             {blogs.map((post, index) => (
                                 <article
                                     key={post.slug}
@@ -222,6 +224,15 @@ const Blog = React.memo(() => {
                                     onDragEnd={handleDragEnd}
                                     className="flex touch-pan-y cursor-grab active:cursor-grabbing transform-gpu py-5 pr-6 lg:px-4"
                                 >
+                                    <SubstackCard 
+                                        style={{ 
+                                            width: CARD_WIDTH, 
+                                            marginRight: CARD_GAP, 
+                                            flexShrink: 0,
+                                            scale: currentIndex === 0 ? 1 : 0.96,
+                                            opacity: currentIndex === 0 ? 1 : 0.7,
+                                        }} 
+                                    />
                                     {blogs.map((post, index) => (
                                         <motion.article
                                             key={post.slug}
@@ -229,8 +240,8 @@ const Blog = React.memo(() => {
                                             style={{ width: CARD_WIDTH, marginRight: CARD_GAP, flexShrink: 0 }}
                                             whileHover={{ y: -10, transition: { duration: 0.3 } }}
                                             animate={{
-                                                scale: index === currentIndex ? 1 : 0.96,
-                                                opacity: index === currentIndex ? 1 : 0.7,
+                                                scale: index + 1 === currentIndex ? 1 : 0.96,
+                                                opacity: index + 1 === currentIndex ? 1 : 0.7,
                                             }}
                                             transition={{ duration: 0.4 }}
                                             className="relative overflow-hidden rounded-[2rem] border border-border/40 bg-card/40 backdrop-blur-xl hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] hover:border-primary/30 cursor-pointer flex flex-col h-auto"
@@ -298,7 +309,7 @@ const Blog = React.memo(() => {
                                     </button>
                                     <button
                                         onClick={() => snapToIndex(currentIndex + 1)}
-                                        disabled={currentIndex >= blogs.length - 1}
+                                        disabled={currentIndex >= blogs.length}
                                         className="absolute right-4 top-1/2 -translate-y-1/2 z-30 hidden lg:flex items-center justify-center w-14 h-14 rounded-full border border-border/50 bg-white/95 backdrop-blur-md hover:bg-slate-50 disabled:opacity-30 transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95 disabled:cursor-not-allowed group"
                                         aria-label="Next slide"
                                     >
