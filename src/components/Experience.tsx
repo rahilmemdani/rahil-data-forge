@@ -71,7 +71,7 @@ const Experience = React.memo(() => {
     {
       name: "AI Innovation Pioneer Award",
       issuer: "Grow Indigo",
-      year: "2024",
+      year: "2026",
       contribution: "",
       images: ["/Award1.jpeg", "/Award2.jpeg", "/Award3.jpeg"],
       type: "award" as const,
