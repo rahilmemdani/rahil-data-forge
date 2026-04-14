@@ -68,10 +68,18 @@ const Experience = React.memo(() => {
       image: "/snowflake-award.jpeg",
       type: "award" as const,
     },
+    {
+      name: "Excellence & Promotion Award",
+      issuer: "Grow Indigo",
+      year: "2024",
+      contribution: "Recognized for AI Innovation Pioneer Award",
+      images: ["/Award1.jpeg", "/Award2.jpeg", "/Award3.jpeg"],
+      type: "award" as const,
+    },
   ];
 
   const openModal = (cert: any) => {
-    if (cert.image) {
+    if (cert.image || cert.images) {
       setModalImage(cert);
       document.body.style.overflow = 'hidden';
     }
@@ -302,9 +310,9 @@ const Experience = React.memo(() => {
                         )}
 
                         <div className="relative z-10 p-4 flex items-center gap-3 sm:gap-4">
-                          {cert.type === 'award' && cert.image ? (
+                          {cert.type === 'award' && (cert.image || cert.images) ? (
                             <div className="shrink-0 w-10 h-10 rounded-xl overflow-hidden border border-white/20 shadow-inner">
-                              <img src={cert.image} alt={cert.name} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+                              <img src={cert.image || (cert.images && cert.images[0])} alt={cert.name} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
                           ) : (
                             <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center shadow-inner ${cert.type === 'award' ? 'bg-white/20 text-white' : 'bg-background border border-border/40 text-primary'
@@ -383,15 +391,33 @@ const Experience = React.memo(() => {
 
               {/* Body */}
               <div className="p-6 sm:p-8 overflow-y-auto">
-                <div className="rounded-2xl overflow-hidden bg-black/5 border border-border/20 mb-6 shadow-inner">
-                  <img
-                    src={modalImage.image}
-                    alt={modalImage.name}
-                    className="w-full h-auto max-h-[50vh] object-contain hover:scale-[1.02] transition-transform duration-500"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
+                {modalImage.image && (
+                  <div className="rounded-2xl overflow-hidden bg-black/5 border border-border/20 mb-6 shadow-inner">
+                    <img
+                      src={modalImage.image}
+                      alt={modalImage.name}
+                      className="w-full h-auto max-h-[50vh] object-contain hover:scale-[1.02] transition-transform duration-500"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                )}
+
+                {modalImage.images && (
+                  <div className="flex flex-col gap-4 mb-6">
+                    {modalImage.images.map((img: string, i: number) => (
+                      <div key={i} className="rounded-2xl overflow-hidden bg-black/5 border border-border/20 shadow-inner">
+                        <img
+                          src={img}
+                          alt={`${modalImage.name} - ${i + 1}`}
+                          className="w-full h-auto max-h-[50vh] object-contain hover:scale-[1.02] transition-transform duration-500"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 {modalImage.contribution && (
                   <div className="p-5 sm:p-6 rounded-2xl bg-blue-500/5 border border-blue-500/10 backdrop-blur-sm">
