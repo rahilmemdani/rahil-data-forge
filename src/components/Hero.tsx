@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Download, Github, Linkedin, Mail, ExternalLink, ChevronDown, ArrowRight, AlertCircle, X } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import ScheduleConsultationModal from './ScheduleConsultationModal';
+import { trackEvent } from '../lib/analytics';
 
 const Hero = () => {
   const { theme } = useTheme();
@@ -77,6 +78,12 @@ const Hero = () => {
   }, [typingText, currentSkillIndex, isTyping, skills]);
 
   const handleDownloadResume = () => {
+    trackEvent({
+      action: 'download_resume',
+      category: 'engagement',
+      label: 'Hero Section',
+    });
+    
     const link = document.createElement('a');
     link.href = '/Rahil_Memdani_Resume.pdf';
     link.download = 'Rahil_Memdani_Resume.pdf';
@@ -86,6 +93,11 @@ const Hero = () => {
   };
 
   const scrollToProjects = () => {
+    trackEvent({
+      action: 'view_projects_click',
+      category: 'navigation',
+      label: 'Hero Section',
+    });
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -241,7 +253,14 @@ const Hero = () => {
 
               {/* Mobile-only Schedule Call Button */}
               <button
-                onClick={() => setShowBookingOptions(true)}
+                onClick={() => {
+                  trackEvent({
+                    action: 'schedule_call_click',
+                    category: 'engagement',
+                    label: 'Hero Section',
+                  });
+                  setShowBookingOptions(true);
+                }}
                 className="sm:hidden btn-secondary text-sm flex-1 justify-center"
               >
                 Schedule Call
@@ -266,6 +285,11 @@ const Hero = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackEvent({
+                    action: 'social_click',
+                    category: 'outbound',
+                    label: social.label
+                  })}
                   className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center bg-muted/40 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
                   aria-label={social.label}
                 >
