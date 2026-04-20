@@ -146,7 +146,7 @@ const BlogPost: React.FC = () => {
                                 Full-Stack Software Engineer building enterprise-scale systems and data platforms. Currently building for millions of users at Grow Indigo.
                             </p>
                             <a
-                                href="https://linkedin.com/in/rahilmemdani"
+                                href="https://www.linkedin.com/in/rahil-memdani-8968681ab"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-primary hover:underline group"
