@@ -65,7 +65,7 @@ const Projects = React.memo(() => {
       description: "20+ years of legacy in event management. Transforming ideas into measurable impact, collaborating with international brands as a top global agency. The vision of three industry stalwarts gave Seventy Seven its shape, grounded in passion and the courage to do things differently.",
       tagline: "Where every event becomes unforgettable",
       icon: <Award className="w-5 h-5" />, gradient: "from-yellow-500 to-amber-600",
-      url: "https://7ty7.vercel.app",
+      url: "https://7ty7.com",
     },
     {
       id: 8, category: "Fitness & Asset Management", title: "TechFit Active",
