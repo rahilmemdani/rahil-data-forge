@@ -83,7 +83,7 @@ const Hero = () => {
       category: 'engagement',
       label: 'Hero Section',
     });
-    
+
     const link = document.createElement('a');
     link.href = '/Rahil_Memdani_Resume.pdf';
     link.download = 'Rahil_Memdani_Resume.pdf';
@@ -319,7 +319,7 @@ const Hero = () => {
               <div className="relative w-full h-full rounded-full p-[3px] bg-background shadow-xl">
                 <div className="w-full h-full rounded-full overflow-hidden bg-muted">
                   <img
-                    src="/rahil.jpeg"
+                    src="/rahil1.jpeg"
                     alt="Rahil Memdani"
                     className="w-full h-full object-cover"
                     loading="eager"
