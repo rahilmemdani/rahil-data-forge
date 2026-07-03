@@ -85,7 +85,7 @@ const ScheduleConsultationModal = ({
 
                 {/* Call button */}
                 <a
-                  href="tel:+919167156829"
+                  href="tel:+61428020932"
                   className="bg-gray-900 hover:bg-gray-800 text-white font-medium flex items-center justify-center rounded-md p-3"
                 >
                   <Phone className="h-4 w-4 mr-2" />
