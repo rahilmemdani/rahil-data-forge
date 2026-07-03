@@ -69,7 +69,7 @@ const About = React.memo(() => {
           <div className="space-y-6 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
             <div className="space-y-4 text-base md:text-lg leading-relaxed text-muted-foreground">
               <p>
-                As a <span className="text-foreground font-medium">Full-Stack Software Engineer</span> with 4+ years at a
+                As a <span className="text-foreground font-medium">Full-Stack Software Engineer</span> with 4 yrs 10 months at a
                 Series B startup ($24M funded, 300+ employees), I specialize in building
                 end-to-end solutions that drive business intelligence and operational efficiency.
               </p>
@@ -79,20 +79,29 @@ const About = React.memo(() => {
                 15+ states with systems managing 7M+ acres of agricultural operations.
               </p>
               <p>
-                I combine <span className="text-foreground font-medium">Snowflake, React, Node.js, and .NET Core</span> to
-                create solutions that improve accuracy by 25-30% and reduce processing errors by 40%.
+                Now based in <span className="text-foreground font-medium">Perth, Western Australia</span>, pursuing a{' '}
+                <span className="gradient-text font-semibold">Master of Computer Science</span> at Edith Cowan University —
+                combining deep enterprise experience with cutting-edge academic research.
               </p>
             </div>
 
-            {/* Current Focus Box */}
-            <div className="p-5 rounded-2xl border border-primary/20 bg-primary/5">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                <span className="text-sm font-semibold text-primary font-mono">current_focus:</span>
+            {/* Aus + ECU highlight box */}
+            <div className="p-5 rounded-2xl border border-emerald-500/20 bg-emerald-500/5">
+              <div className="flex flex-wrap items-center gap-3 mb-3">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                  📍 Perth, WA — Australia
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20">
+                  🎓 M.CS — Edith Cowan University
+                </span>
+              </div>
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                <span className="text-sm font-semibold text-blue-500 dark:text-blue-400 font-mono">availability:</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Driving SaaS platform transformation to multi-tenant architecture at Grow Indigo,
-                enabling global scalability for enterprise agritech solutions.
+                Open to <span className="text-foreground font-medium">part-time developer roles</span>, freelance projects, and{' '}
+                <span className="text-foreground font-medium">Work Integrated Learning (WIL)</span> opportunities across Perth and remote Australia.
               </p>
             </div>
           </div>

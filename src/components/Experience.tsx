@@ -8,7 +8,7 @@ const Experience = React.memo(() => {
     {
       company: "Grow Indigo",
       position: "Software Development Engineer I → II",
-      duration: "Aug 2021 - Present",
+      duration: "Aug 2021 - June 2026",
       location: "Mumbai, India",
       type: "Full-time",
       description:
@@ -59,6 +59,13 @@ const Experience = React.memo(() => {
       name: "Docker for Developers",
       issuer: "LinkedIn Learning",
       icon: <Database className="w-4 h-4" />
+    },
+    {
+      name: "Thoughtworks' Consultant Developer Virtual Experience",
+      issuer: "Prosple · Thoughtworks",
+      year: "2026",
+      icon: <Code className="w-4 h-4" />,
+      link: "https://prosple.com/verifier?id=753d30d0-75de-11f1-b5ce-f3c0bc5ff909"
     },
     {
       name: "Data for Good – APJ Award 2025",
@@ -256,6 +263,16 @@ const Experience = React.memo(() => {
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white mb-6 shadow-lg shadow-purple-500/20 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                     <Users size={24} />
                   </div>
+
+                  {/* ECU Masters */}
+                  <div className="mb-5 p-4 rounded-2xl bg-muted/20 border border-border/20">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-violet-500/10 text-violet-500 border border-violet-500/20">🎓 Current</span>
+                    </div>
+                    <p className="text-sm sm:text-base font-semibold text-foreground">Master of Computer Science</p>
+                    <p className="text-xs text-primary font-medium mt-0.5">Edith Cowan University, Perth WA</p>
+                  </div>
+
                   <h4 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2">University of Mumbai</h4>
                   <p className="text-sm text-primary mb-6">Mumbai, India</p>
 

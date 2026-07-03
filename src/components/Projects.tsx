@@ -14,6 +14,7 @@ interface Project {
   icon: React.ReactNode;
   gradient: string;
   url?: string;
+  hidePreview?: boolean;
 }
 
 const Projects = React.memo(() => {
@@ -68,11 +69,11 @@ const Projects = React.memo(() => {
       url: "https://7ty7.com",
     },
     {
-      id: 8, category: "Fitness & Asset Management", title: "TechFit Active",
-      description: "Platform to manage fitness spaces like long-term assets — streamlined operations for gyms and fitness centres. Built to help gym owners track equipment lifecycle, maintenance schedules, and optimize space utilization for maximum ROI.",
-      tagline: "Manage fitness spaces like long-term assets",
-      icon: <Dumbbell className="w-5 h-5" />, gradient: "from-red-500 to-orange-500",
-      url: "https://www.techfitactive.com/",
+      id: 8, category: "Digital Agency", title: "Tyche Media",
+      description: "Digital media and marketing agency platform. Modern, responsive web experience designed to showcase creative portfolios and drive client engagement.",
+      tagline: "Elevating digital presence",
+      icon: <Sparkles className="w-5 h-5" />, gradient: "from-red-500 to-orange-500",
+      url: "https://tyche.media/",
     },
     {
       id: 6, category: "E-Commerce", title: "Zoshe — Luxury Perfumes",
@@ -92,20 +93,14 @@ const Projects = React.memo(() => {
       description: "India's premier manufacturer of MMA Cages & Commercial Gym Rigs — built for strength, engineered for performance. Comprehensive product catalog with detailed specifications, custom configuration options, and dealer inquiry system.",
       tagline: "India's premier MMA & gym equipment manufacturer",
       icon: <Globe className="w-5 h-5" />, gradient: "from-slate-600 to-zinc-700",
-      url: "http://techfittech.com/",
+      url: "https://www.techfittech.com/",
+      hidePreview: true,
     },
     {
       id: 3, category: "Data Reporting", title: "Excel Reports — Mahyco",
       description: "Seamless Snowflake-Excel integration for real-time sales and R&D reporting. Automated data pipelines reducing reporting time from hours to minutes.",
       tagline: "Excel-native reporting powered by Snowflake",
       icon: <FileSpreadsheet className="w-5 h-5" />, gradient: "from-emerald-500 to-green-600",
-    },
-    {
-      id: 7, category: "Business Website", title: "Zavlin Bookkeeping",
-      description: "Professional bookkeeping website with modern UX and SEO optimization. Clean, conversion-focused design with service showcases and integrated contact forms.",
-      tagline: "Simplifying bookkeeping",
-      icon: <Calculator className="w-5 h-5" />, gradient: "from-teal-500 to-cyan-500",
-      url: "https://www.zavlinbookkeeping.com/",
     }
   ];
 
@@ -218,7 +213,7 @@ const Projects = React.memo(() => {
                     className="block no-underline cursor-pointer"
                     onClick={(e) => { if (!project.url) e.preventDefault(); }}
                   >
-                    {!isMobile && project.url && (
+                    {!isMobile && project.url && !project.hidePreview && (
                       <div className="relative z-10 hidden sm:block h-[140px] md:h-[160px] overflow-hidden border-b border-border/20 bg-muted/10">
                         <div className="absolute inset-0" style={{ transform: 'scale(0.25)', transformOrigin: 'top left', width: '400%', height: '400%' }}>
                           <iframe
@@ -234,7 +229,7 @@ const Projects = React.memo(() => {
                       </div>
                     )}
 
-                    {(isMobile || !project.url) && (
+                    {(isMobile || !project.url || project.hidePreview) && (
                       <div className="relative z-10 flex h-[90px] sm:h-[140px] md:h-[160px] items-center justify-center border-b border-border/20 bg-muted/5 overflow-hidden">
                         <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-[0.03]`} />
                         <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-white opacity-20 transform -rotate-6`}>

@@ -4,13 +4,15 @@ import { MessageCircle, X, Send, Bot, User } from 'lucide-react';
 // --- Enhanced Resume Data ---
 const resumeData = `
 Name: Rahil Memdani
-Contact: +91-9167156829 | rmemdanib@gmail.com | LinkedIn: linkedin.com/in/rahil-memdani | Portfolio: rahilmemdani-portfolio.vercel.app
+Contact: +61-428020932 | rmemdanib@gmail.com | LinkedIn: linkedin.com/in/rahil-memdani | Portfolio: rahilmemdani.com
 
 PROFESSIONAL SUMMARY:
 Full-Stack Software Engineer with 4 years in agritech, building scalable platforms with React, Node.js, and .NET Core. Worked with Snowflake, using SQL Macros, Power BI, and Excel reporting to deliver real-time, data-driven insights for Grow Indigo and Mahyco. Applying advanced analytics and Data Science to drive intelligent, measurable business outcomes.
 
 PERSONAL BACKGROUND & JOURNEY:
-- Originally from Mumbai, studied Electronics & Telecommunication Engineering at University of Mumbai
+- Originally from Mumbai, India — now based in Perth, Western Australia
+- Studied Electronics & Telecommunication Engineering at University of Mumbai
+- Currently completing Masters of Computer Science at Edith Cowan University (ECU), Perth
 - Career pivot: Started in traditional engineering, discovered passion for software development during internship
 - Self-taught web development skills while completing engineering degree
 - Transitioned into AgriTech at Grow Indigo, found passion for data-driven agricultural solutions
@@ -138,18 +140,20 @@ ACHIEVEMENTS:
 - Successfully transformed monolithic application to scalable SaaS platform enabling multi-tenant support and global market expansion
 
 EDUCATION:
-University of Mumbai, B.E. Electronics and Telecommunication (CGPA: 7.52/10), Aug '17 – June '21
+- Edith Cowan University (ECU), Perth WA — Master of Computer Science (Current)
+- University of Mumbai — B.E. Electronics and Telecommunication (CGPA: 7.52/10), Aug '17 – June '21
 
 CERTIFICATIONS & AWARDS:
 - HackerRank Certified: Core Java (Credential ID: 0aae57b1fde8)
 - Data for Good – APJ Award 2025 by Snowflake for impactful agritech data innovation
 
 CURRENT AVAILABILITY & INTERESTS:
-- Open to: Senior Full-Stack Developer roles, Data Engineering positions, Tech Lead opportunities
+- Open to: Senior Full-Stack Developer roles, Data Engineering positions, Tech Lead opportunities in Australia
 - Interested in: Remote work, AgriTech, FinTech, E-commerce, Data Analytics companies
 - Available for: Full-time positions, consulting projects, technical mentoring
-- Location: Based in Mumbai, India - open to remote work globally
-- Notice Period: Currently employed, standard notice period applies
+- Location: Based in Perth, Western Australia — open to remote work globally
+- Contact (Call/Aus): +61 428020932
+- Contact (WhatsApp): +91 9167156829
 - Consulting Services: Snowflake implementation, data analytics, full-stack development, technical mentoring
 
 CAREER ASPIRATIONS & GOALS:
@@ -162,7 +166,7 @@ CAREER ASPIRATIONS & GOALS:
 HOW TO CONNECT WITH RAHIL:
 - Email: rmemdanib@gmail.com (best for detailed discussions)
 - LinkedIn: linkedin.com/in/rahil-memdani (professional networking)
-- Portfolio: rahilmemdani-portfolio.vercel.app (view all projects and details)
+- Portfolio: rahilmemdani.com (view all projects and details)
 - Phone: +91-9167156829 (available for important opportunities)
 - Response Time: Typically responds within 24 hours to professional inquiries
 - Best Contact Method: Email or LinkedIn for initial outreach

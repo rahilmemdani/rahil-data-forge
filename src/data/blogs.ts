@@ -135,7 +135,7 @@ export const blogs: BlogPost[] = [
         tags: ["Side Projects", "Entrepreneurship", "Craft", "Developer Life"],
         content: `<p>Almost every software engineer I know has a graveyard folder on their computer full of abandoned side projects. Apps they got super excited about on a Friday night, started building, and then completely gave up on by Sunday afternoon when the reality of finishing it sank in. I absolutely have a few of those folders myself. But lately, I have stumbled onto something that actually works. Building software that I personally need, or that people I actually know need right now.</p>
 
-<p><strong>TechFit Active</strong> started as a completely casual conversation. A friend of mine manages a gym, and he was losing his mind trying to track everything manually. He had equipment maintenance schedules on a spreadsheet, member follow ups in a WhatsApp group, and payment reminders stored purely in his head. He didn't want or need a massive enterprise fitness platform with a hundred features. He just needed a tool that worked exactly the way his brain worked.</p>
+<p><strong>Tyche Media</strong> started as a completely casual conversation. A friend of mine manages a digital agency, and he was losing his mind trying to track everything manually. He had client deliverables on a spreadsheet, team follow ups in a WhatsApp group, and campaign ideas stored purely in his head. He didn't want or need a massive enterprise project management platform with a hundred features. He just needed a tool that worked exactly the way his brain worked.</p>
 
 <h3>The feedback loop changes everything</h3>
 
@@ -153,7 +153,7 @@ export const blogs: BlogPost[] = [
 
 <p>Enterprise software literally never feels finished. There is always going to be another sprint, another bug fix ticket, and a massive backlog of user requests waiting for you on Monday. But side projects force you to define what finished actually means for yourself. It is way harder than it sounds. Is it finished when the code is clean? Finished when it solves the main problem? Finished when it looks pretty?</p>
 
-<p>Working on things like TechFit, or Seventy Seven, or Zavlin Bookkeeping taught me a huge lesson. For every one of those projects, there was a moment where I had to say the app was good enough, stop tweaking the CSS, and actually hand it over to a real human being who was going to rely on it. Taking on that kind of responsibility entirely on your own makes your technical judgment so much sharper.</p>
+<p>Working on things like Tyche Media, or Seventy Seven, taught me a huge lesson. For every one of those projects, there was a moment where I had to say the app was good enough, stop tweaking the CSS, and actually hand it over to a real human being who was going to rely on it. Taking on that kind of responsibility entirely on your own makes your technical judgment so much sharper.</p>
 
 <p>I would encourage any developer reading this to try and maintain at least one active side project. It is not about making passive income, though that is obviously nice. It is about remembering why you learned to code in the first place. Taking absolutely nothing, and turning it into something that solves a real problem.</p>
 

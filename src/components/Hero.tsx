@@ -40,10 +40,12 @@ const Hero = () => {
     } else if (cmd === 'rahil --solve-error') {
       setShowDebugChallenge(true);
       setTerminalOutput('Triggering Debug Challenge...');
+    } else if (cmd === 'rahil --help' || cmd === 'help') {
+      setTerminalOutput('Available commands: rahil --techstack, rahil --impact, rahil --solve-error, clear');
     } else if (cmd === 'clear') {
       setTerminalOutput(null);
     } else {
-      setTerminalOutput(`Unknown command: ${cmd}. Try: --techstack, --impact, --solve-error`);
+      setTerminalOutput(`Unknown command: ${cmd}. Try: --help, --techstack, --impact, --solve-error`);
     }
 
     setTimeout(() => {
@@ -119,7 +121,7 @@ const Hero = () => {
 
   const usersServed = useCounter(2, 1500);
   const efficiencyGains = useCounter(50, 1800);
-  const yearsExp = useCounter(4, 1200);
+  const yearsExp = 4;
 
   return (
     <section id="hero" className="relative overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-16 lg:pt-32 lg:pb-20 min-h-[100dvh] flex items-center">
@@ -167,6 +169,19 @@ const Hero = () => {
                 <span className="text-foreground font-medium">scalable platforms</span> serving{' '}
                 <span className="gradient-text font-semibold">2M+ users</span> with data-driven innovation.
               </p>
+
+              {/* Resume-style highlight chips */}
+              <div className="flex flex-wrap gap-2 pt-1">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                  <span className="text-base leading-none">📍</span> Perth, WA — Australia
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20">
+                  <span className="text-base leading-none">🎓</span> M.CS — Edith Cowan University
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse inline-block"></span> Open to Part-Time &amp; WIL
+                </span>
+              </div>
             </div>
 
             {/* Typing terminal */}
@@ -233,7 +248,7 @@ const Hero = () => {
               {[
                 { value: `${usersServed}M+`, label: 'Users Served' },
                 { value: `${efficiencyGains}%`, label: 'Efficiency Gains' },
-                { value: `${yearsExp}+`, label: 'Years Exp' },
+                { value: '4 yrs 10 mo', label: 'Work Experience' },
               ].map((stat, i) => (
                 <div key={i} className="min-w-0">
                   <div className="text-xl sm:text-2xl md:text-3xl font-display font-bold gradient-text leading-tight">

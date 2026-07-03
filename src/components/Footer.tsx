@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Phone, MapPin, Heart } from "lucide-react";
+import { Github, Linkedin, Mail, Phone, MapPin, Heart, MessageCircle } from "lucide-react";
 
 const navItems = [
   { name: "Home", href: "#hero" },
@@ -73,8 +73,25 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center justify-start gap-2">
                   <Phone className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
-                  <a href="tel:9167156829" className="text-xs text-muted-foreground hover:text-primary transition-colors truncate max-w-[120px] sm:max-w-none">
+                  <a href="tel:+61428020932" className="text-xs text-muted-foreground hover:text-primary transition-colors truncate max-w-[120px] sm:max-w-none">
+                    +61 428020932
+                  </a>
+                </div>
+                <div className="flex items-center justify-start gap-2">
+                  <MessageCircle className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+                  <a href="https://wa.me/919167156829" target="_blank" rel="noopener noreferrer" className="text-xs text-muted-foreground hover:text-primary transition-colors truncate max-w-[120px] sm:max-w-none">
                     +91 9167156829
+                  </a>
+                </div>
+                <div className="flex items-start justify-start gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0 mt-0.5" />
+                  <a
+                    href="https://maps.google.com/?q=5+Capricorn+Cres,+Bennett+Springs+WA+6063,+Australia"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-muted-foreground hover:text-primary transition-colors leading-relaxed max-w-[160px] sm:max-w-none"
+                  >
+                    5 Capricorn Cres,<br />Bennett Springs WA 6063,<br />Australia
                   </a>
                 </div>
               </div>
