@@ -91,9 +91,9 @@ const JobFitAnalyzer = () => {
 
   const scoreBg = (score: number) =>
     score >= 88 ? 'from-emerald-500/20 to-emerald-500/5 border-emerald-500/30'
-    : score >= 75 ? 'from-blue-500/20 to-blue-500/5 border-blue-500/30'
-    : score >= 60 ? 'from-amber-500/20 to-amber-500/5 border-amber-500/30'
-    : 'from-rose-500/20 to-rose-500/5 border-rose-500/30';
+      : score >= 75 ? 'from-blue-500/20 to-blue-500/5 border-blue-500/30'
+        : score >= 60 ? 'from-amber-500/20 to-amber-500/5 border-amber-500/30'
+          : 'from-rose-500/20 to-rose-500/5 border-rose-500/30';
 
   return (
     <section className="section-full section-padding relative overflow-hidden">
@@ -109,7 +109,7 @@ const JobFitAnalyzer = () => {
             <Sparkles size={12} /> AI-Powered Tool
           </span>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-3">
-            Job <span className="gradient-text">Fit Analyzer</span>
+            Job <span className="gradient-text">Fit Analyser</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Paste a job description or required skills and see how well Rahil matches — instantly.
@@ -216,14 +216,13 @@ const JobFitAnalyzer = () => {
                             background: s.level === 'strong'
                               ? 'linear-gradient(90deg, #10b981, #34d399)'
                               : s.level === 'partial'
-                              ? 'linear-gradient(90deg, #f59e0b, #fbbf24)'
-                              : 'linear-gradient(90deg, #f87171, #fca5a5)',
+                                ? 'linear-gradient(90deg, #f59e0b, #fbbf24)'
+                                : 'linear-gradient(90deg, #f87171, #fca5a5)',
                           }}
                         />
                       </div>
-                      <span className={`text-[11px] font-mono font-bold min-w-[36px] text-right ${
-                        s.level === 'strong' ? 'text-emerald-500' : s.level === 'partial' ? 'text-amber-500' : 'text-rose-500'
-                      }`}>{s.score}%</span>
+                      <span className={`text-[11px] font-mono font-bold min-w-[36px] text-right ${s.level === 'strong' ? 'text-emerald-500' : s.level === 'partial' ? 'text-amber-500' : 'text-rose-500'
+                        }`}>{s.score}%</span>
                     </div>
                   ))}
                 </div>
