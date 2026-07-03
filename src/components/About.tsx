@@ -101,7 +101,8 @@ const About = React.memo(() => {
               </div>
               <p className="text-sm text-muted-foreground">
                 Open to <span className="text-foreground font-medium">part-time developer roles</span>, freelance projects, and{' '}
-                <span className="text-foreground font-medium">Work Integrated Learning (WIL)</span> opportunities across Perth and remote Australia.
+                <span className="text-foreground font-medium">Work Integrated Learning (WIL)</span> opportunities across Perth and remote Australia.{' '}
+                <span className="text-foreground font-medium">Australian work rights confirmed</span> — Student Visa 500, up to 48 hrs/fortnight during study.
               </p>
             </div>
           </div>

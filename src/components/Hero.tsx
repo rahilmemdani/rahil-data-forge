@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Download, Github, Linkedin, Mail, ExternalLink, ChevronDown, ArrowRight, AlertCircle, X } from 'lucide-react';
+import { Download, Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import ScheduleConsultationModal from './ScheduleConsultationModal';
 import { trackEvent } from '../lib/analytics';
@@ -22,36 +22,6 @@ const Hero = () => {
 
   const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
-
-  // Terminal state and handler
-  const [terminalInput, setTerminalInput] = useState('');
-  const [terminalOutput, setTerminalOutput] = useState<string | null>(null);
-  const [showDebugChallenge, setShowDebugChallenge] = useState(false);
-
-  const handleCommand = (e: React.FormEvent) => {
-    e.preventDefault();
-    const cmd = terminalInput.trim().toLowerCase();
-    setTerminalInput('');
-
-    if (cmd === 'rahil --techstack') {
-      setTerminalOutput('React, Node.js, .NET Core, Snowflake, AWS, PostgreSQL');
-    } else if (cmd === 'rahil --impact') {
-      setTerminalOutput('2M+ Farmers served | 35% Efficiency | Snowflake Data for Good Award');
-    } else if (cmd === 'rahil --solve-error') {
-      setShowDebugChallenge(true);
-      setTerminalOutput('Triggering Debug Challenge...');
-    } else if (cmd === 'rahil --help' || cmd === 'help') {
-      setTerminalOutput('Available commands: rahil --techstack, rahil --impact, rahil --solve-error, clear');
-    } else if (cmd === 'clear') {
-      setTerminalOutput(null);
-    } else {
-      setTerminalOutput(`Unknown command: ${cmd}. Try: --help, --techstack, --impact, --solve-error`);
-    }
-
-    setTimeout(() => {
-      if (cmd !== 'rahil --solve-error') setTerminalOutput(null);
-    }, 5000);
-  };
 
   useEffect(() => {
     const currentSkill = skills[currentSkillIndex];
@@ -121,7 +91,6 @@ const Hero = () => {
 
   const usersServed = useCounter(2, 1500);
   const efficiencyGains = useCounter(50, 1800);
-  const yearsExp = 4;
 
   return (
     <section id="hero" className="relative overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-16 lg:pt-32 lg:pb-20 min-h-[100dvh] flex items-center">
@@ -150,12 +119,6 @@ const Hero = () => {
           {/* ═══ LEFT CONTENT ═══ */}
           <div className="lg:col-span-7 space-y-5 sm:space-y-6 animate-fade-in-up">
 
-            {/* Status badge */}
-            {/* <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-primary/8 border border-primary/15 backdrop-blur-sm">
-              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[10px] sm:text-xs font-medium text-primary">Open to opportunities</span>
-            </div> */}
-            {/* . */}
             {/* Name */}
             <div className="space-y-2 sm:space-y-3">
               <h1 className="text-[2.75rem] leading-[0.95] sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-display font-bold tracking-tight">
@@ -178,69 +141,10 @@ const Hero = () => {
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20">
                   <span className="text-base leading-none">🎓</span> M.CS — Edith Cowan University
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse inline-block"></span> Open to Part-Time &amp; WIL
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                  <span className="text-base leading-none">✅</span> Work Rights: 48 hrs/fort
                 </span>
               </div>
-            </div>
-
-            {/* Typing terminal */}
-            <div className="relative group">
-              <form onSubmit={handleCommand} className="flex items-center gap-2 py-2 px-3 rounded-lg bg-muted/30 dark:bg-muted/20 border border-border/40 w-fit max-w-full overflow-hidden transition-all focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/20">
-                <span className="text-[10px] text-muted-foreground font-mono shrink-0">&gt;_</span>
-                <input
-                  type="text"
-                  value={terminalInput}
-                  onChange={(e) => setTerminalInput(e.target.value)}
-                  placeholder="rahil --help"
-                  className="bg-transparent border-none outline-none font-mono text-primary text-sm sm:text-base font-medium w-48 sm:w-64 placeholder:opacity-30"
-                />
-                <button type="submit" className="hidden" />
-              </form>
-
-              {terminalOutput && (
-                <div className="absolute top-full left-0 mt-2 p-3 rounded-lg bg-gray-950 text-sky-400 font-mono text-[10px] sm:text-xs shadow-2xl z-50 animate-fade-in border border-white/5">
-                  <span className="text-white/30 mr-2">$</span> {terminalOutput}
-                </div>
-              )}
-
-              {showDebugChallenge && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
-                  <div className="bg-gray-900 rounded-2xl border border-white/10 p-6 sm:p-8 max-w-lg w-full shadow-2xl relative overflow-hidden">
-                    <div className="absolute -top-10 -right-10 w-40 h-40 bg-rose-500/10 rounded-full blur-3xl pointer-events-none" />
-
-                    <div className="flex justify-between items-center mb-6">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-rose-500/20 flex items-center justify-center text-rose-500">
-                          <AlertCircle size={18} />
-                        </div>
-                        <h4 className="text-xl font-bold text-white">Debug Challenge</h4>
-                      </div>
-                      <button onClick={() => setShowDebugChallenge(false)} className="text-white/40 hover:text-white transition-colors">
-                        <X size={20} />
-                      </button>
-                    </div>
-
-                    <div className="bg-black/50 rounded-xl p-4 font-mono text-xs sm:text-sm text-rose-300 border border-white/5 mb-6">
-                      <div className="text-white/30 mb-2">// Fix the leak in this useEffect</div>
-                      <div>useEffect(() =&gt; {'{'}</div>
-                      <div className="pl-4">const sub = api.subscribe();</div>
-                      <div className="pl-4 text-rose-500 font-bold underline decoration-wavy">// How do we clean this up?</div>
-                      <div>{'}'}, []);</div>
-                    </div>
-
-                    <button
-                      onClick={() => {
-                        alert("Correct! Returning a cleanup function: return () => sub.unsubscribe();");
-                        setShowDebugChallenge(false);
-                      }}
-                      className="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl transition-all active:scale-95 shadow-lg shadow-primary/20"
-                    >
-                      Submit Fix: return () =&gt; sub.unsubscribe();
-                    </button>
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Stats */}
@@ -348,7 +252,7 @@ const Hero = () => {
 
       </div>
 
-      {/* Search Modal */}
+      {/* Schedule Modal */}
       <ScheduleConsultationModal open={showBookingOptions} onClose={() => setShowBookingOptions(false)} />
     </section>
   );
