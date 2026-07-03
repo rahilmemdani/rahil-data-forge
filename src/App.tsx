@@ -1,10 +1,11 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useState } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import ScrollToTop from "../src/ScrollToTop";
+import Loader from "./components/Loader";
 
 // Theme
 import { ThemeProvider } from "./components/ThemeProvider";
@@ -19,6 +20,7 @@ const About = lazy(() => import("./components/About"));
 const Skills = lazy(() => import("./components/Skills"));
 const Projects = lazy(() => import("./components/Projects"));
 const AIOrchestrator = lazy(() => import("./components/AIOrchestrator"));
+const JobFitAnalyzer = lazy(() => import("./components/JobFitAnalyzer"));
 const Experience = lazy(() => import("./components/Experience"));
 const Blog = lazy(() => import("./components/Blog"));
 const Contact = lazy(() => import("./components/Contact"));
@@ -29,7 +31,6 @@ const ParticleBackground = lazy(() => import('./components/ParticleBackground'))
 // Pages
 import NotFound from "./pages/NotFound";
 const BlogPost = lazy(() => import("./pages/BlogPost"));
-const Chatbot = lazy(() => import("./components/Chatbot"));
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const HomePage = () => (
     <Skills />
     <Projects />
     <AIOrchestrator />
+    <JobFitAnalyzer />
     <Experience />
     <Blog />
     <Contact />
@@ -75,18 +77,20 @@ const AppContent = () => {
 };
 
 const App = () => {
+  const [loaded, setLoaded] = useState(false);
+
   return (
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
-            <AppContent />
-            <Suspense fallback={null}>
-              {/* <Chatbot /> */}
-            </Suspense>
-          </BrowserRouter>
+          {!loaded && <Loader onDone={() => setLoaded(true)} />}
+          <div className={`transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}>
+            <BrowserRouter>
+              <AppContent />
+            </BrowserRouter>
+          </div>
         </TooltipProvider>
       </QueryClientProvider>
     </ThemeProvider>
