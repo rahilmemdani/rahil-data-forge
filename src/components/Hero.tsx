@@ -141,9 +141,9 @@ const Hero = () => {
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20">
                   <span className="text-base leading-none">🎓</span> M.CS — Edith Cowan University
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                {/* <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
                   <span className="text-base leading-none">✅</span> Work Rights: 48 hrs/fort
-                </span>
+                </span> */}
               </div>
             </div>
 
