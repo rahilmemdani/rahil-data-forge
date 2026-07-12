@@ -101,6 +101,13 @@ const Projects = React.memo(() => {
       description: "Seamless Snowflake-Excel integration for real-time sales and R&D reporting. Automated data pipelines reducing reporting time from hours to minutes.",
       tagline: "Excel-native reporting powered by Snowflake",
       icon: <FileSpreadsheet className="w-5 h-5" />, gradient: "from-emerald-500 to-green-600",
+    },
+    {
+      id: 11, category: "E-Commerce", title: "Healthy Soya",
+      description: "Enjoy high-protein vegan foods made with premium soya. With 22g protein per 100g, no maida, and full flavour, Healthy Soya makes healthy eating simple, nutritious, and delicious.",
+      tagline: "High Protein Vegan & No Maida Foods",
+      icon: <Globe className="w-5 h-5" />, gradient: "from-green-500 to-emerald-700",
+      url: "https://healthysoya.com/",
     }
   ];
 
