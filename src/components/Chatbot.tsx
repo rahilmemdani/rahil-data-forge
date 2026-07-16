@@ -10,7 +10,7 @@ PROFESSIONAL SUMMARY:
 Full-Stack Software Engineer with 4 years in agritech, building scalable platforms with React, Node.js, and .NET Core. Worked with Snowflake, using SQL Macros, Power BI, and Excel reporting to deliver real-time, data-driven insights for Grow Indigo and Mahyco. Applying advanced analytics and Data Science to drive intelligent, measurable business outcomes.
 
 PERSONAL BACKGROUND & JOURNEY:
-- Originally from Mumbai, India — now based in Perth, Western Australia
+- Originally from Mumbai, India - now based in Perth, Western Australia
 - Studied Electronics & Telecommunication Engineering at University of Mumbai
 - Currently completing Masters of Computer Science at Edith Cowan University (ECU), Perth
 - Career pivot: Started in traditional engineering, discovered passion for software development during internship
@@ -69,7 +69,7 @@ DETAILED PROJECTS PORTFOLIO:
    - SaaS platform streamlining onboarding, commission, and payments for agricultural operations
    - Achieved 20% time savings, 20% better recovery, 10% cost savings, and enabled 5+ schemes
    - Technologies: React, TypeScript, Node.js, .NET Core, PostgreSQL, MongoDB
-   - Impact: Part of Grow Indigo's AgriCloud Platform — automation, insights, scale
+   - Impact: Part of Grow Indigo's AgriCloud Platform - automation, insights, scale
    - Tagline: "Streamlined seller operations with data-driven insights"
 
 5. ZOSHE - LUXURY PERFUME PLATFORM (E-Commerce)
@@ -140,8 +140,8 @@ ACHIEVEMENTS:
 - Successfully transformed monolithic application to scalable SaaS platform enabling multi-tenant support and global market expansion
 
 EDUCATION:
-- Edith Cowan University (ECU), Perth WA — Master of Computer Science (Current)
-- University of Mumbai — B.E. Electronics and Telecommunication (CGPA: 7.52/10), Aug '17 – June '21
+- Edith Cowan University (ECU), Perth WA - Master of Computer Science (Current)
+- University of Mumbai - B.E. Electronics and Telecommunication (CGPA: 7.52/10), Aug '17 – June '21
 
 CERTIFICATIONS & AWARDS:
 - HackerRank Certified: Core Java (Credential ID: 0aae57b1fde8)
@@ -151,7 +151,7 @@ CURRENT AVAILABILITY & INTERESTS:
 - Open to: Senior Full-Stack Developer roles, Data Engineering positions, Tech Lead opportunities in Australia
 - Interested in: Remote work, AgriTech, FinTech, E-commerce, Data Analytics companies
 - Available for: Full-time positions, consulting projects, technical mentoring
-- Location: Based in Perth, Western Australia — open to remote work globally
+- Location: Based in Perth, Western Australia - open to remote work globally
 - Contact (Call/Aus): +61 428020932
 - Contact (WhatsApp): +91 9167156829
 - Consulting Services: Snowflake implementation, data analytics, full-stack development, technical mentoring

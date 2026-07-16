@@ -80,19 +80,19 @@ const About = React.memo(() => {
               </p>
               <p>
                 Now based in <span className="text-foreground font-medium">Perth, Western Australia</span>, pursuing a{' '}
-                <span className="gradient-text font-semibold">Master of Computer Science</span> at Edith Cowan University —
+                <span className="gradient-text font-semibold">Master of Computer Science</span> at Edith Cowan University -
                 combining deep enterprise experience with cutting-edge academic research.
               </p>
             </div>
 
             {/* Aus + ECU highlight box */}
-            <div className="p-5 rounded-2xl border border-emerald-500/20 bg-emerald-500/5">
+            {/* <div className="p-5 rounded-2xl border border-emerald-500/20 bg-emerald-500/5">
               <div className="flex flex-wrap items-center gap-3 mb-3">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                  📍 Perth, WA — Australia
+                  📍 Perth, WA - Australia
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20">
-                  🎓 M.CS — Edith Cowan University
+                  🎓 M.CS - Edith Cowan University
                 </span>
               </div>
               <div className="flex items-center gap-2 mb-1">
@@ -102,16 +102,16 @@ const About = React.memo(() => {
               <p className="text-sm text-muted-foreground">
                 Open to <span className="text-foreground font-medium">part-time developer roles</span>, freelance projects, and{' '}
                 <span className="text-foreground font-medium">Work Integrated Learning (WIL)</span> opportunities across Perth and remote Australia.{' '}
-                <span className="text-foreground font-medium">Australian work rights confirmed</span> — Student Visa 500, up to 48 hrs/fortnight during study.
+                <span className="text-foreground font-medium">Australian work rights confirmed</span> - Student Visa 500, up to 48 hrs/fortnight during study.
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* ── Right Panel: Carousel Card with Left/Right Edge Arrows ── */}
           <div className="animate-fade-in-up" style={{ animationDelay: '400ms' }}>
             <div className="relative">
 
-              {/* ← Left Arrow — on the left edge of the card, vertically centered */}
+              {/* ← Left Arrow - on the left edge of the card, vertically centered */}
               <button
                 onClick={prevCard}
                 className="absolute -left-5 sm:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-background/90 backdrop-blur-sm border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 hover:scale-110 shadow-lg"
@@ -120,7 +120,7 @@ const About = React.memo(() => {
                 <ChevronLeft size={20} />
               </button>
 
-              {/* → Right Arrow — on the right edge of the card, vertically centered */}
+              {/* → Right Arrow - on the right edge of the card, vertically centered */}
               <button
                 onClick={nextCard}
                 className="absolute -right-5 sm:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-background/90 backdrop-blur-sm border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 hover:scale-110 shadow-lg"

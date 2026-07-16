@@ -117,7 +117,7 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
 
           {/* ═══ LEFT CONTENT ═══ */}
-          <div className="lg:col-span-7 space-y-5 sm:space-y-6 animate-fade-in-up">
+          <div className="lg:col-span-12 flex flex-col items-center text-center space-y-5 sm:space-y-6 animate-fade-in-up max-w-3xl mx-auto">
 
             {/* Name */}
             <div className="space-y-2 sm:space-y-3">
@@ -134,12 +134,12 @@ const Hero = () => {
               </p>
 
               {/* Resume-style highlight chips */}
-              <div className="flex flex-wrap gap-2 pt-1">
+              <div className="flex flex-wrap justify-center gap-2 pt-1">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                  <span className="text-base leading-none">📍</span> Perth, WA — Australia
+                  <span className="text-base leading-none">📍</span> Perth, WA - Australia
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20">
-                  <span className="text-base leading-none">🎓</span> M.CS — Edith Cowan University
+                  <span className="text-base leading-none">🎓</span> M.CS - Edith Cowan University
                 </span>
                 {/* <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
                   <span className="text-base leading-none">✅</span> Work Rights: 48 hrs/fort
@@ -148,7 +148,7 @@ const Hero = () => {
             </div>
 
             {/* Stats */}
-            <div className="flex flex-wrap gap-4 sm:gap-6">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
               {[
                 { value: `${usersServed}M+`, label: 'Users Served' },
                 { value: `${efficiencyGains}%`, label: 'Efficiency Gains' },
@@ -164,7 +164,7 @@ const Hero = () => {
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-col xs:flex-row gap-3">
+            <div className="flex flex-col xs:flex-row justify-center gap-3 w-full sm:w-auto">
               <button onClick={scrollToProjects} className="hidden sm:inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border border-primary/40 text-foreground hover:border-primary hover:bg-primary/10 transition-all text-sm font-semibold justify-center bg-transparent backdrop-blur-md">
                 View Projects
                 <ArrowRight size={16} />
@@ -192,7 +192,7 @@ const Hero = () => {
             </div>
 
             {/* Socials */}
-            <div className="flex items-center gap-3 pt-1">
+            <div className="flex items-center justify-center gap-3 pt-1 w-full">
               <span className="text-[10px] text-muted-foreground font-mono">find_me:</span>
               {[
                 { href: "https://www.linkedin.com/in/rahil-memdani-8968681ab/", icon: Linkedin, label: "LinkedIn" },
@@ -218,10 +218,9 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* ═══ RIGHT — PROFILE IMAGE ═══ */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+          {/* ═══ RIGHT - PROFILE IMAGE ═══ */}
+          {/* <div className="lg:col-span-5 flex justify-center lg:justify-end animate-fade-in-up" style={{ animationDelay: '200ms' }}>
             <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80">
-              {/* Animated conic ring */}
               <div
                 className="absolute -inset-2.5 sm:-inset-3 rounded-full animate-spin-slow opacity-50 dark:opacity-60"
                 style={{
@@ -229,12 +228,10 @@ const Hero = () => {
                 }}
               />
 
-              {/* Glow pulse */}
               <div className="absolute -inset-6 sm:-inset-8 rounded-full animate-pulse-ring opacity-20 pointer-events-none"
                 style={{ background: `radial-gradient(circle, var(--gradient-start), transparent 70%)` }}
               />
 
-              {/* Image */}
               <div className="relative w-full h-full rounded-full p-[3px] bg-background shadow-xl">
                 <div className="w-full h-full rounded-full overflow-hidden bg-muted">
                   <img
@@ -247,7 +244,7 @@ const Hero = () => {
               </div>
 
             </div>
-          </div>
+          </div> */}
         </div>
 
       </div>

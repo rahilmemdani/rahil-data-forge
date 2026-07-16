@@ -55,7 +55,7 @@ function analyzeJobDescription(text: string): { overall: number; skills: SkillRe
   if (overall >= 88) summary = `🔥 Exceptional match! Rahil covers ${strong}/${total} key skills at expert level.`;
   else if (overall >= 75) summary = `✅ Strong match. ${strong} of ${total} required skills are covered confidently.`;
   else if (overall >= 60) summary = `👍 Good fit with ${strong} strong matches. A few areas to discuss.`;
-  else summary = `📊 Partial match — ${strong}/${total} skills covered. Worth a conversation!`;
+  else summary = `📊 Partial match - ${strong}/${total} skills covered. Worth a conversation!`;
 
   return { overall, skills: found.sort((a, b) => b.score - a.score), summary };
 }
@@ -112,7 +112,7 @@ const JobFitAnalyzer = () => {
             Job <span className="gradient-text">Fit Analyser</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Paste a job description or required skills and see how well Rahil matches — instantly.
+            Paste a job description or required skills and see how well Rahil matches - instantly.
           </p>
         </div>
 

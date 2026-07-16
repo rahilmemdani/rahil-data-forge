@@ -279,7 +279,7 @@ const Experience = React.memo(() => {
                   <div className="space-y-4 p-4 rounded-2xl bg-muted/20 border border-border/20">
                     <div>
                       <p className="text-sm sm:text-base font-semibold text-foreground">B.E. Electronics & Telecommunication</p>
-                      <p className="text-xs text-muted-foreground mt-1">Aug 2017 — June 2021</p>
+                      <p className="text-xs text-muted-foreground mt-1">Aug 2017 - June 2021</p>
                     </div>
                     <div className="pt-4 border-t border-border/20">
                       <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-background/50 border border-border/30">

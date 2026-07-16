@@ -40,7 +40,7 @@ const Projects = React.memo(() => {
 
   const featuredProject = {
     category: "Enterprise AgriTech",
-    title: "Grow Indigo — AgriCloud Platform",
+    title: "Grow Indigo - AgriCloud Platform",
     description: "Scalable SaaS platform serving 2M+ farmers across 15+ Indian states, managing 7M+ acres of agricultural operations. Led the transformation from monolithic to multi-tenant architecture with real-time analytics, payment processing, and seller onboarding.",
     metrics: ["2M+ Users", "15+ States", "7M+ Acres", "35% Cost Reduction"],
     url: "https://www.growindigo.co.in/",
@@ -62,7 +62,7 @@ const Projects = React.memo(() => {
       url: "https://app.powerbi.com/view?r=eyJrIjoiOTM3MTJkY2YtMDdhYy00YjBlLWFiNTQtNGYxMDAzMmRjZTM0IiwidCI6IjhmYzRlMWZhLTc3NjItNGU0OS1iYzJlLTY0MWQ4YTZkNzUzMCJ9",
     },
     {
-      id: 10, category: "Event Management", title: "Seventy Seven — 7ty7",
+      id: 10, category: "Event Management", title: "Seventy Seven - 7ty7",
       description: "20+ years of legacy in event management. Transforming ideas into measurable impact, collaborating with international brands as a top global agency. The vision of three industry stalwarts gave Seventy Seven its shape, grounded in passion and the courage to do things differently.",
       tagline: "Where every event becomes unforgettable",
       icon: <Award className="w-5 h-5" />, gradient: "from-yellow-500 to-amber-600",
@@ -76,28 +76,28 @@ const Projects = React.memo(() => {
       url: "https://tyche.media/",
     },
     {
-      id: 6, category: "E-Commerce", title: "Zoshe — Luxury Perfumes",
+      id: 6, category: "E-Commerce", title: "Zoshe - Luxury Perfumes",
       description: "SEO-optimized e-commerce platform for premium fragrances with mobile-first design. Features product filtering, wishlist functionality, and an immersive brand experience.",
       tagline: "Luxury meets technology",
       icon: <Sparkles className="w-5 h-5" />, gradient: "from-pink-500 to-rose-500",
       url: "https://www.zoshe.in/",
     },
     {
-      id: 2, category: "Data & Analytics", title: "Snowflake Macros — Grow Indigo",
+      id: 2, category: "Data & Analytics", title: "Snowflake Macros - Grow Indigo",
       description: "Reusable Snowflake SQL macros for streamlined query logic across agricultural datasets. Reduced query development time by 40% and ensured consistency across all reporting layers.",
       tagline: "Reusable data logic for scalable insights",
       icon: <Database className="w-5 h-5" />, gradient: "from-sky-500 to-blue-600",
     },
     {
       id: 9, category: "Manufacturing", title: "TechFit Tech",
-      description: "India's premier manufacturer of MMA Cages & Commercial Gym Rigs — built for strength, engineered for performance. Comprehensive product catalog with detailed specifications, custom configuration options, and dealer inquiry system.",
+      description: "India's premier manufacturer of MMA Cages & Commercial Gym Rigs - built for strength, engineered for performance. Comprehensive product catalog with detailed specifications, custom configuration options, and dealer inquiry system.",
       tagline: "India's premier MMA & gym equipment manufacturer",
       icon: <Globe className="w-5 h-5" />, gradient: "from-slate-600 to-zinc-700",
       url: "https://www.techfittech.com/",
       hidePreview: true,
     },
     {
-      id: 3, category: "Data Reporting", title: "Excel Reports — Mahyco",
+      id: 3, category: "Data Reporting", title: "Excel Reports - Mahyco",
       description: "Seamless Snowflake-Excel integration for real-time sales and R&D reporting. Automated data pipelines reducing reporting time from hours to minutes.",
       tagline: "Excel-native reporting powered by Snowflake",
       icon: <FileSpreadsheet className="w-5 h-5" />, gradient: "from-emerald-500 to-green-600",
