@@ -77,7 +77,8 @@ const AppContent = () => {
 };
 
 const App = () => {
-  const [loaded, setLoaded] = useState(false);
+  const isCrawler = typeof navigator !== 'undefined' && navigator.userAgent.includes('ReactSnap');
+  const [loaded, setLoaded] = useState(isCrawler);
 
   return (
     <ThemeProvider>
@@ -87,6 +88,7 @@ const App = () => {
           <Sonner />
           {!loaded && <Loader onDone={() => setLoaded(true)} />}
           <div className={`transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}>
+
             <BrowserRouter>
               <AppContent />
             </BrowserRouter>

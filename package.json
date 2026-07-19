@@ -6,9 +6,20 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "react-snap",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"
+  },
+  "reactSnap": {
+    "source": "dist",
+    "include": [
+      "/",
+      "/blog/messy-truth-data-pipelines-at-scale",
+      "/blog/what-2m-farmers-taught-me-about-software",
+      "/blog/going-multi-tenant-lessons-from-rewriting-a-saas-platform",
+      "/blog/why-every-developer-should-build-something-they-actually-use"
+    ]
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
