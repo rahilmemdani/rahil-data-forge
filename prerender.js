@@ -18,12 +18,12 @@ const routes = [
 
 async function prerender() {
   const app = express();
-  
+
   // Serve static files from dist
   app.use(express.static(distPath));
-  
+
   // Fallback to index.html for SPA routing
-  app.get('*', (req, res) => {
+  app.use((req, res) => {
     res.sendFile(path.join(distPath, 'index.html'));
   });
 
@@ -33,29 +33,29 @@ async function prerender() {
 
     const browser = await puppeteer.launch({ headless: 'new' });
     const page = await browser.newPage();
-    
+
     // Set a flag so the React app knows it's being prerendered (if it checks for it)
     await page.setUserAgent('ReactSnap');
 
     for (const route of routes) {
       console.log(`Prerendering ${route}...`);
       await page.goto(`http://localhost:${port}${route}`, { waitUntil: 'networkidle0', timeout: 30000 });
-      
+
       // Wait for the app to finish its entry animation
       try {
         await page.waitForSelector('.opacity-100', { timeout: 5000 });
       } catch (e) {
         console.warn('Timeout waiting for .opacity-100 class, proceeding to capture HTML anyway.');
       }
-      
+
       const html = await page.evaluate(() => document.documentElement.outerHTML);
-      
+
       // Create directories if they don't exist
       const routeDir = path.join(distPath, route);
       if (!fs.existsSync(routeDir)) {
         fs.mkdirSync(routeDir, { recursive: true });
       }
-      
+
       fs.writeFileSync(path.join(routeDir, 'index.html'), `<!DOCTYPE html>\n${html}`);
     }
 
