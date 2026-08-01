@@ -111,6 +111,38 @@ const Projects = React.memo(() => {
     }
   ];
 
+  const comingSoonProjects: Project[] = [
+    {
+      id: 100,
+      category: "Coming Soon",
+      title: "Ivory Atelier",
+      description: "House for hair, nails and beauty, luxury salon.",
+      tagline: "Luxury salon",
+      icon: <Sparkles className="w-4 h-4" />,
+      gradient: "from-indigo-500 to-violet-600",
+      url: "https://ivory-proj-dep.netlify.app/",
+    },
+    {
+      id: 101,
+      category: "Coming Soon",
+      title: "22nd Avenue",
+      description: "Talent management and artist representation platform.",
+      tagline: "Talent management",
+      icon: <Sparkles className="w-4 h-4" />,
+      gradient: "from-emerald-500 to-teal-600",
+      url: "https://22ndavenue.netlify.app/",
+    },
+    {
+      id: 102,
+      category: "Coming Soon",
+      title: "Lsn Lagree",
+      description: "Lagree fitness studio, strength and conditioning using the Lagree method.",
+      tagline: "Lagree studio",
+      icon: <Dumbbell className="w-4 h-4" />,
+      gradient: "from-rose-500 to-pink-600",
+    },
+  ];
+
   const gridRef = useRef<HTMLDivElement>(null);
   const perPage = isMobile ? 4 : 6;
   const totalPages = Math.ceil(projects.length / perPage);
@@ -307,6 +339,39 @@ const Projects = React.memo(() => {
               </button>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* ═══ Coming Soon — Compact Section ═══ */}
+      <div className="container-custom relative z-10 px-4 sm:px-6 lg:px-8 mt-12 animate-fade-in-up">
+        <div className="text-center mb-4">
+          <h3 className="text-xl font-display font-bold">Coming Soon — Projects in Progress</h3>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {comingSoonProjects.map((p) => (
+            <div key={p.id} className="flex flex-col gap-3 p-3 rounded-xl border border-border/10 bg-muted/5">
+              <div className="flex items-center gap-3">
+                <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${p.gradient} flex items-center justify-center text-white text-sm`}>{p.icon}</div>
+                <h4 className="text-sm font-medium truncate">{p.title}</h4>
+              </div>
+
+              <p className="text-[11px] text-muted-foreground line-clamp-2">{p.description}</p>
+
+              <div className="flex items-center justify-between gap-2">
+                {p.url ? (
+                  <a href={p.url} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap inline-flex items-center px-3 py-1.5 rounded-md text-sm font-semibold bg-primary text-primary-foreground hover:opacity-95">
+                    Visit site
+                  </a>
+                ) : (
+                  <span className="whitespace-nowrap inline-block px-2 py-1 rounded-full text-xs font-medium bg-border/10 text-muted-foreground">Coming soon</span>
+                )}
+                <button onClick={() => setSelectedProject(p)} className="whitespace-nowrap text-[11px] font-medium text-primary hover:underline">
+                  Read more
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
