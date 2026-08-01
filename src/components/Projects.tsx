@@ -140,6 +140,7 @@ const Projects = React.memo(() => {
       tagline: "Lagree studio",
       icon: <Dumbbell className="w-4 h-4" />,
       gradient: "from-rose-500 to-pink-600",
+      url: "https://lsn-lagree.netlify.app/",
     },
   ];
 
@@ -366,9 +367,9 @@ const Projects = React.memo(() => {
                 ) : (
                   <span className="whitespace-nowrap inline-block px-2 py-1 rounded-full text-xs font-medium bg-border/10 text-muted-foreground">Coming soon</span>
                 )}
-                <button onClick={() => setSelectedProject(p)} className="whitespace-nowrap text-[11px] font-medium text-primary hover:underline">
+                {/* <button onClick={() => setSelectedProject(p)} className="whitespace-nowrap text-[11px] font-medium text-primary hover:underline">
                   Read more
-                </button>
+                </button> */}
               </div>
             </div>
           ))}
