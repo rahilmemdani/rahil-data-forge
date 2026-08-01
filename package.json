@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postbuild": "node prerender.js",
     "build:dev": "vite build --mode development",
+    "prerender": "node prerender.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
