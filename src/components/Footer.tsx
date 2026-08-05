@@ -1,4 +1,5 @@
-import { Github, Linkedin, Mail, Phone, MapPin, Heart, MessageCircle } from "lucide-react";
+import { Github, Linkedin, Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const navItems = [
   { name: "Home", href: "#hero" },
@@ -6,13 +7,25 @@ const navItems = [
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
   { name: "Experience", href: "#experience" },
+  { name: "Upcoming Work", href: "/coming-soon", isRoute: true },
   { name: "Contact", href: "#contact" },
 ];
 
 const Footer = () => {
-  const scrollTo = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavClick = (item: { name: string; href: string; isRoute?: boolean }) => {
+    if (item.isRoute) {
+      navigate(item.href);
+      return;
+    }
+    if (location.pathname !== "/") {
+      navigate("/" + item.href);
+    } else {
+      const element = document.querySelector(item.href);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -52,7 +65,7 @@ const Footer = () => {
               <ul className="grid grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-2">
                 {navItems.map((item) => (
                   <li key={item.name}>
-                    <button onClick={() => scrollTo(item.href)}
+                    <button onClick={() => handleNavClick(item)}
                       className="text-xs text-muted-foreground hover:text-primary transition-colors duration-200">
                       {item.name}
                     </button>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Building2, BarChart3, Globe, Sparkles, FileSpreadsheet, Database, Calculator, ArrowUpRight, ChevronLeft, ChevronRight, Dumbbell, Award, X, Layers } from 'lucide-react';
 import { Button } from './ui/button';
 import ScheduleConsultationModal from './ScheduleConsultationModal';
@@ -373,6 +374,15 @@ const Projects = React.memo(() => {
               </div>
             </div>
           ))}
+        </div>
+        <div className="text-center mt-6">
+          <Link
+            to="/coming-soon"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 border border-primary/20 shadow-sm"
+          >
+            <span>Explore The Documentation Hub</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
 

@@ -31,6 +31,7 @@ const ParticleBackground = lazy(() => import('./components/ParticleBackground'))
 // Pages
 import NotFound from "./pages/NotFound";
 const BlogPost = lazy(() => import("./pages/BlogPost"));
+const ComingSoon = lazy(() => import("./pages/ComingSoon"));
 
 const queryClient = new QueryClient();
 
@@ -56,11 +57,12 @@ const HomePage = () => (
 const AppContent = () => {
   const location = useLocation();
   const isBlogPost = location.pathname.startsWith('/blog/');
+  const isComingSoon = location.pathname === '/coming-soon';
 
   return (
     <>
-      {/* Hide Navbar when viewing a blog post */}
-      {!isBlogPost && <Navbar />}
+      {/* Hide Navbar when viewing a blog post or coming-soon page */}
+      {!isBlogPost && !isComingSoon && <Navbar />}
       <Layout>
         <ScrollToTop />
         <Suspense fallback={null}>
@@ -69,6 +71,7 @@ const AppContent = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/blog/:slug" element={<Suspense fallback={<SectionLoading />}><BlogPost /></Suspense>} />
+          <Route path="/coming-soon" element={<Suspense fallback={<SectionLoading />}><ComingSoon /></Suspense>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
