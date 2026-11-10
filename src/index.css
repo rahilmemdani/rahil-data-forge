@@ -69,13 +69,9 @@
     @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
   }
 
-  /* Short laptop screens: shrink content slightly so each section still fits */
-  @media (min-width: 1024px) and (max-height: 860px) {
-    .screen { padding-top: calc(var(--nav) + 0.75rem); padding-bottom: 1.25rem; }
-    .screen > .wrap { zoom: 0.86; }
-  }
-  @media (min-width: 1024px) and (max-height: 700px) {
-    .screen > .wrap { zoom: 0.76; }
+  /* Laptops and desktops: snug padding; FitScreens.tsx scales content to fill the rest */
+  @media (min-width: 1024px) {
+    .screen { padding-top: calc(var(--nav) + 1rem); padding-bottom: 1.5rem; }
   }
 
   /* Big condensed headline, as in the reference */

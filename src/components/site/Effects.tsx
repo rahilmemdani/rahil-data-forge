@@ -11,6 +11,10 @@ const Effects = () => {
       els.forEach((el) => el.classList.add('in'));
       return;
     }
+    // Anything already on the first screen shows straight away
+    els.forEach((el) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
+    });
     const io = new IntersectionObserver(
       (entries) =>
         entries.forEach((en) => {
@@ -19,9 +23,10 @@ const Effects = () => {
             io.unobserve(en.target);
           }
         }),
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+      // Sections fill the whole screen, so content can sit right at the bottom edge
+      { rootMargin: '0px 0px -2% 0px', threshold: 0.05 },
     );
-    els.forEach((el) => io.observe(el));
+    els.forEach((el) => !el.classList.contains('in') && io.observe(el));
     return () => io.disconnect();
   }, []);
 

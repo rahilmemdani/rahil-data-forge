@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import ScrollToTop from './ScrollToTop';
 
 import Effects from './components/site/Effects';
+import FitScreens from './components/site/FitScreens';
 import Nav from './components/site/Nav';
 import Hero from './components/site/Hero';
 import About from './components/site/About';
@@ -35,6 +36,7 @@ const HomePage = () => (
     </main>
     <Contact />
     <Effects />
+    <FitScreens />
   </>
 );
 

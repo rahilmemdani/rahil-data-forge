@@ -87,7 +87,7 @@ const Nav = () => {
       }`}
     >
       <nav
-        className={`mx-auto flex h-14 max-w-6xl items-center justify-between rounded-full pl-5 pr-2 transition-[background-color,box-shadow] duration-300 ${
+        className={`mx-auto flex h-14 max-w-[88rem] items-center justify-between rounded-full pl-5 pr-2 transition-[background-color,box-shadow] duration-300 ${
           scrolled
             ? 'bg-white/90 shadow-[0_10px_30px_-12px_rgba(20,20,20,0.25)] ring-1 ring-ink/5 backdrop-blur-md'
             : 'bg-white/60 ring-1 ring-ink/5'
