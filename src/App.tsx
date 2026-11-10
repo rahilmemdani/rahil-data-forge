@@ -1,105 +1,61 @@
-import React, { Suspense, lazy, useState } from 'react';
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import ScrollToTop from "../src/ScrollToTop";
-import Loader from "./components/Loader";
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import ScrollToTop from './ScrollToTop';
 
-// Theme
-import { ThemeProvider } from "./components/ThemeProvider";
+import Effects from './components/site/Effects';
+import Nav from './components/site/Nav';
+import Hero from './components/site/Hero';
+import About from './components/site/About';
+import Work from './components/site/Work';
+import MoreWork from './components/site/MoreWork';
+import Basecase from './components/site/Basecase';
+import Security from './components/site/Security';
+import Scale from './components/site/Scale';
+import Experience from './components/site/Experience';
+import Writing from './components/site/Writing';
+import Contact from './components/site/Contact';
+import NotFound from './pages/NotFound';
 
-// Static Sections (Above the fold)
-import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
-import Layout from "./components/Layout";
+const BlogPost = lazy(() => import('./pages/BlogPost'));
 
-// Lazy Loaded Sections (Below the fold)
-const About = lazy(() => import("./components/About"));
-const Skills = lazy(() => import("./components/Skills"));
-const Projects = lazy(() => import("./components/Projects"));
-const AIOrchestrator = lazy(() => import("./components/AIOrchestrator"));
-const JobFitAnalyzer = lazy(() => import("./components/JobFitAnalyzer"));
-const Experience = lazy(() => import("./components/Experience"));
-const Blog = lazy(() => import("./components/Blog"));
-const Contact = lazy(() => import("./components/Contact"));
-
-// Optional/Heavy Components
-const ParticleBackground = lazy(() => import('./components/ParticleBackground'));
-
-// Pages
-import NotFound from "./pages/NotFound";
-const BlogPost = lazy(() => import("./pages/BlogPost"));
-const ComingSoon = lazy(() => import("./pages/ComingSoon"));
-
-const queryClient = new QueryClient();
-
-// Loading Fallback
-const SectionLoading = () => <div className="min-h-[200px] w-full" />;
-
-// Single-page home with all sections
+/* Each section fills at least one screen; scrolling stays native, with light CSS reveals. */
 const HomePage = () => (
-  <Suspense fallback={<SectionLoading />}>
-    <Hero />
-    <About />
-    <Skills />
-    <Projects />
-    <AIOrchestrator />
-    <JobFitAnalyzer />
-    <Experience />
-    <Blog />
+  <>
+    <Nav />
+    <main>
+      <Hero />
+      <About />
+      <Work />
+      <MoreWork />
+      <Basecase />
+      <Security />
+      <Scale />
+      <Experience />
+      <Writing />
+    </main>
     <Contact />
-  </Suspense>
+    <Effects />
+  </>
 );
 
-// Wrapper to conditionally render layout elements based on route
-const AppContent = () => {
-  const location = useLocation();
-  const isBlogPost = location.pathname.startsWith('/blog/');
-  const isComingSoon = location.pathname === '/coming-soon';
-
-  return (
-    <>
-      {/* Hide Navbar when viewing a blog post or coming-soon page */}
-      {!isBlogPost && !isComingSoon && <Navbar />}
-      <Layout>
-        <ScrollToTop />
-        <Suspense fallback={null}>
-          <ParticleBackground />
-        </Suspense>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/blog/:slug" element={<Suspense fallback={<SectionLoading />}><BlogPost /></Suspense>} />
-          <Route path="/coming-soon" element={<Suspense fallback={<SectionLoading />}><ComingSoon /></Suspense>} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Layout>
-    </>
-  );
-};
-
-const App = () => {
-  const isCrawler = typeof navigator !== 'undefined' && navigator.userAgent.includes('ReactSnap');
-  const [loaded, setLoaded] = useState(isCrawler);
-
-  return (
-    <ThemeProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          {!loaded && <Loader onDone={() => setLoaded(true)} />}
-          <div className={`transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}>
-
-            <BrowserRouter>
-              <AppContent />
-            </BrowserRouter>
-          </div>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
-  );
-};
+const App = () => (
+  <BrowserRouter>
+    <ScrollToTop />
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route
+        path="/blog/:slug"
+        element={
+          <Suspense fallback={<div className="min-h-screen bg-paper" />}>
+            <BlogPost />
+          </Suspense>
+        }
+      />
+      {/* The old "coming soon" projects are live now, so send people to the work section */}
+      <Route path="/coming-soon" element={<Navigate to="/#work" replace />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  </BrowserRouter>
+);
 
 export default App;

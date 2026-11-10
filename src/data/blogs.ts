@@ -19,7 +19,7 @@ export const blogs: BlogPost[] = [
         readTime: "7 min read",
         excerpt:
             "Nobody talks about the unglamorous middle part. The part where your pipeline works beautifully on your local machine, breaks entirely in production, and your phone starts buzzing at 2am. Here is what I actually learned building ETL at scale with Snowflake.",
-        coverImage: "/blog-cover-pipelines.png",
+        coverImage: "/illustrations/blog-pipelines.jpg",
         tags: ["Snowflake", "ETL", "Data Engineering", "Lessons Learned"],
         content: `<p>When people ask me what I do, I say I build data pipelines. And usually, their eyes glaze over. I totally get it because "data pipelines" sounds about as exciting as filing taxes. But here is the thing nobody warns you about: building data infrastructure at scale is equal parts architecture, firefighting, and staying deeply humble.</p>
 
@@ -55,7 +55,7 @@ export const blogs: BlogPost[] = [
         readTime: "6 min read",
         excerpt:
             "Software built in air-conditioned offices for users who are out working in the field usually misses the point entirely. Spending four years in AgriTech completely shifted my perspective on what good software actually looks like.",
-        coverImage: "/blog-cover-agritech.png",
+        coverImage: "/illustrations/blog-agritech.jpg",
         tags: ["AgriTech", "Product Thinking", "UX", "Scale"],
         content: `<p>The first time I saw our platform being used in the real world was incredibly eye opening. It was not in a controlled demo or a QA session. I watched a field agent trying to use our app on a patchy 4G connection in rural Maharashtra. I felt genuinely uncomfortable watching him struggle. Not because the app crashed, thankfully it did not. I felt uncomfortable because I suddenly realised how many assumptions we had baked into the design. Things that only make sense if you are sitting at a desk with gigabit internet.</p>
 
@@ -91,7 +91,7 @@ export const blogs: BlogPost[] = [
         readTime: "8 min read",
         excerpt:
             "Migrating a live platform from a monolithic architecture to a multi-tenant SaaS model without causing downtime is basically controlled chaos. Here is what we did right, what we messed up, and what I would do differently next time.",
-        coverImage: "/blog-cover-multitenant.png",
+        coverImage: "/illustrations/blog-multitenant.jpg",
         tags: ["SaaS", "Architecture", "Multi-Tenant", "Engineering"],
         content: `<p>There is a very specific type of engineering anxiety that kicks in when you are asked to rewrite a system that millions of people are actively using. Every line of code you change is live. Every mistake you make has an immediate blast radius. Unlike starting a fresh new project, you cannot just turn the servers off for a weekend and swap the engine out. The platform has to keep humming while you rebuild it mid flight.</p>
 
@@ -131,7 +131,7 @@ export const blogs: BlogPost[] = [
         readTime: "5 min read",
         excerpt:
             "A lot of side projects fail because they are overambitious and try to solve problems the developer does not actually have. Building things I genuinely needed taught me more about product design than years of enterprise coding.",
-        coverImage: "/blog-cover-sideprojects.png",
+        coverImage: "/illustrations/blog-sideprojects.jpg",
         tags: ["Side Projects", "Entrepreneurship", "Craft", "Developer Life"],
         content: `<p>Almost every software engineer I know has a graveyard folder on their computer full of abandoned side projects. Apps they got super excited about on a Friday night, started building, and then completely gave up on by Sunday afternoon when the reality of finishing it sank in. I absolutely have a few of those folders myself. But lately, I have stumbled onto something that actually works. Building software that I personally need, or that people I actually know need right now.</p>
 

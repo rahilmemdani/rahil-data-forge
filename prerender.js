@@ -43,9 +43,9 @@ async function prerender() {
 
       // Wait for the app to finish its entry animation
       try {
-        await page.waitForSelector('.opacity-100', { timeout: 5000 });
+        await page.waitForSelector('#top, article', { timeout: 5000 });
       } catch (e) {
-        console.warn('Timeout waiting for .opacity-100 class, proceeding to capture HTML anyway.');
+        console.warn('Timeout waiting for page content, capturing HTML anyway.');
       }
 
       const html = await page.evaluate(() => document.documentElement.outerHTML);
